@@ -10,6 +10,7 @@
       <TheFooter />
     </div>
   </div>
+  <RouterView />
 </template>
 
 <script>
