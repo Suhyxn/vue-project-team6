@@ -1,12 +1,14 @@
 <template>
-  <div class="backgroundImg">
+  <div class="background-img">
     <div class="welcome">
       MapleStory Market에 오신 것을 환영합니다!
     </div>
     <div class="select_container">
-      <div class="user_in">
-        로그인 / 회원가입
-      </div>
+      <RouterLink to="/MyPage">
+        <div class="user_in">
+          로그인 / 회원가입
+        </div>
+      </RouterLink>
       <div class="search">
         <span class="material-icons">
           search
@@ -27,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .backgroundImg {
+  .background-img {
     position: relative;
     height: 100%;
     background-position-y: 80%;
