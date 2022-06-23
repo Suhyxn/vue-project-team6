@@ -4,11 +4,13 @@
       MapleStory Market에 오신 것을 환영합니다!
     </div>
     <div class="select_container">
-      <RouterLink to="/MyPage">
-        <div class="user_in">
+      <div class="user_in">
+        <RouterLink
+          to="/signin"
+          class="a">
           로그인 / 회원가입
-        </div>
-      </RouterLink>
+        </RouterLink>
+      </div>
       <div class="search">
         <span class="material-icons">
           search
@@ -73,5 +75,9 @@ export default {
         margin-top: 5px;
       }
     }
+  }
+  .a {
+    color: #000;
+    text-decoration: none;
   }
 </style>
