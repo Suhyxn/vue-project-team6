@@ -33,15 +33,11 @@ export default {
       title: '',
       price: '',
       description: '',
-      files: ''
+      thumbnail: ''
     }
   },
   methods: {
-    hello() {
-      console.log('hello')
-    },
     async AllReadProduct () {
-      console.log('hello')
       const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
         method: 'GET',
         headers: {
@@ -66,22 +62,21 @@ export default {
         body: JSON.stringify({
           title: this.title,
           price: this.price,
-          description: this.description
+          description: this.description,
+          thumbnailBase64: this.thumbnail
         })
       })
       const product = await res.json()
       console.log(product)
     },
     SelectImage(event) {
+      console.log(event)
       const { files } = event.target
-      for (const file of files) {
-        const reader = new FileReader()
+      for ( const file of files ) {
+        const reader =  new FileReader()
         reader.readAsDataURL(file)
         reader.addEventListener('load', e => {
-          this.workspaceStore.updateWorkspace({
-            id: this.$route.params.id,
-            poster: e.target.result
-          })
+          this.thumbnail = e.target.result
         })
       }
     }
@@ -89,4 +84,3 @@ export default {
 }
 
 </script>
-
