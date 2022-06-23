@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroundImg">
+  <div class="background-img">
     <div class="welcome">
       MapleStory Market에 오신 것을 환영합니다!
     </div>
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .backgroundImg {
+  .background-img {
     position: relative;
     height: 100%;
     background-position-y: 80%;
