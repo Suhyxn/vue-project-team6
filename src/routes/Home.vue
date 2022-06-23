@@ -5,7 +5,11 @@
     </div>
     <div class="select_container">
       <div class="user_in">
-        로그인 / 회원가입
+        <RouterLink
+          to="/signin"
+          class="a">
+          로그인 / 회원가입
+        </RouterLink>
       </div>
       <div class="search">
         <span class="material-icons">
@@ -71,5 +75,9 @@ export default {
         margin-top: 5px;
       }
     }
+  }
+  .a {
+    color: #000;
+    text-decoration: none;
   }
 </style>
