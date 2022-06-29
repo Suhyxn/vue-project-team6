@@ -1,33 +1,44 @@
 <template>
-  <button @click="AllReadProduct">
-    조회
-  </button>
-
-  <input
-    v-model="title"
-    type="text" />
-  <input
-    v-model="price"
-    type="text" />
-  <input
-    v-model="description"
-    type="text" />
-  <input
-    type="file"
-    @change="SelectImage" />
-  <button @click="AddProduct">
-    추가
-  </button>
-
-  {{ title }}
+  <div class="background-image">
+    <div class="square">
+      <div class="container">
+        <AdminLNB />
+        <div class="content">
+          <button @click="AllReadProduct">
+            조회
+          </button>
+        
+          <input
+            v-model="title"
+            type="text" />
+          <input
+            v-model="price"
+            type="text" />
+          <input
+            v-model="description"
+            type="text" />
+          <input
+            type="file"
+            @change="SelectImage" />
+          <button @click="AddProduct">
+            추가
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 import { useAdminStore } from '~/store/admin'
+import AdminLNB from '../components/AdminLNB.vue'
 
 export default {
   ...mapStores(useAdminStore),
+  components: {
+    AdminLNB
+  },
   data() {
     return {
       title: '',
@@ -82,5 +93,38 @@ export default {
     }
   }
 }
-
 </script>
+
+<style scoped lang="scss">
+
+.background-image {
+  position: relative;
+  height: 100%;
+  background-position-y: 80%;
+  background-repeat : no-repeat;
+  background-size : cover;
+  background-image: url('../backgroundImg/Main.png');
+  .square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    .container {
+      position:relative;
+      display: flex;
+      background-color: white;
+      width: 1300px;
+      height: 550px;
+      opacity: .8;
+      justify-content: center;
+      align-items: center;
+      .content {
+        flex-grow: 1;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+
+</style>
