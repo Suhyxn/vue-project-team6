@@ -4,7 +4,7 @@
       MapleStory Market에 오신 것을 환영합니다!
     </div>
     <div class="select_container">
-      <RouterLink to="/MyPage">
+      <RouterLink to="/mypage">
         <div class="user_in">
           로그인 / 회원가입
         </div>
@@ -39,7 +39,7 @@ export default {
     .welcome {
       padding-top: 30px;
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -56,7 +56,7 @@ export default {
         border-radius: 20px;
         cursor: pointer;
         font-size: 24px;
-        font-weight: bold;
+        font-weight: 700;
         display: flex;
         justify-content: center;
         align-items: center;
