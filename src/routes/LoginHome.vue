@@ -1,36 +1,45 @@
 <template>
   <div class="background-img">
     <div class="welcome">
-      MapleStory Market에 오신 것을 환영합니다!
+      <h2>{{ userName }}님</h2>
+      <div>MapleStory Market에 오신 것을 환영합니다!</div>
     </div>
     <div class="select_container">
       <div class="user_in">
         <RouterLink
-          to="/signin"
+          to="/mypage"
           class="a">
-          로그인 / 회원가입
-        </routerlink>
+          마이페이지
+        </RouterLink>
       </div>
       <div class="search">
         <span class="material-icons">
           search
         </span>
-        <router-link
-          to="/store"
-          class="move-btn">
-          제품 검색
-        </router-link>
+        제품 검색
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
+import { validateTokenUser } from '~/core'
 
 export default {
-  ...mapStores(useMainStore)
+  data() {
+    return {
+      userName: ''
+    }
+  },
+  mounted() {
+    this.name()
+  },
+  methods: {
+    async name() {
+      const user = await validateTokenUser()
+      this.userName = user.displayName
+    }
+  }
 }
 </script>
 
@@ -45,10 +54,13 @@ export default {
     .welcome {
       padding-top: 30px;
       font-size: 24px;
-      font-weight: 700;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-weight: bold;
+      width: 500px;
+      margin: 0 auto;
+      h2 {
+        display: flex;
+        justify-content: center;
+      }
     }
     .select_container {
       padding-top: 30px;
@@ -62,7 +74,7 @@ export default {
         border-radius: 20px;
         cursor: pointer;
         font-size: 24px;
-        font-weight: 700;
+        font-weight: bold;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -73,13 +85,6 @@ export default {
       }
       .search {
         margin-left: 5%;
-      .move-btn{
-          text-decoration: none;
-          color: #000;
-          &:hover{
-            color:rgba(0,0,0,.5)
-          }
-        }
       }
       .material-icons {
         font-size: 30px;
