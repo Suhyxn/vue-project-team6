@@ -3,6 +3,7 @@ import Home from './Home.vue'
 import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
 import Admin from './Admin.vue'
+import AllReadProduct from './AllReadProduct.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -13,8 +14,12 @@ export default createRouter({
       component: Home
     },
     {
-      path: '/Admin',
+      path: '/admin',
       component: Admin
+    },
+    {
+      path: '/admin/allreadproduct',
+      component: AllReadProduct
     },
     {
       path: '/MyPage',

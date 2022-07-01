@@ -1,15 +1,19 @@
 <template>
   <div class="__container">
     <div class="LNB">
-      <nav>
-        <ul>
-          <li>모든 제품 조회</li>
-          <li>전체 판매 내역</li>
-          <li>판매 상태</li>
-          <li>조회</li>
-          <li>추가</li>
-        </ul>
-      </nav>
+      <div class="nav nav-pills">
+        <div
+          v-for="nav in navigations"
+          :key="nav.name"
+          class="nav-item">
+          <RouterLink
+            :to="nav.href"
+            active-class="active"
+            class="nav-link">
+            {{ nav.name }}
+          </RouterLink>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -22,7 +26,28 @@ export default {
   ...mapStores(useAdminStore),
   data() {
     return {
-
+      navigations: [
+        {
+          name: 'AllReadProduct',
+          href: '/admin'
+        },
+        {
+          name: 'AllReadHistory',
+          href: '/admin/allreadhistory'
+        },
+        {
+          name: 'ReadHistory',
+          href: '/admin/readhistory'
+        },
+        {
+          name: 'EditProduct',
+          href: '/admin/editproduct'
+        },
+        {
+          name: 'AddProduct',
+          href: '/admin/addproduct'
+        }
+      ]
     }
   }
 }

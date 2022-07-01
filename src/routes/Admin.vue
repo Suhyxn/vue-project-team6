@@ -35,7 +35,6 @@ import { useAdminStore } from '~/store/admin'
 import AdminLNB from '../components/AdminLNB.vue'
 
 export default {
-  ...mapStores(useAdminStore),
   components: {
     AdminLNB
   },
@@ -46,6 +45,9 @@ export default {
       description: '',
       thumbnail: ''
     }
+  },
+  computed: {
+    ...mapStores(useAdminStore)
   },
   methods: {
     async AllReadProduct () {
