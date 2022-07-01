@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Home.vue'
+import SignIn from './SignIn.vue'
 import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
 
+import Store from './Store.vue'
 export default createRouter({
   history: createWebHistory(),
-  scrollBehavior: () => ({top: 0}),
+  scrollBehavior: () => ({ top: 0 }),
   routes: [
     {
       path: '/',
@@ -26,8 +28,20 @@ export default createRouter({
       component: MyPage
     },
     {
-      path: '/MyPage/AccountList',
-      component: AccountList
+      path: '/store',
+      component: Store,
+    },
+    {
+      path: '/signin',
+      component: SignIn,
+    },
+    {
+      path: '/MyPage',
+      component: MyPage,
+    },
+    {
+      path: '/AccountList',
+      component: AccountList,
     }
-  ]
+  ],
 })
