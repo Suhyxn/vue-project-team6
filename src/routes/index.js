@@ -41,7 +41,7 @@ export default createRouter({
       path: '/test',
       component: Test
     },
-    {  
+    {
       path: '/store',
       component: Store,
     },
@@ -49,13 +49,5 @@ export default createRouter({
       path: '/signin',
       component: SignIn,
     },
-    {
-      path: '/MyPage',
-      component: MyPage,
-    },
-    {
-      path: '/AccountList',
-      component: AccountList,
-    }
   ],
 })
