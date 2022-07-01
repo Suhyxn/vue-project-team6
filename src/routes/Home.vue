@@ -9,7 +9,7 @@
           to="/signin"
           class="a">
           로그인 / 회원가입
-        </RouterLink>
+        </routerlink>
       </div>
       <div class="search">
         <span class="material-icons">
@@ -45,7 +45,7 @@ export default {
     .welcome {
       padding-top: 30px;
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -62,7 +62,7 @@ export default {
         border-radius: 20px;
         cursor: pointer;
         font-size: 24px;
-        font-weight: bold;
+        font-weight: 700;
         display: flex;
         justify-content: center;
         align-items: center;

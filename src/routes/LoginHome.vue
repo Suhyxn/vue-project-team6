@@ -7,7 +7,7 @@
     <div class="select_container">
       <div class="user_in">
         <RouterLink
-          to="/MyPage"
+          to="/mypage"
           class="a">
           마이페이지
         </RouterLink>

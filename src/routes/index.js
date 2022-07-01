@@ -3,6 +3,7 @@ import Home from './Home.vue'
 import SignIn from './SignIn.vue'
 import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
+import AccountAdd from './AccountAdd.vue'
 import LoginHome from './LoginHome.vue'
 import Test from './test.vue'
 import Admin from './Admin.vue'
@@ -18,20 +19,26 @@ export default createRouter({
       component: Home
     },
     {
+      path: '/mypage',
+      component: MyPage,
+      children: [
+        {
+          path: 'accountlist',
+          component: AccountList
+        },
+        { 
+          path: 'accountadd',
+          component: AccountAdd
+        }
+      ]
+    },
+    {
       path: '/admin',
       component: Admin
     },
     {
       path: '/admin/allreadproduct',
       component: AllReadProduct
-    },
-    {
-      path: '/MyPage',
-      component: MyPage
-    },
-    {
-      path: '/MyPage/AccountList',
-      component: AccountList
     },
     {
       path: '/loginHome',
@@ -48,6 +55,6 @@ export default createRouter({
     {
       path: '/signin',
       component: SignIn,
-    },
+    }
   ],
 })
