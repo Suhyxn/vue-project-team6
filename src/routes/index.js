@@ -3,6 +3,8 @@ import Home from './Home.vue'
 import SignIn from './SignIn.vue'
 import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
+import LoginHome from './LoginHome.vue'
+import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
 
@@ -28,6 +30,18 @@ export default createRouter({
       component: MyPage
     },
     {
+      path: '/MyPage/AccountList',
+      component: AccountList
+    },
+    {
+      path: '/loginHome',
+      component: LoginHome
+    },
+    {
+      path: '/test',
+      component: Test
+    },
+    {  
       path: '/store',
       component: Store,
     },

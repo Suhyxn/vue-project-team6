@@ -15,7 +15,8 @@
           <input
             v-model="password"
             placeholder="패스워드"
-            type="text" />
+            type="text"
+            @keydown.enter="signIn" />
         </div>
         <div class="checkID">
           <span
@@ -47,7 +48,9 @@ export default {
     return {
       email: '',
       password: '',
-      checkID: false
+      checkID: false,
+      displayName: '',
+      loginCheck: '/signin'
     }
   },
   computed: {
@@ -70,9 +73,22 @@ export default {
       const { user, accessToken } = await res.json()
       window.localStorage.setItem('token', accessToken)
       this.userStore.user = user
-      console.log(this.userStore.user)
+      console.log(this.userStore.user) 
       if(!this.userStore.user) {
         this.checkID = true
+        this.email = ''
+        this.password = ''
+      } else {
+        // 질문 시: 아래의 방법을 사용해서 새로 고침을 구현했는데
+        // 그런데 이렇게 새로 고침을 하게 되면 나중에 배포나 다른 상황에서
+        // 문제가 생길 확률이 있다고 생각이 들었습니다
+        // 그래서 this.$router.push('/loginHome')를 직접 넣는 방식으로 진행을 했는데
+        // 이 경우에 정상적인 새로고침이 일어나지 않아 다른 해결책이 필요하다고 생각이 드는데 강사님의 의견이 필요합니다
+
+        location.href = 'http://localhost:3000/loginHome'
+        // this.$router.push('/loginHome')
+        // location.href = `'${this.$router.push('/loginHome')}'`
+      
       }
     }
   }
@@ -94,7 +110,8 @@ export default {
 .inner {
   display: flex;
   justify-content: center;
-  margin-top: -30vh;
+  position: absolute;
+  top: 10%;
   width: 800px;
   height: 400px; 
   background-color: #fff;
@@ -156,16 +173,16 @@ input {
     color: #845FA7;
   }
 }
-button {
+.login {
   margin-top: 6px;
   border: none;
   background-color: #845FA7;
   border-radius: 50px;
-  color: #fff;
   width: 620px;
   height: 70px;
-  font-size: 28px;
   cursor: pointer;
+  color: #fff;
+  font-size: 28px;
   &:hover {
     opacity: .9;
   }

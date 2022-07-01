@@ -4,29 +4,74 @@
       src="../HeaderImage/mapleIcon.png"
       alt="icon" 
       class="icon" />
-    <RouterLink to="/">
+    <RouterLink
+      :to="loginCheck">
       <img
         src="../HeaderImage/mapleLogo.png"
         alt="logo"
         class="logo" />
     </RouterLink>
     <div class="user">
+      <button
+        v-if="logoutCheck"
+        @click="signOut">
+        <RouterLink
+          to="/">
+          로그아웃
+        </RouterLink>
+      </button>
       <span class="material-icons">
         account_circle
       </span>
       <div class="user_name">
-        Guest
+        {{ userName }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
+import { validateTokenUser } from '~/core'
 
 export default {
-  ...mapStores(useMainStore)
+  data() {
+    return {
+      loginCheck: '/',
+      logoutCheck: false,
+      userName: 'Guest'
+    }
+  },
+  mounted() {
+    this.name()
+  },
+  methods: {
+    async name() {
+      const user = await validateTokenUser()
+      if(window.localStorage.getItem('token')) {
+        this.userName = user.displayName
+        this.loginCheck = '/loginHome'
+        this.logoutCheck = true
+      } else {
+        this.loginCheck = '/'
+        this.logoutCheck = false
+      }
+    },
+    async signOut() {
+      this.$router.push('/')
+      const accessToken = window.localStorage.getItem('token')
+      await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/logout', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'apikey': 'FcKdtJs202204',
+          'username': 'KDT2_team6',
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+      window.localStorage.removeItem('token', accessToken)
+      this.$router.go()
+    }
+  }
 }
 </script>
 
