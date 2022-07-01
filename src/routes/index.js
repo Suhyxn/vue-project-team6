@@ -5,18 +5,25 @@ import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
 import LoginHome from './LoginHome.vue'
 import Test from './test.vue'
+import Admin from './Admin.vue'
+import AllReadProduct from './AllReadProduct.vue'
 
+import Store from './Store.vue'
 export default createRouter({
   history: createWebHistory(),
-  scrollBehavior: () => ({top: 0}),
+  scrollBehavior: () => ({ top: 0 }),
   routes: [
     {
       path: '/',
       component: Home
     },
     {
-      path: '/signin',
-      component: SignIn
+      path: '/admin',
+      component: Admin
+    },
+    {
+      path: '/admin/allreadproduct',
+      component: AllReadProduct
     },
     {
       path: '/MyPage',
@@ -33,6 +40,22 @@ export default createRouter({
     {
       path: '/test',
       component: Test
+    },
+    {  
+      path: '/store',
+      component: Store,
+    },
+    {
+      path: '/signin',
+      component: SignIn,
+    },
+    {
+      path: '/MyPage',
+      component: MyPage,
+    },
+    {
+      path: '/AccountList',
+      component: AccountList,
     }
-  ]
+  ],
 })

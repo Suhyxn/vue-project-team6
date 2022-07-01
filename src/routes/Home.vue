@@ -15,7 +15,11 @@
         <span class="material-icons">
           search
         </span>
-        제품 검색
+        <router-link
+          to="/store"
+          class="move-btn">
+          제품 검색
+        </router-link>
       </div>
     </div>
   </div>
@@ -69,6 +73,13 @@ export default {
       }
       .search {
         margin-left: 5%;
+      .move-btn{
+          text-decoration: none;
+          color: #000;
+          &:hover{
+            color:rgba(0,0,0,.5)
+          }
+        }
       }
       .material-icons {
         font-size: 30px;
