@@ -38,7 +38,7 @@
         전체보기
       </button>
       <button
-        :class="{ active: selected === 1 }"
+        :class="{ active: selected === 1}"
         class="btn"
         @click="selected=1">
         장비
