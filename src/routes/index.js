@@ -8,8 +8,20 @@ import LoginHome from './LoginHome.vue'
 import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
+import { useUserStore } from '~/store/user'
 
 import Store from './Store.vue'
+
+const rejectAuthUser = (to, from, next) => {
+  const userStore = useUserStore()
+  
+  if (userStore.isSignin === true) {
+    next()
+  } else {
+    next('/')
+  }
+}
+
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
@@ -42,6 +54,7 @@ export default createRouter({
     },
     {
       path: '/loginHome',
+      beforeEnter: rejectAuthUser,
       component: LoginHome
     },
     {

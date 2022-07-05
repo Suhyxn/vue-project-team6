@@ -16,11 +16,14 @@
             v-model="password"
             placeholder="패스워드"
             type="text"
-            @keydown.enter="signIn" />
+            @keydown.enter="[signIn({
+              email,
+              password
+            })]" />
         </div>
         <div class="checkID">
           <span
-            v-if="checkID">
+            v-if="signinError">
             아이디 또는 패스워드가 일치하지 않습니다.
           </span>
           <RouterLink
@@ -31,7 +34,10 @@
         </div>
         <button
           class="login"
-          @click="signIn">
+          @click="signIn({
+            email,
+            password
+          })">
           로그인
         </button>
       </div>
@@ -40,7 +46,7 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useUserStore } from '~/store/user'
 
 export default {
@@ -48,49 +54,13 @@ export default {
     return {
       email: '',
       password: '',
-      checkID: false,
-      displayName: '',
-      loginCheck: '/signin'
     }
   },
   computed: {
-    ...mapStores(useUserStore)
+    ...mapState(useUserStore, ['signinError'])
   },  
   methods: {
-    async signIn() {
-      const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202204',
-          'username': 'KDT2_team6'
-        },
-        body: JSON.stringify({
-          email: this.email.trim(),
-          password: this.password.trim()
-        })
-      })
-      const { user, accessToken } = await res.json()
-      window.localStorage.setItem('token', accessToken)
-      this.userStore.user = user
-      console.log(this.userStore.user) 
-      if(!this.userStore.user) {
-        this.checkID = true
-        this.email = ''
-        this.password = ''
-      } else {
-        // 질문 시: 아래의 방법을 사용해서 새로 고침을 구현했는데
-        // 그런데 이렇게 새로 고침을 하게 되면 나중에 배포나 다른 상황에서
-        // 문제가 생길 확률이 있다고 생각이 들었습니다
-        // 그래서 this.$router.push('/loginHome')를 직접 넣는 방식으로 진행을 했는데
-        // 이 경우에 정상적인 새로고침이 일어나지 않아 다른 해결책이 필요하다고 생각이 드는데 강사님의 의견이 필요합니다
-
-        location.href = 'http://localhost:3000/loginHome'
-        // this.$router.push('/loginHome')
-        // location.href = `'${this.$router.push('/loginHome')}'`
-      
-      }
-    }
+    ...mapActions(useUserStore, ['signIn']),
   }
 }
 </script>

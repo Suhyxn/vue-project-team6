@@ -5,72 +5,42 @@
       alt="icon" 
       class="icon" />
     <RouterLink
-      :to="loginCheck">
+      to="/loginHome">
       <img
         src="../HeaderImage/mapleLogo.png"
         alt="logo"
         class="logo" />
     </RouterLink>
     <div class="user">
-      <button
-        v-if="logoutCheck"
-        @click="signOut">
-        <RouterLink
-          to="/">
-          로그아웃
-        </RouterLink>
-      </button>
+      <RouterLink
+        v-if="isSignin"
+        class="logout"
+        to="/"
+        @click="signOut()">
+        <span class="material-icons">
+          logout
+        </span>
+      </RouterLink>
       <span class="material-icons">
         account_circle
       </span>
       <div class="user_name">
-        {{ userName }}
+        {{ userInfo.displayName }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { validateTokenUser } from '~/core'
+import { mapState, mapActions } from 'pinia'
+import { useUserStore } from '~/store/user'
 
 export default {
-  data() {
-    return {
-      loginCheck: '/',
-      logoutCheck: false,
-      userName: 'Guest'
-    }
-  },
-  mounted() {
-    this.name()
+  computed: {
+    ...mapState(useUserStore, ['isSignin', 'userInfo'])
   },
   methods: {
-    async name() {
-      const user = await validateTokenUser()
-      if(window.localStorage.getItem('token')) {
-        this.userName = user.displayName
-        this.loginCheck = '/loginHome'
-        this.logoutCheck = true
-      } else {
-        this.loginCheck = '/'
-        this.logoutCheck = false
-      }
-    },
-    async signOut() {
-      this.$router.push('/')
-      const accessToken = window.localStorage.getItem('token')
-      await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/logout', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202204',
-          'username': 'KDT2_team6',
-          'Authorization': `Bearer ${accessToken}`
-        }
-      })
-      window.localStorage.removeItem('token', accessToken)
-      this.$router.go()
-    }
+    ...mapActions(useUserStore, ['signOut'])
   }
 }
 </script>
@@ -89,10 +59,12 @@ export default {
     height: 48px;
   }
   .logo {
+    margin-left: 80px;
     cursor: pointer;
   }
   .user {
     display: flex;
+    align-items: center;
     .material-icons {
       font-size: 30px;
     }
@@ -100,6 +72,20 @@ export default {
       font-size: 24px;
       margin-right: 30px;
       margin-left: 10px;
+    }
+    .logout {
+      span {
+        width: 50px;
+        height: 45px;
+        margin-right: 10px;
+        text-decoration: none;
+        color: #000;
+        text-align: center;
+        line-height: 45px;
+        &:hover {
+          color: #F6921D;
+        }
+      }
     }
   }
 }
