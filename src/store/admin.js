@@ -1,31 +1,34 @@
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
-export const useAdminStore = defineStore('Product', {
-  state() {
+const adminURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products'
+const headers = {
+  'content-type': 'application/json',
+  'apikey': 'FcKdtJs202204',
+  'username': 'KDT2_team6',
+  'masterKey': 'true'
+}
+
+export const useAdminStore = defineStore('admin', {
+  state: () => {
     return {
-      Product: [] 
+      products: [],
+      product: {},
+      done: false
     }
   },
   getters: {
 
   },
   actions: {
-    hello() {
-      console.log('hello')
-    },
-    async ReadProductAdmin () {
-      console.log('hello')
-      const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
+    async AllReadProduct () {
+      const { data: products } = await axios ({
+        url: adminURL,
         method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202204',
-          'username': 'Team6' ,
-          'masterKey': 'true'
-        }
+        headers
       })
-      const master = await res.json()
-      console.log(master)
+      console.log(products)
+      this.products = products
     }
   }
 })

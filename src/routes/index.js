@@ -8,6 +8,7 @@ import LoginHome from './LoginHome.vue'
 import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
+import Addproduct from './AddProduct.vue'
 
 import Store from './Store.vue'
 export default createRouter({
@@ -34,11 +35,17 @@ export default createRouter({
     },
     {
       path: '/admin',
-      component: Admin
-    },
-    {
-      path: '/admin/allreadproduct',
-      component: AllReadProduct
+      component: Admin,
+      children: [
+        {
+          path: 'allreadproduct',
+          component: AllReadProduct
+        },
+        {
+          path: 'addproduct',
+          component: Addproduct
+        }
+      ]
     },
     {
       path: '/loginHome',

@@ -4,18 +4,23 @@
       <div class="container">
         <AdminLNB />
         <div class="content">
+          <RouterView />
+        </div>
+        <!-- <div class="content">
           <button @click="AllReadProduct">
-            조회
+            조회?
           </button>
-        
           <input
             v-model="title"
+            type="text" />
+          <input
+            v-model="description"
             type="text" />
           <input
             v-model="price"
             type="text" />
           <input
-            v-model="description"
+            v-model="tags"
             type="text" />
           <input
             type="file"
@@ -23,7 +28,7 @@
           <button @click="AddProduct">
             추가
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -43,6 +48,7 @@ export default {
       title: '',
       price: '',
       description: '',
+      tags: '',
       thumbnail: ''
     }
   },
@@ -56,7 +62,7 @@ export default {
         headers: {
           'content-type': 'application/json',
           'apikey': 'FcKdtJs202204',
-          'username': 'Team6' ,
+          'username': 'KDT2_team6' ,
           'masterKey': 'true'
         }
       })
@@ -69,13 +75,14 @@ export default {
         headers: {
           'content-type': 'application/json',
           'apikey': 'FcKdtJs202204',
-          'username': 'Team6' ,
+          'username': 'KDT2_team6' ,
           'masterKey': 'true'
         },
         body: JSON.stringify({
           title: this.title,
           price: this.price,
           description: this.description,
+          tags: this.tags,
           thumbnailBase64: this.thumbnail
         })
       })
@@ -118,10 +125,10 @@ export default {
       width: 1300px;
       height: 550px;
       opacity: .8;
-      justify-content: center;
       align-items: center;
       .content {
-        flex-grow: 1;
+        width: 1000px;
+        display: flex;
         box-sizing: border-box;
       }
     }
