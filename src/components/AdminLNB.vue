@@ -29,7 +29,7 @@ export default {
       navigations: [
         {
           name: 'AllReadProduct',
-          href: '/admin'
+          href: '/admin/allreadproduct'
         },
         {
           name: 'AllReadHistory',

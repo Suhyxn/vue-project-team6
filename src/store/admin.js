@@ -29,6 +29,6 @@ export const useAdminStore = defineStore('admin', {
       })
       console.log(products)
       this.products = products
-    }
+    },
   }
 })
