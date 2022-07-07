@@ -7,7 +7,7 @@
           <RouterView />
         </div>
         <!-- <div class="content">
-          <button @click="AllReadProduct">
+          <button @click="allReadProduct">
             조회?
           </button>
           <input
@@ -56,7 +56,7 @@ export default {
     ...mapStores(useAdminStore)
   },
   methods: {
-    async AllReadProduct () {
+    async allReadProduct () {
       const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
         method: 'GET',
         headers: {

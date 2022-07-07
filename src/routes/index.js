@@ -11,6 +11,7 @@ import AllReadProduct from './AllReadProduct.vue'
 import Addproduct from './AddProduct.vue'
 import AllReadHistory from './AllReadHistory.vue'
 import EditProduct from './Editproduct.vue'
+import ReadHistory from './ReadHistory.vue'
 
 import Store from './Store.vue'
 export default createRouter({
@@ -54,6 +55,10 @@ export default createRouter({
         {
           path: 'addproduct',
           component: Addproduct
+        },
+        {
+          path: 'readhistory',
+          component: ReadHistory
         }
       ]
     },

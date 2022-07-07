@@ -22,7 +22,10 @@ import { mapStores } from 'pinia'
 import { useAdminStore } from '../store/admin'
 
 export default {
-  components: {
+  data() {
+    return {
+
+    }
   },
   computed: {
     ...mapStores(useAdminStore)
