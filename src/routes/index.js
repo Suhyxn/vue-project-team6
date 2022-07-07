@@ -9,6 +9,8 @@ import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
 import Addproduct from './AddProduct.vue'
+import AllReadHistory from './AllReadHistory.vue'
+import EditProduct from './Editproduct.vue'
 
 import Store from './Store.vue'
 export default createRouter({
@@ -40,6 +42,14 @@ export default createRouter({
         {
           path: 'allreadproduct',
           component: AllReadProduct
+        },
+        {
+          path: 'allreadhistory',
+          component: AllReadHistory
+        },
+        {
+          path: 'editproduct',
+          component: EditProduct
         },
         {
           path: 'addproduct',

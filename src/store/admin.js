@@ -14,6 +14,9 @@ export const useAdminStore = defineStore('admin', {
     return {
       products: [],
       product: {},
+      histories: [],
+      history: {},
+      editproduct: {},
       done: false
     }
   },
@@ -21,7 +24,7 @@ export const useAdminStore = defineStore('admin', {
 
   },
   actions: {
-    async AllReadProduct () {
+    async allReadProduct () {
       const { data: products } = await axios ({
         url: adminURL,
         method: 'GET',
@@ -30,5 +33,33 @@ export const useAdminStore = defineStore('admin', {
       console.log(products)
       this.products = products
     },
+    async allReadHistory () {
+      const { data: histories } = await axios ({
+        url: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all',
+        method: 'GET',
+        headers
+      })
+      console.log(histories)
+      this.histories = histories
+    },
+    async editProduct (payload) {
+      const { title, price, description, tags, thumbnail, isSoldout } = payload
+      const editProduct = await axios ({
+        url: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/:productId',
+        method: 'PUT',
+        headers,
+        body: {
+            title,
+            price,
+            description,
+            tags,
+            thumbnail,
+            isSoldout
+        }
+      })
+      console.log('hello')
+      this.product = editProduct
+      this.allReadProduct()
+    }
   }
 })

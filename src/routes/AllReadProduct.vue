@@ -28,7 +28,7 @@ export default {
     ...mapStores(useAdminStore)
   },
   created() {
-    this.adminStore.AllReadProduct()
+    this.adminStore.allReadProduct()
   }
 }
 
@@ -36,11 +36,13 @@ export default {
 
 <style scoped lang="scss">
 .product-list {
+  width: 100%;
+  height: 350px;
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 100%;
   flex-wrap: wrap;
+  overflow-y: scroll;
   .product-item {
     display: flex;
     flex-direction: column;
