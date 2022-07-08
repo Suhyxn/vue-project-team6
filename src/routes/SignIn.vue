@@ -63,7 +63,7 @@ export default {
         headers: {
           'content-type': 'application/json',
           'apikey': 'FcKdtJs202204',
-          'username': 'KDT2_team6'
+          'username': 'Team6'
         },
         body: JSON.stringify({
           email: this.email.trim(),

@@ -1,33 +1,29 @@
 <template>
   <div class="button">
     <button class="account_add">
-      <RouterLink to="/mypage/accountadd">
-        계좌 추가
-      </RouterLink>
+      계좌 연결
     </button>
     <button class="account_delete">
-      계좌 삭제
+      <RouterLink to="/mypage/accountlist">
+        취소
+      </RouterLink>
     </button>
   </div>
-  <div class="account_list">
-    <ul>
-      <!-- v-if 반복문 -->
-      <AccountListDetail />
-    </ul>
+  <div class="account_add_list">
+    <AccountAddDetail />
   </div>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 import { useAccouontStore } from '~/store/account'
-import AccountListDetail from '~/components/AccountListDetail.vue'
-
+import AccountAddDetail from '~/components/AccountAddDetail.vue'
 export default {
   components: {
-    AccountListDetail
+    AccountAddDetail
   },
   computed: {
-    ...mapStores(useAccouontStore)
+  ...mapStores(useAccouontStore)
   },
 }
 </script>
@@ -52,16 +48,10 @@ button {
     background-color: #f83d3d;
   }
 }
-.account_list {
-  margin-top: 10px;
+.account_add_list {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 85%;
-  overflow-y: auto;
-  ul {
-    width: 80%;
-    height: 100%;
-  }
 }
 </style>
+

@@ -4,14 +4,9 @@
       <div class="my_page">
         <p>My Page</p>
         <div class="menu">
-          <div class="menu_list">
-            <RouterLink to="/MyPage/AccountList">
-              <div class="account">
-                계좌
-              </div>
-            </RouterLink>
-          </div>
+          <MyPageLNB />
           <div class="menu_ui">
+            <router-view />
           </div>
         </div>
       </div>
@@ -22,9 +17,18 @@
 <script>
 import { mapStores } from 'pinia'
 import { useMainStore } from '~/store/main'
+import MyPageLNB from '~/components/MyPageLNB.vue'
 
 export default {
-  ...mapStores(useMainStore)
+  components: {
+    MyPageLNB,
+  },
+  computed: {
+    ...mapStores(useMainStore),
+  },
+  methods: {
+    
+  }
 }
 </script>
 
@@ -44,16 +48,13 @@ export default {
       .my_page {
         width: 60%;
         height: 75vh;
-        background-color: white;
+        background: white;
         border-radius: 20px;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
         opacity: 0.8;
         p {
           padding: 20px 0;
           font-size: 24px;
-          font-weight: bold;
+          font-weight: 700;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -72,7 +73,7 @@ export default {
               padding-top: 20px;
               text-align: center;
               font-size: 18px;
-              font-weight: bold;
+              font-weight: 700;
             }
           }
           .menu_ui {
@@ -80,6 +81,7 @@ export default {
             height: 60vh;
             background-color: #F9C5D5;
             border-radius: 20px;
+            overflow: auto;
           }
         }
       }

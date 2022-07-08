@@ -3,11 +3,15 @@ import Home from "./Home.vue";
 import SignIn from "./SignIn.vue";
 import MyPage from "./MyPage.vue";
 import AccountList from "./AccountList.vue";
+import AccountAdd from "./AccountAdd.vue";
 import LoginHome from "./LoginHome.vue";
+import Test from "./test.vue";
 import Admin from "./Admin.vue";
 import AllReadProduct from "./AllReadProduct.vue";
-
 import Store from "./Store.vue";
+import PurchaseList from "./PurchaseList.vue";
+import Detail from "./Detail.vue";
+
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
@@ -15,6 +19,24 @@ export default createRouter({
     {
       path: "/",
       component: Home,
+    },
+    {
+      path: "/mypage",
+      component: MyPage,
+      children: [
+        {
+          path: "accountlist",
+          component: AccountList,
+        },
+        {
+          path: "accountadd",
+          component: AccountAdd,
+        },
+        {
+          path: "purchaselist",
+          component: PurchaseList,
+        },
+      ],
     },
     {
       path: "/admin",
@@ -25,20 +47,20 @@ export default createRouter({
       component: AllReadProduct,
     },
     {
-      path: "/MyPage",
-      component: MyPage,
-    },
-    {
-      path: "/MyPage/AccountList",
-      component: AccountList,
-    },
-    {
       path: "/loginHome",
       component: LoginHome,
     },
     {
+      path: "/test",
+      component: Test,
+    },
+    {
       path: "/store",
       component: Store,
+    },
+    {
+      path: "/store/detail/:id",
+      component: Detail,
     },
     {
       path: "/signin",

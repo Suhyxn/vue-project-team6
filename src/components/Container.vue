@@ -2,20 +2,19 @@
   <div class="container">
     <div class="menu">
       <select 
-        v-model="selected"
+        v-model="clientStore.selected"
         name="category"
-        class="select-section"
-        @change="test">
-        <option :value="0">
+        class="select-section">
+        <option :value="'everyItem'">
           전체보기 
         </option>
-        <option :value="1">
+        <option :value="'equipment'">
           장비
         </option>
-        <option :value="2">
+        <option :value="'consumption'">
           소비
         </option>
-        <option :value="3">
+        <option :value="'pet'">
           펫
         </option>
       </select>
@@ -23,50 +22,57 @@
 
     <div class="search">
       <input
+        ref="inputEl"
         placeholder="제품을 검색하세요!"
-        class="search-bar" />
-      <span class="material-icons">
+        class="search-bar"
+        @input="clientStore.searchValue = $event.target.value"
+        @keydown.enter="search" />
+      <span 
+        class="material-icons"
+        @click="search">
         search
       </span>
     </div>
 
     <div class="category-btns">
       <button
-        :class="{active: selected === 0}"
+        :class="{active: clientStore.selected === 'everyItem'}"
         class="btn"
-        @click="selected=0">
+        @click="clientStore.selected = 'everyItem'">
         전체보기
       </button>
       <button
-        :class="{ active: selected === 1}"
+        :class="{ active: clientStore.selected === 'equipment'}"
         class="btn"
-        @click="selected=1">
+        @click="clientStore.selected='equipment'">
         장비
       </button>
       <button
-        :class="{ active: selected === 2 }"
+        :class="{ active: clientStore.selected === 'consumption' }"
         class="btn"
-        @click="selected=2">
+        @click="clientStore.selected = 'consumption'">
         소비
       </button>
       <button
-        :class="{ active: selected === 3 }"
+        :class="{ active: clientStore.selected === 'pet' }"
         class="btn"
-        @click="selected=3">
+        @click="clientStore.selected = 'pet'">
         펫
       </button>
     </div>
 
     <div class="item-box">
-      <EveryItem v-if="selected === 0" />
-      <Equipment v-else-if="selected === 1" />
-      <Consumption v-else-if="selected === 2" />
-      <Pet v-else-if="selected === 3" />
+      <EveryItem v-if="clientStore.selected === 'everyItem'" />
+      <Equipment v-else-if="clientStore.selected === 'equipment'" />
+      <Consumption v-else-if="clientStore.selected === 'consumption'" />
+      <Pet v-else-if="clientStore.selected === 'pet'" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import {useClientStore} from '~/store/client'
 import EveryItem from './EveryItem.vue'
 import Equipment from './Equipment.vue'
 import Pet from './Pet.vue'
@@ -80,16 +86,27 @@ export default {
   },
   data(){
     return{
-      selected:0
-    } 
+     
+    }
+  },
+  computed:{
+    ...mapStores([useClientStore])
+  },
+   created(){
+      this.clientStore.AllReadProduct()
   },
   mounted(){
+      this.$refs.inputEl.focus()
   },
   methods:{
-    test(e){
-      console.log(e.target.value)
-    }
-  }
+   async search(){
+      await this.clientStore.searchProduct({
+        text:this.clientStore.searchValue,
+      })
+    this.clientStore.searchItem.length === 0 ? alert('해당 상품을 찾을 수 없습니다!') : this.$router.push(`/store/detail/${this.clientStore.searchItem[0].id}`)
+    this.$refs.inputEl.value = ''
+    },
+  },
 }
 </script>
 
@@ -98,9 +115,10 @@ export default {
   width: 80vw;
   height: 80vh;
   background: #fff;
-  opacity:.8;
   position: relative;
   border-radius: 8px;
+
+
   .menu{
     position: absolute;
     right:220px;
@@ -152,14 +170,17 @@ export default {
         }
       }
     }
-  .item-box{
-    width:65vw;
+    .item-box{
+    width:60vw;
     height:60vh;
-    background: #808080;
+    background-image: url('../backgroundImg/itembox.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y:65%;
     overflow-y:scroll;
     position: absolute;
     top: 80px;
-    left:150px;
+    left:200px;
     border-radius: 8px;
   }
 }

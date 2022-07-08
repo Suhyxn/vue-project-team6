@@ -8,7 +8,7 @@
 import Container from '../components/Container.vue'
 export default {
   components:{
-    Container
+    Container,
   }
 }
 </script>

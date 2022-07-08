@@ -16,8 +16,10 @@
         </p>
       </div>
       <div class="btns">
-        <button class="btn">
-          구메하기
+        <button 
+          class="btn"
+          @click="handler(item.id)">
+          구매하기
         </button>
         <button class="btn">
           상세페이지
@@ -28,8 +30,19 @@
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import {useClientStore} from '~/store/client'
 export default {
-
+  computed:{
+    ...mapStores([useClientStore])
+  },
+  methods:{
+    handler(id){
+      this.clientStore.modalHandler()
+      this.clientStore.singleProductId = id
+      console.log(this.clientStore.singleProductId)
+    }
+  }
 }
 </script>
 
@@ -39,7 +52,7 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     .item{
-      width:150px;
+      width:170px;
       height:200px;
       background:red;
       margin: 10px 0;
