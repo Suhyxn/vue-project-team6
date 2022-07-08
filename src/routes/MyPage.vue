@@ -15,26 +15,17 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
 import MyPageLNB from '~/components/MyPageLNB.vue'
 
 export default {
   components: {
-    MyPageLNB,
-  },
-  computed: {
-    ...mapStores(useMainStore),
-  },
-  methods: {
-    
+    MyPageLNB
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .background-img {
-    position: relative;
     height: 100%;
     background-position-y: 92%;
     background-repeat : no-repeat;
@@ -63,24 +54,12 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          .menu_list {
-            width: 20%;
-            height: 60vh;
-            background-color: #F999B7;
-            border-radius: 20px;
-            margin-right: 5%;
-            .account {
-              padding-top: 20px;
-              text-align: center;
-              font-size: 18px;
-              font-weight: 700;
-            }
-          }
           .menu_ui {
             width: 60%;
             height: 60vh;
             background-color: #F9C5D5;
             border-radius: 20px;
+            overflow: auto;
           }
         }
       }

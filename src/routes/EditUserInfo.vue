@@ -5,42 +5,42 @@
         <img
           src="../BSE_imgs/login.png"
           alt="login" />
-        <div class="id">
+        <div class="name">
           <input
-            v-model="email"
-            placeholder="아이디 (이메일 주소)"
+            v-model="displayName"
+            placeholder="New 닉네임 (20자 이하)"
             type="text" />
         </div>
-        <div class="pw">
+        <div class="old_pw">
           <input
-            v-model="password"
-            placeholder="패스워드"
-            type="text"
-            @keydown.enter="signIn({
-              email,
-              password
-            })" />
+            v-model="oldPassword"
+            placeholder="현재 비밀번호"
+            type="text" />
         </div>
-        <div class="checkID">
-          <span
-            v-if="signinError">
-            아이디 또는 패스워드가 일치하지 않습니다.
-          </span>
-          <RouterLink
-            class="join"
-            to="/signup"
-            @click="errorReset()">
-            회원가입
-          </RouterLink>
+        <div class="new_pw">
+          <input
+            v-model="newPassword"
+            placeholder="New 비밀번호 (8자 이상)"
+            type="text" />
         </div>
-        <button
-          class="login"
-          @click="signIn({
-            email,
-            password
-          })">
-          로그인
-        </button>
+        <div>
+          <input
+            placeholder="프로필(임시)"
+            type="file" 
+            @change="selectFile" />
+        </div>
+        <div>
+          <button
+            class="check"
+            @click="editUserInfo({
+              oldPassword,
+              newPassword,
+              displayName,
+              profileImgBase64
+            })">
+            확인
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -53,15 +53,26 @@ import { useUserStore } from '~/store/user'
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      oldPassword: '',
+      newPassword: '',
+      displayName: '',
+      profileImgBase64: ''
     }
   },
   computed: {
-    ...mapState(useUserStore, ['signinError'])
-  },  
+    ...mapState(useUserStore, [])
+  }, 
   methods: {
-    ...mapActions(useUserStore, ['signIn', 'errorReset']),
+    ...mapActions(useUserStore, ['editUserInfo']),
+    selectFile(event) {
+      const reader = new FileReader()
+      for(const file of event.target.files) {
+        reader.readAsDataURL(file)
+        reader.addEventListener('load', e => {
+          this.profileImgBase64 = e.target.result
+        })
+      }
+    }
   }
 }
 </script>
@@ -81,10 +92,11 @@ export default {
 .inner {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 10%;
+  top: 5%;
   width: 800px;
-  height: 400px; 
+  height: 550px; 
   background-color: #fff;
   opacity: .9;
   border-radius: 10px;
@@ -96,16 +108,16 @@ img {
   height: 110px;
   margin: auto;
 }
-.font {
-  display: inline-block;
-  width: 100px;
-  font-size: 46px;
-  line-height: 55px;
-}
 .id {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 10px;
 }
 .pw {
+  margin-bottom: 10px;
+}
+.name {
   margin-bottom: 10px;
 }
 input {
@@ -114,7 +126,8 @@ input {
   border: 3px solid #f5f5f5;
   border-radius: 10px;
   width: 600px;
-  height: 50px;
+  height: 30px;
+  margin-bottom: 10px;
   &:focus {
     outline: none;
     border: 3px solid rgba(131, 94, 166, .5);
@@ -123,29 +136,7 @@ input {
     color: #cac7c7;
   }
 }
-.checkID {
-  display: flex;
-  justify-content: right;
-  span {
-  font-size: 18px;
-  font-weight: bold;
-  color: red;
-  padding: 0 150px 0 5px;
-  }
-}
-.join {
-  width: 100px;
-  font-size: 18px;
-  padding-right: 10px;
-  margin-bottom: 10px;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  &:hover {
-    color: #845FA7;
-  }
-}
-.login {
+.check {
   margin-top: 6px;
   border: none;
   background-color: #845FA7;
@@ -159,4 +150,6 @@ input {
     opacity: .9;
   }
 }
+
 </style>
+

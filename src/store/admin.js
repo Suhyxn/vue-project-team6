@@ -20,9 +20,7 @@ export const useAdminStore = defineStore('admin', {
       done: false
     }
   },
-  getters: {
-
-  },
+  getters: {},
   actions: {
     async allReadProduct () {
       const { data: products } = await axios ({
@@ -75,3 +73,4 @@ export const useAdminStore = defineStore('admin', {
     }
   }
 })
+

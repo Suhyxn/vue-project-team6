@@ -1,32 +1,85 @@
 <template>
-  <div 
-    v-for="account in accountStore.accounts"
-    :key="account"
-    class="accounts_list"
-    :accountId="accountId">
-  </div>
+  <li>
+    <input
+      type="checkbox" 
+      :checked="checked"
+      @click="checkedStatus" />
+    <div class="account_information">
+      <div class="bank_name">
+        은행 명: {{ bankName }}
+      </div>
+      <div class="account_number">
+        계좌 번호: {{ accountNumber }}
+      </div>
+      <div class="balance">
+        보유 금액: {{ balance }}원
+      </div>
+    </div>
+  </li>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
-import { useAccouontStore } from '~/store/account'
+import { useAccountStore } from '~/store/account'
 
 export default {
-  computed: {
-  ...mapStores(useAccouontStore)
-  },
-  created() {
-    this.accountStore.readAccountList()
+  props: {
+    id: {
+      type: String,
+      default: ''
+    },
+    bankName: {
+      type: String,
+      default: ''
+    },
+    bankCode: {
+      type: String,
+      default: ''
+    },
+    accountNumber:{
+      type: String,
+      default: ''
+    },
+    balance: {
+      type: Number,
+      default: 0
+    },
+    checked: {
+      type: Boolean,
+      default: false
+    }
+  }
+  ,computed: {
+      ...mapStores(useAccountStore)
+  }
+  ,methods: {
+    checkedStatus(event) {
+      this.$emit('update:checked', event.target.checked)
+    }
   }
 }
 </script>
 
-<style>
-.accounts_list {
-  margin-top: 10px;
-  width: 100%;
-  height: 100px;
-  border-radius: 5px;
-  background-color: rgb(250, 234, 214, 1);
+<style lang="scss" scoped>
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10%;
+  }
+  .account_information {
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-right: 15%;
+      .bank_name, .account_number, .balance {
+        padding-top: 3px;
+        padding-bottom: 3px;
+      } 
+    }
 }
 </style>

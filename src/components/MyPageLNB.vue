@@ -2,9 +2,9 @@
   <div class="menu_list">
     <button 
       class="account"
-      :class="{ active: /^\/mypage$/.test($route.fullPath) }"
-      @click="$router.push(`/mypage`)">
-      마이페이지
+      :class="{ active: /^\/mypage\/userinfo$/.test($route.fullPath) }"
+      @click="$router.push(`/mypage/userinfo`)">
+      내 정보
     </button>
     <button 
       class="account"
@@ -17,6 +17,7 @@
 
 <script>
 import { mapStores } from 'pinia'
+import { useAccountStore } from '~/store/account'
 import { useMainStore } from '~/store/main'
 
 export default {
@@ -26,7 +27,10 @@ export default {
     }
   }, 
   computed: {
-    ...mapStores(useMainStore)
+    ...mapStores([
+      useMainStore,
+      useAccountStore
+    ])
   },
   methods: {
   }

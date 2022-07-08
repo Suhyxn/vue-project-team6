@@ -1,5 +1,16 @@
 <template>
-  {{ Histories }}
+  <ul class="history-list">
+    <li
+      v-for="history in adminStore.histories"
+      :key="history.id"
+      class="history-item"
+      :productId="history.id">
+      <div>
+        {{ history.detailId }}
+        {{ history.user }}
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script>

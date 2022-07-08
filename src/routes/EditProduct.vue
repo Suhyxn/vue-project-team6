@@ -67,11 +67,13 @@ export default {
     clickDetail(productId) {
       this.adminStore.oneReadProduct(productId)
     },
-    updateProduct( type: 'title' || 'content' || '') {
+    updateProduct() {
 
-      if (type === 'title' && title === this.workspaceStore.workspace.title) return
-      if (type === 'content' && content === this.workspaceStore.workspace.content) return
     }
+    // updateProduct( type: 'title' || 'content' || '') {
+
+    //   if (type === 'title' && title === this.workspaceStore.workspace.title) return
+    //   if (type === 'content' && content === this.workspaceStore.workspace.content) return
   }
 }
 </script>
