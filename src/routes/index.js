@@ -9,15 +9,11 @@ import LoginHome from './LoginHome.vue'
 import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
-<<<<<<< HEAD
 import Addproduct from './AddProduct.vue'
 import AllReadHistory from './AllReadHistory.vue'
 import EditProduct from './Editproduct.vue'
 import ReadHistory from './ReadHistory.vue'
-
-=======
 import EditUserInfo from './EditUserInfo.vue'
->>>>>>> 8f63d082db79b066c6f45f48805de083b9bc22ef
 import Store from './Store.vue'
 import PurchaseList from './PurchaseList.vue'
 import Detail from './Detail.vue'
@@ -56,7 +52,6 @@ export default createRouter({
     {
       path: '/admin',
       component: Admin,
-<<<<<<< HEAD
       children: [
         {
           path: 'allreadproduct',
@@ -79,12 +74,6 @@ export default createRouter({
           component: ReadHistory
         }
       ]
-=======
-    },
-    {
-      path: '/admin/allreadproduct',
-      component: AllReadProduct,
->>>>>>> 8f63d082db79b066c6f45f48805de083b9bc22ef
     },
     {
       path: '/loginHome',
