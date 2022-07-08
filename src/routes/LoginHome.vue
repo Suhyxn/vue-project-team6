@@ -50,6 +50,7 @@ export default {
       h2 {
         display: flex;
         justify-content: center;
+        margin-bottom: 10px;
       }
     }
     .select_container {

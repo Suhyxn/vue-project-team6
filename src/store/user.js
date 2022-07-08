@@ -8,7 +8,10 @@ export const useUserStore = defineStore('user', {
         displayName: 'Guest'
       },
       signinError: false,
-      isSignin: false
+      isSignin: false,
+      isSignup: false,
+      signUpError: '',
+      signUpMsg: '',
     }
   },
   getters: {
@@ -55,6 +58,69 @@ export const useUserStore = defineStore('user', {
       window.localStorage.removeItem('token', accessToken)
       this.isSignin = false
       this.userInfo.displayName = 'Guest'
+    },
+    async signUp(signObj) {
+      try {
+        const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'apikey': 'FcKdtJs202204',
+          'username': 'KDT2_team6'
+        },
+        body: JSON.stringify({
+          email: signObj.email.trim(),
+          password: signObj.password.trim(),
+          displayName: signObj.displayName.trim(),
+          profileImgBase64: signObj.profileImgBase64
+        })
+      })
+      const user = await res.json()
+      if (!res.ok) throw new Error(user)
+      console.log(user)
+      this.isSignup = true
+      this.signUpMsg = '가입 성공! 아이디와 비밀번호를 확인하고 로그인 해주세요.'
+      } catch {
+        this.isSignup = false
+        if(signObj.email.trim() === '' || !signObj.password.trim() || !signObj.displayName.trim()) {
+          this.signUpError = '가입 실패! 필수 항목을 모두 입력해주세요.'
+        } else if(signObj.password.trim().length < 8) {
+          this.signUpError = '가입 실패! 비밀번호는 8자 이상으로 입력해주세요.'
+        } else if(signObj.displayName.trim().length > 20) {
+          this.signUpError = '가입 실패! 닉네임은 20자 이하로 입력해주세요.'
+        } else {
+          this.signUpError = '가입 실패! 이미 존재하는 아이디 입니다. 혹은 아이디 형식이 잘못되었습니다.'
+        }
+      }
+    },
+    errorReset() {
+      this.signUpMsg = ''
+      this.signUpError = ''
+    },
+    async editUserInfo(userObj) {
+      const accessToken = window.localStorage.getItem('token')
+      try {
+        const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/user', {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          'apikey': 'FcKdtJs202204',
+          'username': 'KDT2_team6',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          oldPassword: userObj.oldPassword.trim(),
+          newPassword: userObj.newPassword.trim(),
+          displayName: userObj.displayName.trim(),
+          profileImgBase64: userObj.profileImgBase64
+        })
+      })
+      const user = await res.json()
+      if (!res.ok) throw new Error(user)
+      console.log(user)
+      } catch {
+        console.log('수정 실패')
+      }
     }
   }
 })
