@@ -6,7 +6,7 @@ import { defineStore } from "pinia";
 const headers = {
   "content-type": "application/json",
   apikey: "FcKdtJs202204",
-  username: "Team6",
+  username: "KDT2_team6",
   //username은 test용으로 지어짐 향후 완성되면 구현되면 KDT2_team6으로 변경예정
 };
 
@@ -25,7 +25,7 @@ export const useClientStore = defineStore("client", {
       singlePageData: {
         data: {},
       },
-      purchasedList: [],
+      purchasedList: null,
     };
   },
   actions: {

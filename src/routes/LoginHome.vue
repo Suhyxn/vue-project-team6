@@ -1,7 +1,7 @@
 <template>
   <div class="background-img">
     <div class="welcome">
-      <h2>{{ userName }}님</h2>
+      <h2>{{ userInfo.displayName }}님</h2>
       <div>MapleStory Market에 오신 것을 환영합니다!</div>
     </div>
     <div class="select_container">
@@ -25,23 +25,13 @@
 </template>
 
 <script>
-import { validateTokenUser } from '~/core'
+import { mapState } from 'pinia'
+import { useUserStore } from '~/store/user'
 
 export default {
-  data() {
-    return {
-      userName: ''
-    }
-  },
-  mounted() {
-    this.name()
-  },
-  methods: {
-    async name() {
-      const user = await validateTokenUser()
-      this.userName = user.displayName
-    }
-  }
+  computed: {
+    ...mapState(useUserStore, ['userInfo'])
+  },  
 }
 </script>
 
@@ -62,6 +52,7 @@ export default {
       h2 {
         display: flex;
         justify-content: center;
+        margin-bottom: 10px;
       }
     }
     .select_container {
