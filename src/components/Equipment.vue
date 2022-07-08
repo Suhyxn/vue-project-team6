@@ -1,35 +1,54 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="(item,index) in 20"
-      :key="index"
+      v-for="item in clientStore.getAllProduct"
+      :key="item.id"
       class="item">
-      <div class="sumnail">
-        이미지 영역
+      <div 
+        class="sumnail"
+        :style="{backgroundImage:`url(${item.thumbnail})`}">
       </div>
       <div class="info">
         <p class="title">
-          이름: 갈색 삿갓
+          이름: {{ item.title }}
         </p> 
         <p class="price">
-          가격: 0000
+          가격: {{ item.price }}
         </p>
       </div>
       <div class="btns">
-        <button class="btn">
-          구메하기
+        <button 
+          class="btn"
+          @click="handler(item.id);">
+          구매하기 
         </button>
-        <button class="btn">
+      
+        <router-link
+          class="btn btn--move"
+          :to="`/store/detail/${item.id}`">
           상세페이지
-        </button>
+        </router-link>
       </div>
     </li>
   </ul>
 </template>
 
 <script>
-export default {
+import { mapStores } from 'pinia'
+import {useClientStore} from '~/store/client'
 
+export default {
+  computed:{
+    ...mapStores([useClientStore])
+  },
+
+  methods: {
+    handler(id){
+      this.clientStore.modalHandler()
+      this.clientStore.singleProductId = id
+      console.log(this.clientStore.singleProductId)
+    }
+  },
 }
 </script>
 
@@ -39,33 +58,39 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     .item{
-      width:150px;
-      height:200px;
+      width:200px;
+      height:250px;
       background:red;
+      border: ridge 15px #fff;
+      border-radius: 8px;
+      box-sizing: border-box;
       margin: 10px 0;
       display: flex;
       flex-direction: column;
-      border-radius: 8px;
+      
     
      .sumnail{
-      width: 85%;
-      height: 80px;
-      background: blue;
+      width: 60px;
+      height: 60px;
+      padding: 15px;
+      background: #808080;
+      background-repeat: no-repeat;
+      background-size: cover;
       margin: 10px;
       box-sizing: border-box;
      }
      .info{
       margin: 10px;
       .title{
-        margin-bottom: 5px;
+        margin-bottom: 25px;
       }
      }
      .btns{
       display: flex;
-      
+      margin-top:25px;
       .btn{
         display: inline-block;
-        padding:5px 5px;
+        padding:5px 10px;
         box-sizing: border-box;
         outline: none;
         border:none;
@@ -73,11 +98,17 @@ export default {
         background: #000;
         color: #fff;
         &:first-child{
-        margin: 0 3px;    
+        margin: 0 10px;    
         }
+        font-size:12px;
         &:hover{
           background:green;
         }
+      }
+      .btn--move{
+        text-decoration: none;
+        display:flex;
+        align-items: center;
       }
      }
     }

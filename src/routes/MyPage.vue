@@ -15,19 +15,11 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
 import MyPageLNB from '~/components/MyPageLNB.vue'
 
 export default {
   components: {
-    MyPageLNB,
-  },
-  computed: {
-    ...mapStores(useMainStore),
-  },
-  methods: {
-    
+    MyPageLNB
   }
 }
 </script>
@@ -67,6 +59,7 @@ export default {
             height: 60vh;
             background-color: #F9C5D5;
             border-radius: 20px;
+            overflow: auto;
           }
         }
       }

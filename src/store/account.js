@@ -16,9 +16,8 @@ export const useAccountStore = defineStore('account', {
       banks: []
     }
   },
-  getters: {
+  getters: {},
 
-  },
   actions: {
     async selectBankList() {
       const bankLsit = await axios({
