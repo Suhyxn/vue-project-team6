@@ -12,12 +12,14 @@
           마이페이지
         </RouterLink>
       </div>
-      <div class="search">
+      <routerLink
+        to="/store"
+        class="search">
         <span class="material-icons">
           search
         </span>
         제품 검색
-      </div>
+      </routerLink>
     </div>
   </div>
 </template>
@@ -76,6 +78,8 @@ export default {
       }
       .search {
         margin-left: 5%;
+        text-decoration: none;
+        color: #000;
       }
       .material-icons {
         font-size: 30px;

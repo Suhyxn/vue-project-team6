@@ -9,22 +9,34 @@
     <div class="footer">
       <TheFooter />
     </div>
+    <transition name="modal-animation">
+      <Modal 
+        v-if="clientStore.isShow" 
+        class="modal" />
+    </transition>
   </div>
 </template>
 
 <script>
 import TheHeader from '~/components/TheHeader.vue'
 import TheFooter from '~/components/TheFooter.vue'
-
+import Modal from '~/components/Modal.vue'
+import { mapStores } from 'pinia'
+import {useClientStore} from '~/store/client'
 export default {
   components: {
     TheHeader,
-    TheFooter
+    TheFooter,
+    Modal
+  },
+  computed:{
+    ...mapStores([useClientStore])
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .container {
   height: 100vh;
   flex-shrink: 0;
@@ -43,4 +55,23 @@ export default {
     height: 35px;
   }
 }
+
+.modal{
+ transition: .4s;
+
+}
+
+.modal-animation-enter-from{
+  opacity: 0;
+ 
+}
+.modal-animation-enter-to{
+   opacity: 1;
+ 
+}
+.modal-animation-leave-active{
+  opacity:0;
+ 
+}
+
 </style>

@@ -109,6 +109,8 @@ export default {
             height: 60vh;
             background-color: #F9C5D5;
             border-radius: 20px;
+            overflow: auto;
+
             img {
               width: 50px;
               height: 50px;
