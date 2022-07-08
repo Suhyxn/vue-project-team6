@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Home.vue'
 import SignIn from './SignIn.vue'
+import SignUp from './SignUp.vue'
 import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
 import AccountAdd from './AccountAdd.vue'
@@ -8,8 +9,11 @@ import LoginHome from './LoginHome.vue'
 import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
+import EditUserInfo from './EditUserInfo.vue'
 
 import Store from './Store.vue'
+
+
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
@@ -42,19 +46,30 @@ export default createRouter({
     },
     {
       path: '/loginHome',
-      component: LoginHome
+      component: LoginHome,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/test',
       component: Test
     },
-    {  
+    {
       path: '/store',
       component: Store,
     },
     {
       path: '/signin',
       component: SignIn,
+    },
+    {
+      path: '/signup',
+      component: SignUp,
+    },
+    {
+      path: '/editUserInfo',
+      component: EditUserInfo
     }
   ],
 })

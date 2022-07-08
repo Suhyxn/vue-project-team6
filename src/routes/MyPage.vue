@@ -6,7 +6,20 @@
         <div class="menu">
           <MyPageLNB />
           <div class="menu_ui">
-            <router-view />
+            <p>
+              <img
+                :src="profileImg"
+                alt="profileImg" />
+            </p>
+            <p>{{ displayName }}</p>
+            <p>{{ email }}</p>
+            <p>
+              <RouterLink to="/editUserInfo">
+                <button>
+                  내정보 수정하기
+                </button>
+              </RouterLink>
+            </p>
           </div>
         </div>
       </div>
@@ -15,19 +28,34 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
+import { validateTokenUser } from '~/core'
 import MyPageLNB from '~/components/MyPageLNB.vue'
 
 export default {
   components: {
     MyPageLNB,
   },
+  data() {
+    return {
+      email: '',
+      displayName: '',
+      profileImg: ''
+    }
+  },
   computed: {
-    ...mapStores(useMainStore),
+    
+  },
+  mounted() {
+    this.userRender()
   },
   methods: {
-    
+    async userRender() {
+      const user = await validateTokenUser()
+      console.log(user)
+      this.email = user.email
+      this.displayName = user.displayName
+      this.profileImg = user.profileImg
+    }
   }
 }
 </script>
@@ -81,6 +109,24 @@ export default {
             height: 60vh;
             background-color: #F9C5D5;
             border-radius: 20px;
+            img {
+              width: 50px;
+              height: 50px;
+            }
+            button {
+              margin: auto;
+              border: none;
+              background-color: #845FA7;
+              border-radius: 50px;
+              width: 400px;
+              height: 70px;
+              cursor: pointer;
+              color: #fff;
+              font-size: 28px;
+              &:hover {
+                opacity: .9;
+              }
+            }
           }
         }
       }
