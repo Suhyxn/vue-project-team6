@@ -17,7 +17,7 @@
     </li>
   </ul>
 
-  <div>
+  <!-- <div>
     <div
       ref="title"
       contenteditable
@@ -43,6 +43,44 @@
       {{ adminStore.product.tags }}
     </div>
     <div>{{ adminStore.product.thumbnail }}</div>
+  </div> -->
+
+  <div>
+    <div>{{ adminStore.product.title }}</div>
+    <div>{{ adminStore.product.price }}</div>
+    <div>{{ adminStore.product.description }}</div>
+    <div>{{ adminStore.product.tags }}</div>
+
+    <input
+      v-model="title"
+      type="text"
+      placeholder="title" />
+    <input
+      v-model="price"
+      type="text" 
+      placeholder="price" />
+    <input
+      v-model="description"
+      type="text" 
+      placeholder="description" />
+    <input
+      v-model="tags"
+      type="text" 
+      placeholder="tags" />
+    <input
+      v-model="id"
+      type="text" 
+      placeholder="id" />
+    <input type="file" />
+    <button
+      @click="updateProduct({
+        title, price, description, tags, id
+      })">
+      test
+    </button>
+    <!-- <button @click="updateProduct({title, content, description, tags},id)">
+      수정중
+    </button> -->
   </div>
 </template>
 
@@ -54,7 +92,12 @@ export default {
   data() {
     return {
       products: [],
-      product: {}
+      product: {},
+      title: '',
+      price: '',
+      description: '',
+      tags: '',
+      id: ''
     }
   },
   computed: {
@@ -67,8 +110,11 @@ export default {
     clickDetail(productId) {
       this.adminStore.oneReadProduct(productId)
     },
-    updateProduct() {
-
+    updateProduct(item) {
+      this.adminStore.editProduct(item)
+    },
+    testId(item) {
+      console.log(item)
     }
     // updateProduct( type: 'title' || 'content' || '') {
 
