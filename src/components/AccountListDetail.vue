@@ -72,14 +72,28 @@ li {
   }
   .account_information {
     display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      margin-right: 15%;
-      .bank_name, .account_number, .balance {
-        padding-top: 3px;
-        padding-bottom: 3px;
-      } 
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 15%;
+    .bank_name {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-weight: 700;
+      color: #F6921D;
     }
+    .account_number {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-weight: 700;
+      color: #8EC976;
+    }
+    .balance {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-weight: 700;
+      color: #83c1c4;
+    } 
+  }
 }
 </style>

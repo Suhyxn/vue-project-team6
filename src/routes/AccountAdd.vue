@@ -105,7 +105,7 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 button {
   width: 80px;
@@ -120,9 +120,12 @@ button {
   display: flex;
   justify-content: flex-end;
   .account_add {
-    background-color: #5353f1;
+    background-color: #845FA7;
+    font-weight: 700;
+    color: #fff;
   }
   .account_delete {
+    font-weight: 700;
     background-color: #f83d3d;
   }
 }
