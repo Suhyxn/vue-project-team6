@@ -111,6 +111,15 @@ import { mapStores } from 'pinia'
 import { useAccountStore } from '~/store/account'
 
 export default {
+  emits: 
+    [
+      'getBankCode',
+      'getAccountNumber',
+      'getPhoneNumber',
+      'getSignature',
+      'getDigits'
+    ]
+  ,
   data() {
     return {
       bankName: '',
@@ -217,36 +226,40 @@ export default {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   background-color: antiquewhite;
-    .wrong_message{
-      color: red;
+    .wrong_message {
       width: 100%;
+      color: red;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
     .correct_message {
-      color: #08a108;
       width: 100%;
+      color: #08a108;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
     .wrong_message_sign_no {
-      color: red;
       width: 100%;
+      color: red;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 15px;
     }
     .wrong_message_sign_ok {
-      color: #08a108;
       width: 100%;
+      color: #08a108;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -264,10 +277,10 @@ export default {
     margin-bottom: 3%;
     margin-left: 20px;
     input, select {
-      height: 20px;
+      height: 24px;
       border-radius: 4px;
       border: solid 1px #e1dfdf;
-      width: 160px;
+      width: 250px;
     }
   } .sign {
     width: 85%;

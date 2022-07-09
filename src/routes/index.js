@@ -6,7 +6,6 @@ import MyPage from './MyPage.vue'
 import AccountList from './AccountList.vue'
 import AccountAdd from './AccountAdd.vue'
 import LoginHome from './LoginHome.vue'
-import Test from './test.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
 import Addproduct from './AddProduct.vue'
@@ -34,6 +33,10 @@ export default createRouter({
         {
           path: 'userinfo',
           component: UserInfo,
+        },
+        {
+          path: 'edituserinfo',
+          component: EditUserInfo
         },
         {
           path: 'accountlist',
@@ -81,10 +84,6 @@ export default createRouter({
       meta: {
         auth: true,
       },
-    },
-    {
-      path: '/test',
-      component: Test,
     },
     {
       path: '/store',

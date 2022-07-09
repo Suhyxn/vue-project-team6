@@ -7,11 +7,14 @@
   <p>{{ displayName }}</p>
   <p>{{ email }}</p>
   <p>
-    <RouterLink to="/editUserInfo">
+    <button
+      class="edit_userinfo"
+      :class="{ active: /^\/mypage\/edituserinfo.*/.test($route.fullPath) }"
+      @click="$router.push(`/mypage/edituserinfo`)">
       <button>
         내정보 수정하기
       </button>
-    </RouterLink>
+    </button>
   </p>
 </template>
 
