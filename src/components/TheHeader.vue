@@ -69,7 +69,7 @@ export default {
       font-size: 30px;
     }
     .user_name {
-      font-size: 24px;
+      font-size: 20px;
       margin-right: 30px;
       margin-left: 10px;
     }

@@ -29,7 +29,7 @@ export default {
       navigations: [
         {
           name: 'AllReadProduct',
-          href: '/admin'
+          href: '/admin/allreadproduct'
         },
         {
           name: 'AllReadHistory',
@@ -58,18 +58,19 @@ export default {
 .__container {
   display: flex;
   flex-direction: row;
+  width: 200px;
   .LNB {
     display: flex;
     height: 100%;
     justify-content: center;
     align-items: center;
-    nav {
+   .nav {
       display: flex;
-      ul {
-        flex-grow: 1;
-        li {
-          margin-bottom: 30px;
-        }
+      flex-wrap: wrap;
+      flex-direction: column;
+      margin-left: 10px;
+      .nav-item {
+        padding-bottom: 10px;
       }
     }
   }
