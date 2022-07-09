@@ -28,7 +28,7 @@
     </div>
     <div class="total_balance">
       전체 보유 금액: <p class="total_balance_account">
-        &nbsp;{{ accountStore.list.totalBalance }}
+        &nbsp;{{ Number(accountStore.list.totalBalance).toLocaleString('ko-KR') }}
       </p>원
     </div>
     <ul>
