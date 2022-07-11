@@ -8,19 +8,19 @@
         <div class="id">
           <input
             v-model="email"
-            placeholder="아이디 (이메일 주소)"
+            placeholder="아이디 (이메일 주소) *필수"
             type="text" />
         </div>
         <div class="pw">
           <input
             v-model="password"
-            placeholder="비밀번호 (8자 이상)"
+            placeholder="비밀번호 (8자 이상) *필수"
             type="text" />
         </div>
         <div class="name">
           <input
             v-model="displayName"
-            placeholder="닉네임 (20자 이하)"
+            placeholder="닉네임 (20자 이하) *필수"
             type="text" />
         </div>
         <div>
@@ -62,6 +62,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { useUserStore } from '~/store/user'
+import { baseImg } from '~/core'
 
 export default {
   data() {
@@ -69,7 +70,7 @@ export default {
       email: '',
       password: '',
       displayName: '',
-      profileImgBase64: ''
+      profileImgBase64: baseImg
     }
   },
   computed: {
@@ -80,12 +81,14 @@ export default {
     selectFile(event) {
       const reader = new FileReader()
       for(const file of event.target.files) {
+        console.log(file)
         reader.readAsDataURL(file)
         reader.addEventListener('load', e => {
           this.profileImgBase64 = e.target.result
         })
       }
-    }
+    },
+
   }
 }
 </script>
