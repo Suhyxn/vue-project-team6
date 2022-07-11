@@ -12,7 +12,7 @@
         계좌 번호: {{ accountNumber }}
       </div>
       <div class="balance">
-        보유 금액: {{ balance }}원
+        보유 금액: {{ balance.toLocaleString('ko-KR') }}원
       </div>
     </div>
   </li>
@@ -49,6 +49,10 @@ export default {
       default: false
     }
   }
+  ,
+  emits: [
+    'update:checked'
+  ]
   ,computed: {
       ...mapStores(useAccountStore)
   }

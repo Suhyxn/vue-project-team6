@@ -111,6 +111,15 @@ import { mapStores } from 'pinia'
 import { useAccountStore } from '~/store/account'
 
 export default {
+  emits: 
+    [
+      'getBankCode',
+      'getAccountNumber',
+      'getPhoneNumber',
+      'getSignature',
+      'getDigits'
+    ]
+  ,
   data() {
     return {
       bankName: '',
