@@ -1,7 +1,7 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="item in clientStore.getAllProduct"
+      v-for="item in clientStore.getEquiment"
       :key="item.id"
       class="item">
       <div 
@@ -10,7 +10,7 @@
       </div>
       <div class="info">
         <p class="title">
-          이름: {{ item.title }}
+          제품: {{ item.title }}
         </p> 
         <p class="price">
           가격: {{ item.price }}
@@ -19,34 +19,42 @@
       <div class="btns">
         <button 
           class="btn"
-          @click="handler(item.id);">
+          @click="handler({
+            id:item.id,
+            price:item.price
+          });">
           구매하기 
         </button>
       
-        <router-link
-          class="btn btn--move"
-          :to="`/store/detail/${item.id}`">
+        <button
+          class="btn"
+          @click="$router.push(`/store/singleproductdetail/${item.id}`)">
           상세페이지
-        </router-link>
+        </button>
       </div>
     </li>
   </ul>
 </template>
 
+
 <script>
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
-
+import { useAccountStore } from '../store/account'
 export default {
   computed:{
-    ...mapStores([useClientStore])
+    ...mapStores([useClientStore,useAccountStore])
   },
 
   methods: {
-    handler(id){
-      this.clientStore.modalHandler()
-      this.clientStore.singleProductId = id
-      console.log(this.clientStore.singleProductId)
+    handler(payload){
+        if(!localStorage.getItem('token')){
+          alert('제품구매는 로그인을 해야 할 수 있습니다!')
+          this.$router.push('/signin')
+          return 
+        }
+      this.clientStore.singleProductData = payload
+      this.accountStore.isShow = !this.accountStore.isShow
     }
   },
 }
@@ -81,13 +89,20 @@ export default {
      }
      .info{
       margin: 10px;
+      font-weight: 700;
       .title{
-        margin-bottom: 25px;
+        margin-bottom: 10px;
+        height: 32px;
+      }
+      .price{
+        margin-bottom: 10px;
       }
      }
      .btns{
       display: flex;
-      margin-top:25px;
+      justify-content:space-around;
+      align-items: center;
+      
       .btn{
         display: inline-block;
         padding:5px 10px;
@@ -97,18 +112,11 @@ export default {
         border-radius: 8px;
         background: #000;
         color: #fff;
-        &:first-child{
-        margin: 0 10px;    
-        }
         font-size:12px;
         &:hover{
           background:green;
         }
-      }
-      .btn--move{
-        text-decoration: none;
-        display:flex;
-        align-items: center;
+        
       }
      }
     }

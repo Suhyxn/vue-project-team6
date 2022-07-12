@@ -1,80 +1,83 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from "pinia";
+import axios from "axios";
 
-const accountURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/account'
+const accountURL =
+  "https://asia-northeast3-heropy-api.cloudfunctions.net/api/account";
 const headers = {
-  'content-type': 'application/json',
-  'apikey': 'FcKdtJs202204',
-  'username': 'KDT2_team6',
-}
+  "content-type": "application/json",
+  apikey: "FcKdtJs202204",
+  username: "KDT2_team6",
+};
 
-
-export const useAccountStore = defineStore('account', {
+export const useAccountStore = defineStore("account", {
   state() {
     return {
       list: [],
-      banks: []
-    }
+      banks: [],
+      selectedBankData: null,
+      isShow: false,
+    };
   },
   getters: {},
 
   actions: {
     async selectBankList() {
       const bankLsit = await axios({
-        url: accountURL+'/banks',
-        method: 'GET',
+        url: accountURL + "/banks",
+        method: "GET",
         headers: {
           ...headers,
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`
-        }
-        })
-      this.banks = bankLsit.data
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
+      this.banks = bankLsit.data;
     },
+
     async readAccountList() {
       const accountList = await axios({
         url: accountURL,
-        method: 'GET',
+        method: "GET",
         headers: {
           ...headers,
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`
-        }
-        })
-      this.list = accountList.data
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
+      this.list = accountList.data;
     },
     async addAccountList(payload) {
-      const { bankCode, accountNumber, phoneNumber, signature } = payload
+      const { bankCode, accountNumber, phoneNumber, signature } = payload;
 
       await axios({
         url: accountURL,
-        method: 'POST',
+        method: "POST",
         headers: {
           ...headers,
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
         data: {
           bankCode,
           accountNumber,
           phoneNumber,
-          signature
-        }
-        })
+          signature,
+        },
+      });
     },
     async deleteAccount(accountIds, signature) {
       for (let i in accountIds) {
         await axios({
           url: accountURL,
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
             ...headers,
-            Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },
           data: {
             accountId: accountIds[i],
-            signature
-          }
-        })
+            signature,
+          },
+        });
       }
-      this.readAccountList()
-    }
-  }
-})
+      this.readAccountList();
+    },
+  },
+});

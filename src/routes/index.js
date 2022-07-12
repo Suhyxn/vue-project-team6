@@ -1,109 +1,114 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from './Home.vue'
-import SignIn from './SignIn.vue'
-import SignUp from './SignUp.vue'
-import MyPage from './MyPage.vue'
-import AccountList from './AccountList.vue'
-import AccountAdd from './AccountAdd.vue'
-import LoginHome from './LoginHome.vue'
-import Admin from './Admin.vue'
-import AllReadProduct from './AllReadProduct.vue'
-import Addproduct from './AddProduct.vue'
-import AllReadHistory from './AllReadHistory.vue'
-import EditProduct from './Editproduct.vue'
-import ReadHistory from './ReadHistory.vue'
-import EditUserInfo from './EditUserInfo.vue'
-import Store from './Store.vue'
-import PurchaseList from './PurchaseList.vue'
-import Detail from './Detail.vue'
-import UserInfo from './UserInfo.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "./Home.vue";
+import SignIn from "./SignIn.vue";
+import SignUp from "./SignUp.vue";
+import MyPage from "./MyPage.vue";
+import AccountList from "./AccountList.vue";
+import AccountAdd from "./AccountAdd.vue";
+import LoginHome from "./LoginHome.vue";
+import Admin from "./Admin.vue";
+import AllReadProduct from "./AllReadProduct.vue";
+import Addproduct from "./AddProduct.vue";
+import AllReadHistory from "./AllReadHistory.vue";
+import EditProduct from "./Editproduct.vue";
+import ReadHistory from "./ReadHistory.vue";
+import EditUserInfo from "./EditUserInfo.vue";
+import Store from "./Store.vue";
+import PurchaseList from "./PurchaseList.vue";
+import SingleProductDetail from "./SingleProductDetail.vue";
+import SinglePurchasedItemDetail from "./SinglePurchasedItemDetail.vue";
+import UserInfo from "./UserInfo.vue";
 
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
   routes: [
     {
-      path: '/',
+      path: "/",
       component: Home,
     },
     {
-      path: '/mypage',
+      path: "/mypage",
       component: MyPage,
       children: [
         {
-          path: 'userinfo',
+          path: "userinfo",
           component: UserInfo,
         },
         {
-          path: 'edituserinfo',
-          component: EditUserInfo
+          path: "edituserinfo",
+          component: EditUserInfo,
         },
         {
-          path: 'accountlist',
+          path: "accountlist",
           component: AccountList,
         },
         {
-          path: 'accountadd',
+          path: "accountadd",
           component: AccountAdd,
         },
         {
-          path: 'purchaselist',
+          path: "purchaselist",
           component: PurchaseList,
         },
       ],
     },
     {
-      path: '/admin',
+      path: "/mypage/purchaselist/singlepurchaseditem/:id",
+      component: SinglePurchasedItemDetail,
+    },
+    {
+      path: "/admin",
       component: Admin,
       children: [
         {
-          path: 'allreadproduct',
-          component: AllReadProduct
+          path: "allreadproduct",
+          component: AllReadProduct,
         },
         {
-          path: 'allreadhistory',
-          component: AllReadHistory
+          path: "allreadhistory",
+          component: AllReadHistory,
         },
         {
-          path: 'editproduct',
-          component: EditProduct
+          path: "editproduct",
+          component: EditProduct,
         },
         {
-          path: 'addproduct',
-          component: Addproduct
+          path: "addproduct",
+          component: Addproduct,
         },
         {
-          path: 'readhistory',
-          component: ReadHistory
-        }
-      ]
+          path: "readhistory",
+          component: ReadHistory,
+        },
+      ],
     },
     {
-      path: '/loginHome',
+      path: "/loginHome",
       component: LoginHome,
       meta: {
         auth: true,
       },
     },
     {
-      path: '/store',
+      path: "/store",
       component: Store,
     },
     {
-      path: '/store/detail/:id',
-      component: Detail,
+      path: "/store/singleproductdetail/:id",
+      component: SingleProductDetail,
     },
     {
-      path: '/signin',
+      path: "/signin",
       component: SignIn,
     },
     {
-      path: '/signup',
+      path: "/signup",
       component: SignUp,
     },
     {
-      path: '/editUserInfo',
+      path: "/editUserInfo",
       component: EditUserInfo,
     },
   ],
-})
+});

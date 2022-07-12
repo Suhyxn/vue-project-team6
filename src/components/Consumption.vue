@@ -1,27 +1,34 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="(item,index) in 20"
-      :key="index"
+      v-for="item in clientStore.getConsumption"
+      :key="item.id"
       class="item">
-      <div class="sumnail">
-        이미지 영역
+      <div 
+        class="sumnail"
+        :style="{backgroundImage:`url(${item.thumbnail})`}">
       </div>
       <div class="info">
         <p class="title">
-          이름: 빨간물약
+          제품: {{ item.title }}
         </p> 
         <p class="price">
-          가격: 0000
+          가격: {{ item.price }}
         </p>
       </div>
       <div class="btns">
         <button 
           class="btn"
-          @click="handler(item.id);">
-          구매하기
+          @click="handler({
+            id:item.id,
+            price:item.price
+          });">
+          구매하기 
         </button>
-        <button class="btn">
+      
+        <button
+          class="btn"
+          @click="$router.push(`/store/singleproductdetail/${item.id}`)">
           상세페이지
         </button>
       </div>
@@ -29,22 +36,29 @@
   </ul>
 </template>
 
+
 <script>
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
+import { useAccountStore } from '../store/account'
+
 export default {
   computed:{
-  ...mapStores([useClientStore])
-},
-methods:{
-  handler(id){
-    this.clientStore.modalHandler()
-    this.clientStore.singleProductId = id
-    console.log(this.clientStore.singleProductId)
- }
-}
-}
+    ...mapStores([useClientStore,useAccountStore])
+  },
 
+  methods: {
+      handler(payload){
+       if(!localStorage.getItem('token')){
+          alert('제품구매는 로그인을 해야 할 수 있습니다!')
+          this.$router.push('/signin')
+          return 
+        }
+      this.clientStore.singleProductData = payload
+      this.accountStore.isShow = !this.accountStore.isShow
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -53,45 +67,57 @@ methods:{
     flex-wrap: wrap;
     justify-content: space-around;
     .item{
-      width:170px;
-      height:200px;
+      width:200px;
+      height:250px;
       background:red;
+      border: ridge 15px #fff;
+      border-radius: 8px;
+      box-sizing: border-box;
       margin: 10px 0;
       display: flex;
       flex-direction: column;
-      border-radius: 8px;
+      
     
      .sumnail{
-      width: 85%;
-      height: 80px;
-      background: blue;
+      width: 60px;
+      height: 60px;
+      padding: 15px;
+      background: #808080;
+      background-repeat: no-repeat;
+      background-size: cover;
       margin: 10px;
       box-sizing: border-box;
      }
      .info{
       margin: 10px;
+      font-weight: 700;
       .title{
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        height: 32px;
+      }
+      .price{
+        margin-bottom: 10px;
       }
      }
      .btns{
       display: flex;
+      justify-content:space-around;
+      align-items: center;
       
       .btn{
         display: inline-block;
-        padding:5px 5px;
+        padding:5px 10px;
         box-sizing: border-box;
         outline: none;
         border:none;
         border-radius: 8px;
         background: #000;
         color: #fff;
-        &:first-child{
-        margin: 0 3px;    
-        }
+        font-size:12px;
         &:hover{
           background:green;
         }
+        
       }
      }
     }
