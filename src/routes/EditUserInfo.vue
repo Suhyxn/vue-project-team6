@@ -1,47 +1,43 @@
 <template>
-  <div class="bg">
-    <div class="inner">
-      <div>
-        <img
-          src="../BSE_imgs/login.png"
-          alt="login" />
-        <div class="name">
-          <input
-            v-model="displayName"
-            placeholder="New 닉네임 (20자 이하)"
-            type="text" />
-        </div>
-        <div class="old_pw">
-          <input
-            v-model="oldPassword"
-            placeholder="현재 비밀번호"
-            type="text" />
-        </div>
-        <div class="new_pw">
-          <input
-            v-model="newPassword"
-            placeholder="New 비밀번호 (8자 이상)"
-            type="text" />
-        </div>
-        <div>
-          <input
-            placeholder="프로필(임시)"
-            type="file" 
-            @change="selectFile" />
-        </div>
-        <div>
-          <button
-            class="check"
-            @click="editUserInfo({
-              oldPassword,
-              newPassword,
-              displayName,
-              profileImgBase64
-            })">
-            확인
-          </button>
-        </div>
-      </div>
+  <div>
+    <img
+      src="../BSE_imgs/login.png"
+      alt="login" />
+    <div class="name">
+      <input
+        v-model="displayName"
+        placeholder="New 닉네임 (20자 이하)"
+        type="text" />
+    </div>
+    <div class="old_pw">
+      <input
+        v-model="oldPassword"
+        placeholder="현재 비밀번호"
+        type="text" />
+    </div>
+    <div class="new_pw">
+      <input
+        v-model="newPassword"
+        placeholder="New 비밀번호 (8자 이상)"
+        type="text" />
+    </div>
+    <div>
+      <input
+        placeholder="프로필(임시)"
+        type="file" 
+        @change="selectFile" />
+    </div>
+    <div>
+      <button
+        class="check"
+        @click="editUserInfo({
+          oldPassword,
+          newPassword,
+          displayName,
+          profileImgBase64
+        })">
+        확인
+      </button>
     </div>
   </div>
 </template>

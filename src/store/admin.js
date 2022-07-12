@@ -1,32 +1,75 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
+import axios from 'axios'
 
-export const useAdminStore = defineStore("admin", {
-  state() {
+const adminURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products'
+const headers = {
+  'content-type': 'application/json',
+  'apikey': 'FcKdtJs202204',
+  'username': 'KDT2_team6',
+  'masterKey': 'true'
+}
+
+export const useAdminStore = defineStore('admin', {
+  state: () => {
     return {
-      Product: [],
-    };
+      products: [],
+      product: {},
+      histories: [],
+      history: {},
+      editproduct: {},
+      done: false
+    }
   },
   getters: {},
   actions: {
-    hello() {
-      console.log("hello");
+    async allReadProduct () {
+      const { data: products } = await axios ({
+        url: adminURL,
+        method: 'GET',
+        headers
+      })
+      console.log(products)
+      this.products = products
     },
-    async ReadProductAdmin() {
-      console.log("hello");
-      const res = await fetch(
-        "https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ",
-        {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            apikey: "FcKdtJs202204",
-            username: "Team6",
-            masterKey: "true",
-          },
+    async oneReadProduct (id) {
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
+      const { data: product } = await axios ({
+        url,
+        method: 'GET',
+        headers,
+        id
+      })
+      console.log(product)
+      this.product = product
+    },
+    async allReadHistory () {
+      const { data: histories } = await axios ({
+        url: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all',
+        method: 'GET',
+        headers
+      })
+      console.log(histories)
+      this.histories = histories
+    },
+    async editProduct (payload, id) {
+      const { title, price, description, tags, thumbnail, isSoldout } = payload
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
+      const editProduct = await axios ({
+        url,
+        method: 'PUT',
+        headers,
+        body: {
+          title,
+          price,
+          description,
+          tags,
+          thumbnail,
+          isSoldout
         }
-      );
-      const master = await res.json();
-      console.log(master);
-    },
-  },
-});
+      })
+      console.log('hello')
+      this.product = editProduct
+      this.allReadProduct()
+    }
+  }
+})

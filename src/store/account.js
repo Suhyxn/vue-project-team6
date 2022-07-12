@@ -7,7 +7,6 @@ const headers = {
   "content-type": "application/json",
   apikey: "FcKdtJs202204",
   username: "KDT2_team6",
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
 };
 
 export const useAccountStore = defineStore("account", {
@@ -26,26 +25,35 @@ export const useAccountStore = defineStore("account", {
       const bankLsit = await axios({
         url: accountURL + "/banks",
         method: "GET",
-        headers,
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       });
       this.banks = bankLsit.data;
     },
+
     async readAccountList() {
       const accountList = await axios({
         url: accountURL,
         method: "GET",
-        headers,
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       });
       this.list = accountList.data;
-      console.log(this.list);
     },
     async addAccountList(payload) {
       const { bankCode, accountNumber, phoneNumber, signature } = payload;
 
-      const res = await axios({
+      await axios({
         url: accountURL,
         method: "POST",
-        headers,
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
         data: {
           bankCode,
           accountNumber,
@@ -53,14 +61,16 @@ export const useAccountStore = defineStore("account", {
           signature,
         },
       });
-      console.log(res.data);
     },
     async deleteAccount(accountIds, signature) {
       for (let i in accountIds) {
         await axios({
           url: accountURL,
           method: "DELETE",
-          headers,
+          headers: {
+            ...headers,
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
           data: {
             accountId: accountIds[i],
             signature,

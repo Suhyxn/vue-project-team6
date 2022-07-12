@@ -12,7 +12,7 @@
         계좌 번호: {{ accountNumber }}
       </div>
       <div class="balance">
-        보유 금액: {{ balance }}원
+        보유 금액: {{ balance.toLocaleString('ko-KR') }}원
       </div>
     </div>
   </li>
@@ -49,6 +49,10 @@ export default {
       default: false
     }
   }
+  ,
+  emits: [
+    'update:checked'
+  ]
   ,computed: {
       ...mapStores(useAccountStore)
   }
@@ -72,14 +76,28 @@ li {
   }
   .account_information {
     display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      margin-right: 15%;
-      .bank_name, .account_number, .balance {
-        padding-top: 3px;
-        padding-bottom: 3px;
-      } 
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 15%;
+    .bank_name {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-weight: 700;
+      color: #F6921D;
     }
+    .account_number {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-weight: 700;
+      color: #8EC976;
+    }
+    .balance {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      font-weight: 700;
+      color: #83c1c4;
+    } 
+  }
 }
 </style>

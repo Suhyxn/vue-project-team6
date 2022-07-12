@@ -6,9 +6,12 @@ import MyPage from "./MyPage.vue";
 import AccountList from "./AccountList.vue";
 import AccountAdd from "./AccountAdd.vue";
 import LoginHome from "./LoginHome.vue";
-import Test from "./test.vue";
 import Admin from "./Admin.vue";
 import AllReadProduct from "./AllReadProduct.vue";
+import Addproduct from "./AddProduct.vue";
+import AllReadHistory from "./AllReadHistory.vue";
+import EditProduct from "./Editproduct.vue";
+import ReadHistory from "./ReadHistory.vue";
 import EditUserInfo from "./EditUserInfo.vue";
 import Store from "./Store.vue";
 import PurchaseList from "./PurchaseList.vue";
@@ -33,6 +36,10 @@ export default createRouter({
           component: UserInfo,
         },
         {
+          path: "edituserinfo",
+          component: EditUserInfo,
+        },
+        {
           path: "accountlist",
           component: AccountList,
         },
@@ -53,10 +60,28 @@ export default createRouter({
     {
       path: "/admin",
       component: Admin,
-    },
-    {
-      path: "/admin/allreadproduct",
-      component: AllReadProduct,
+      children: [
+        {
+          path: "allreadproduct",
+          component: AllReadProduct,
+        },
+        {
+          path: "allreadhistory",
+          component: AllReadHistory,
+        },
+        {
+          path: "editproduct",
+          component: EditProduct,
+        },
+        {
+          path: "addproduct",
+          component: Addproduct,
+        },
+        {
+          path: "readhistory",
+          component: ReadHistory,
+        },
+      ],
     },
     {
       path: "/loginHome",
@@ -64,10 +89,6 @@ export default createRouter({
       meta: {
         auth: true,
       },
-    },
-    {
-      path: "/test",
-      component: Test,
     },
     {
       path: "/store",

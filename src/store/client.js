@@ -25,6 +25,7 @@ export const useClientStore = defineStore("client", {
       searchValue: "",
       searchItem: [],
       singleProductData: null,
+      singleProductId: "",
       singlePageData: {
         data: {},
       },
@@ -200,7 +201,6 @@ export const useClientStore = defineStore("client", {
         console.log(err);
       }
     },
-
     //단일 제품 상세 조회 공통 api
     async readSingleProduct(id) {
       try {

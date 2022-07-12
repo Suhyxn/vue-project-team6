@@ -1,13 +1,13 @@
 <template>
   <div class="menu_list">
     <button 
-      class="account"
-      :class="{ active: /^\/mypage\/userinfo$/.test($route.fullPath) }"
+      class="menu myinfo"
+      :class="{ active: /^\/mypage\/.*userinfo/.test($route.fullPath) }"
       @click="$router.push(`/mypage/userinfo`)">
       내 정보
     </button>
     <button 
-      class="account"
+      class="menu account"
       :class="{ active: /^\/mypage\/account.*/.test($route.fullPath) }"
       @click="$router.push(`/mypage/accountlist`)">
       계좌
@@ -48,7 +48,7 @@ export default {
   background-color: #F999B7;
   border-radius: 20px;
   margin-right: 5%;
-  .account {
+  .menu {
     width: 70%;
     height: 10%;
     margin-top: 10%;
@@ -56,19 +56,27 @@ export default {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    border: solid 2px #c7c7e1;
     border-radius: 5px;
     color: #fff;
-    background-color: gray;
-    &:hover {
-      color: #000;
-      background-color: aliceblue;
-      border-color: aliceblue;
+    &.myinfo {
+      background-color: #F6921D;
+      border: solid 2px #F6921D;
+      &:hover {
+        border: solid 3px #FFE341;
+      }
+      &.active {
+        border: solid 3px #FFE341;
+      }
     }
-    &.active {
-      color: #000;
-      background-color: aliceblue;
-      border-color: aliceblue;
+    &.account {
+      border: solid 2px #8EC976;
+      background-color: #8EC976;
+      &:hover {
+        border: solid 3px #2d9006;
+        }
+      &.active {
+        border: solid 3px #2d9006;
+        }
     }
   }
 }

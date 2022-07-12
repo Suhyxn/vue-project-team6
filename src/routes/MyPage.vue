@@ -39,9 +39,8 @@ export default {
       .my_page {
         width: 60%;
         height: 75vh;
-        background: white;
+        background: rgb(255, 255, 255, 0.8);
         border-radius: 20px;
-        opacity: 0.8;
         p {
           padding: 20px 0;
           font-size: 24px;

@@ -5,15 +5,14 @@
       <p>은행명</p>
       <select
         @change="onChangeBankCode($event), bankDigits()">
-        <option value="">
+        <option value="all">
           전체
         </option>
         <option 
           v-for="bank in accountStore.banks"
           :key="bank.name"
           :bankName="bank.name"
-          :disabled="bank.disabled"
-          :value="bank.code">
+          :value="JSON.stringify(bank)">
           <div
             v-if="bank.disabled === true">
             {{ `${bank.name} (사용 중)` }}
@@ -26,14 +25,19 @@
       </select>
     </div>
     <div
-      v-if="!bankCode"
+      v-if="bankCode && !disabled"
+      class="correct_message">
+      "{{ bankName }}" 을(를) 선택하셨습니다!
+    </div>
+    <div
+      v-else-if="bankCode && disabled"
       class="wrong_message">
-      은행을 선택해주세요!
+      "{{ bankName }}" 은(는) 이미 연결된 은행입니다!
     </div>
     <div
       v-else
-      class="correct_message">
-      "{{ bankName }}" 을(를) 선택하셨습니다!
+      class="wrong_message">
+      은행을 선택해주세요!
     </div>
     <div
       class="account_number">
@@ -48,16 +52,16 @@
         @change="onChangeAccountNumber" />
     </div>
     <div
-      v-if="accountNumber.length !== sum"
+      v-if="accountNumber.length !== sum && disabled === false"
       class="wrong_message">
       계좌 번호를 {{ sum }}자리{{ digits }}에 맞게
       <br />
       입력 해주세요!
     </div>
     <div
-      v-else-if="!bankCode"
+      v-else-if="!bankCode || disabled === true"
       class="wrong_message">
-      은행을 선택해주세요!
+      은행을 다시 선택해주세요!
     </div>
     <div
       v-else
@@ -111,6 +115,15 @@ import { mapStores } from 'pinia'
 import { useAccountStore } from '~/store/account'
 
 export default {
+  emits: 
+    [
+      'getBankCode',
+      'getAccountNumber',
+      'getPhoneNumber',
+      'getSignature',
+      'getDigits'
+    ]
+  ,
   data() {
     return {
       bankName: '',
@@ -133,31 +146,19 @@ export default {
   },
   methods: {
     onChangeBankCode(e) {
-      this.bankCode = e.target.value
+      if (e.target.value =='all') {
+        this.$refs.accountNumberText.value = ''
+        return this.bankCode = ''
+      }
+      else {
+      this.bankCode = JSON.parse(e.target.value).code
+      this.bankName = JSON.parse(e.target.value).name
+      this.disabled = JSON.parse(e.target.value).disabled
       const bankCode = this.bankCode
-      if (bankCode == '004') {
-        this.bankName = 'KB국민은행'
-      }
-      else if (bankCode == '088') {
-        this.bankName = '신한은행'
-      }
-      else if (bankCode == '020') {
-        this.bankName = '우리은행'
-      }
-      else if (bankCode == '081') {
-        this.bankName = '하나은행'
-      }
-      else if (bankCode == '089') {
-        this.bankName = '케이뱅크'
-      }
-      else if (bankCode == '090') {
-        this.bankName = '카카오뱅크'
-      }
-      else if (bankCode == '011') {
-        this.bankName = 'NH농협은행'
-      }
+      const disabled = this.disabled
       this.$refs.accountNumberText.value = ''
-      this.$emit('getBankCode', bankCode)
+      this.$emit('getBankCode', bankCode, disabled)
+      }
     },
     onChangeAccountNumber(e) {
       this.accountNumber = e.target.value.trim()
@@ -191,7 +192,7 @@ export default {
           this.digits = this.accountStore.banks[i].digits
         }
       }
-      if(!this.bankCode) {
+      if(!this.bankCode || this.disabled) {
         this.digits = ''
         this.sum = 0
         this.message = '은행을 선택 해주세요'
@@ -217,36 +218,40 @@ export default {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   background-color: antiquewhite;
-    .wrong_message{
-      color: red;
+    .wrong_message {
       width: 100%;
+      color: red;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
     .correct_message {
-      color: #08a108;
       width: 100%;
+      color: #08a108;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
     .wrong_message_sign_no {
-      color: red;
       width: 100%;
+      color: red;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 15px;
     }
     .wrong_message_sign_ok {
-      color: #08a108;
       width: 100%;
+      color: #08a108;
+      font-weight: 700;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -264,10 +269,10 @@ export default {
     margin-bottom: 3%;
     margin-left: 20px;
     input, select {
-      height: 20px;
+      height: 24px;
       border-radius: 4px;
       border: solid 1px #e1dfdf;
-      width: 160px;
+      width: 250px;
     }
   } .sign {
     width: 85%;

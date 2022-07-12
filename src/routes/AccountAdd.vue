@@ -36,6 +36,7 @@ export default {
       digits: '',
       accountNumber: '',
       phoneNumber: '',
+      disabled: false,
       signature: false,
       sum: 0
     }
@@ -44,8 +45,9 @@ export default {
     ...mapStores(useAccountStore)
   },
   methods: {
-    getBankCode(value) {
-      this.bankCode = value 
+    getBankCode(value1, value2) {
+      this.bankCode = value1 
+      this.disabled = value2
     },
     getAccountNumber(value) {
       this.accountNumber = value 
@@ -66,6 +68,7 @@ export default {
     },
     addAccount() {
       const bankCode = this.bankCode
+      const disabled = this.disabled
       const accountNumber = this.accountNumber
       const phoneNumber = this.phoneNumber
       const signature = this.signature
@@ -73,6 +76,9 @@ export default {
       const regExp = new RegExp(`^([0-9]{${sum}})$`)
       
       if(!bankCode) {
+        return false
+      }
+      else if (disabled == true) {
         return false
       }
       else if (!accountNumber) {
@@ -105,7 +111,7 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 button {
   width: 80px;
@@ -120,9 +126,12 @@ button {
   display: flex;
   justify-content: flex-end;
   .account_add {
-    background-color: #5353f1;
+    background-color: #845FA7;
+    font-weight: 700;
+    color: #fff;
   }
   .account_delete {
+    font-weight: 700;
     background-color: #f83d3d;
   }
 }
