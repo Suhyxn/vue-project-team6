@@ -17,12 +17,18 @@ export const useClientStore = defineStore("client", {
   state() {
     return {
       getAllProduct: [],
+      getEquiment: [],
+      getConsumption: [],
+      getPat: [],
       isShow: false,
       selected: "everyItem",
       searchValue: "",
       searchItem: [],
-      singleProductId: "",
+      singleProductData: null,
       singlePageData: {
+        data: {},
+      },
+      singlePurchasedItemPageData: {
         data: {},
       },
       purchasedList: null,
@@ -48,6 +54,21 @@ export const useClientStore = defineStore("client", {
       const master = await res.json();
       console.log(master);
       this.getAllProduct = master;
+
+      const equiment = this.getAllProduct.filter((i) => {
+        return i.tags === "장비";
+      });
+      this.getEquiment = equiment;
+
+      const consumption = this.getAllProduct.filter((i) => {
+        return i.tags === "소비";
+      });
+      this.getConsumption = consumption;
+
+      const pet = this.getAllProduct.filter((i) => {
+        return i.tags === "펫";
+      });
+      this.getPat = pet;
     },
 
     //제품 검색 기능
@@ -73,14 +94,14 @@ export const useClientStore = defineStore("client", {
     },
 
     //제품 구매 신청 기능
-    async productPurchase() {
-      // if(보유금액보다 제품금액이 크다면){
-      //   alert('잔액이 부족합니다!')
-      //   return ;
-      // }
+    async productPurchase(payload) {
+      const { id, price } = payload;
+      if (price < this.singleProductData.price) {
+        alert("잔액이 부족합니다!");
+        return;
+      }
 
       try {
-        // const { accountId } = payload; -> error출력을 방지하기 위해 일단 주석처리 해놓음
         const res = await axios({
           url: `${END_POINT}/buy`,
           method: "POST",
@@ -89,14 +110,14 @@ export const useClientStore = defineStore("client", {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           data: {
-            productId: this.singleProductId,
-            accountId: "Ga2tRwm1HrJRPXtSDuLS",
-            // accountId 아직 합치기 전이라 하드코딩해놓음
+            productId: this.singleProductData.id,
+            accountId: id,
           },
         });
         console.log(res);
+        this.allPurchasedList();
       } catch (err) {
-        console.log(err);
+        alert("로그인을 하지않았거나 등록된 계좌가 없습니다");
       }
     },
 
@@ -104,7 +125,7 @@ export const useClientStore = defineStore("client", {
     async purchaseCancel(payload) {
       try {
         const { detailId } = payload;
-        const res = await axios({
+        await axios({
           url: `${END_POINT}/cancel`,
           method: "POST",
           headers: {
@@ -115,7 +136,6 @@ export const useClientStore = defineStore("client", {
             detailId,
           },
         });
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -125,7 +145,7 @@ export const useClientStore = defineStore("client", {
     async purchaseDecision(payload) {
       try {
         const { detailId } = payload;
-        const res = await axios({
+        await axios({
           url: `${END_POINT}/ok`,
           method: "POST",
           headers: {
@@ -136,7 +156,6 @@ export const useClientStore = defineStore("client", {
             detailId,
           },
         });
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -165,7 +184,7 @@ export const useClientStore = defineStore("client", {
     async singlePurchasedList(payload) {
       const { detailId } = payload;
       try {
-        const res = await axios({
+        const { data } = await axios({
           url: `${END_POINT}/transactions/detail`,
           method: "POST",
           headers: {
@@ -176,7 +195,7 @@ export const useClientStore = defineStore("client", {
             detailId,
           },
         });
-        console.log(res);
+        this.singlePurchasedItemPageData = data;
       } catch (err) {
         console.log(err);
       }
@@ -194,7 +213,6 @@ export const useClientStore = defineStore("client", {
             ...headers,
           },
         });
-        console.log(data);
         this.singlePageData = data;
       } catch (err) {
         console.log(err);
