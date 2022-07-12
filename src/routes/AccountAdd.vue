@@ -36,6 +36,7 @@ export default {
       digits: '',
       accountNumber: '',
       phoneNumber: '',
+      disabled: false,
       signature: false,
       sum: 0
     }
@@ -44,8 +45,9 @@ export default {
     ...mapStores(useAccountStore)
   },
   methods: {
-    getBankCode(value) {
-      this.bankCode = value 
+    getBankCode(value1, value2) {
+      this.bankCode = value1 
+      this.disabled = value2
     },
     getAccountNumber(value) {
       this.accountNumber = value 
@@ -66,6 +68,7 @@ export default {
     },
     addAccount() {
       const bankCode = this.bankCode
+      const disabled = this.disabled
       const accountNumber = this.accountNumber
       const phoneNumber = this.phoneNumber
       const signature = this.signature
@@ -73,6 +76,9 @@ export default {
       const regExp = new RegExp(`^([0-9]{${sum}})$`)
       
       if(!bankCode) {
+        return false
+      }
+      else if (disabled == true) {
         return false
       }
       else if (!accountNumber) {
