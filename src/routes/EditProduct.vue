@@ -1,21 +1,27 @@
 <template>
-  <ul class="product-list">
-    <li
-      v-for="product in adminStore.products"
-      :key="product.id"
-      class="product-item"
-      :productId="product.id">
-      <div
-        class="product-image"
-        :style="{ backgroundImage: `url(${product.thumbnail})` }"
-        @click="clickDetail(`${product.id}`)">
-        .
-      </div>
-      <div class="product-title">
-        {{ product.id }}
-      </div>
-    </li>
-  </ul>
+  <div class="relative">
+    <div>
+      정보를 볼 제품을 클릭하세요!
+    </div>
+
+    <ul class="product-list">
+      <li
+        v-for="product in adminStore.products"
+        :key="product.id"
+        class="product-item"
+        :productId="product.id">
+        <div
+          class="product-image"
+          :style="{ backgroundImage: `url(${product.thumbnail})` }"
+          @click="clickDetail(`${product.id}`)">
+          .
+        </div>
+        <div class="product-title">
+          {{ product.id }}
+        </div>
+      </li>
+    </ul>
+  </div>
 
   <!-- <div>
     <div
@@ -125,7 +131,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.product-list {
+.relative {
+  position: relative;
+  .product-list {
   width: 40%;
   height: 350px;
   display: flex;
@@ -151,5 +159,6 @@ export default {
       font-weight: bold;
     }
   }
+}
 }
 </style>
