@@ -36,12 +36,12 @@ export const useUserStore = defineStore('user', {
         }
       )
       const { user, accessToken } = await res.json()
-      window.localStorage.setItem('userName', user.displayName)
-      window.localStorage.setItem('token', accessToken)
       if (!user) {
         this.signinError = true
         this.isSignin = false
       } else {
+        window.sessionStorage.setItem('userName', user.displayName)
+        window.sessionStorage.setItem('token', accessToken)
         this.userInfo = user
         this.isSignin = true
         this.signinError = false
@@ -49,7 +49,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async signOut() {
-      const accessToken = window.localStorage.getItem('token')
+      const accessToken = window.sessionStorage.getItem('token')
       await fetch(
         'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/logout',
         {
@@ -62,8 +62,8 @@ export const useUserStore = defineStore('user', {
           },
         }
       )
-      window.localStorage.removeItem('token', accessToken)
-      window.localStorage.removeItem('userName')
+      window.sessionStorage.removeItem('token', accessToken)
+      window.sessionStorage.removeItem('userName')
       this.isSignin = false
       this.userInfo.displayName = 'Guest'
     },
@@ -115,7 +115,7 @@ export const useUserStore = defineStore('user', {
       this.signUpError = ''
     },
     async editUserInfo(userObj) {
-      const accessToken = window.localStorage.getItem('token')
+      const accessToken = window.sessionStorage.getItem('token')
       try {
         const res = await fetch(
           'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/user',
@@ -154,8 +154,8 @@ export const useUserStore = defineStore('user', {
       this.editErrorMsg = ''
     },
     changeUserName() {
-      if(window.localStorage.getItem('userName')) {
-        this.userInfo.displayName = window.localStorage.getItem('userName')
+      if(window.sessionStorage.getItem('userName')) {
+        this.userInfo.displayName = window.sessionStorage.getItem('userName')
         this.isSignin = true
       } else {
         this.userInfo.displayName = 'Guest'

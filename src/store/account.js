@@ -26,7 +26,7 @@ export const useAccountStore = defineStore('account', {
         method: 'GET',
         headers: {
           ...headers,
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+          Authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
         },
       })
       this.banks = bankList.data
@@ -38,7 +38,7 @@ export const useAccountStore = defineStore('account', {
         method: 'GET',
         headers: {
           ...headers,
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+          Authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
         },
       })
       this.list = accountList.data
@@ -51,7 +51,7 @@ export const useAccountStore = defineStore('account', {
         method: 'POST',
         headers: {
           ...headers,
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+          Authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
         },
         data: {
           bankCode,
@@ -68,7 +68,7 @@ export const useAccountStore = defineStore('account', {
           method: 'DELETE',
           headers: {
             ...headers,
-            Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+            Authorization: `Bearer ${window.sessionStorage.getItem('token')}`,
           },
           data: {
             accountId: accountIds[i],

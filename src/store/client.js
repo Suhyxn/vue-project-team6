@@ -108,7 +108,7 @@ export const useClientStore = defineStore('client', {
           method: 'POST',
           headers: {
             ...headers,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
           data: {
             productId: this.singleProductData.id,
@@ -131,7 +131,7 @@ export const useClientStore = defineStore('client', {
           method: 'POST',
           headers: {
             ...headers,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
           data: {
             detailId,
@@ -151,7 +151,7 @@ export const useClientStore = defineStore('client', {
           method: 'POST',
           headers: {
             ...headers,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
           data: {
             detailId,
@@ -171,7 +171,7 @@ export const useClientStore = defineStore('client', {
           method: 'GET',
           headers: {
             ...headers,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         })
         this.purchasedList = data
@@ -190,7 +190,7 @@ export const useClientStore = defineStore('client', {
           method: 'POST',
           headers: {
             ...headers,
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
           data: {
             detailId,
