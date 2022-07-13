@@ -8,7 +8,8 @@ router.beforeEach(async to => {
 
   if(to.meta.auth) {
     const user = await validateTokenUser()
-    if (user.email === 'admin@team6.com' && user.displayName === 'admin') {
+    // user.email === 'admin@team6.com' && 
+    if (user.displayName === 'admin') {
       userStore.userInfo = user
       userStore.isSignin = true
       return '/admin'
@@ -16,6 +17,7 @@ router.beforeEach(async to => {
     if (user && user.email) {
       userStore.userInfo = user
       userStore.isSignin = true
+      console.log(userStore.userInfo)
       return true
     }
     return '/'

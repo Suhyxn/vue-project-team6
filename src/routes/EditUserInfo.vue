@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <img
-      src="../BSE_imgs/login.png"
-      alt="login" />
+  <div class="inner">
     <div class="name">
       <input
         v-model="displayName"
@@ -29,7 +26,7 @@
     </div>
     <div>
       <button
-        class="check"
+        class="check margin"
         @click="editUserInfo({
           oldPassword,
           newPassword,
@@ -38,6 +35,14 @@
         })">
         확인
       </button>
+      <button
+        class="check" 
+        @click="cancel()">
+        취소
+      </button>
+    </div>
+    <div class="msg">
+      {{ editErrorMsg }}
     </div>
   </div>
 </template>
@@ -56,7 +61,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useUserStore, [])
+    ...mapState(useUserStore, ['editErrorMsg']),
   }, 
   methods: {
     ...mapActions(useUserStore, ['editUserInfo']),
@@ -68,60 +73,29 @@ export default {
           this.profileImgBase64 = e.target.result
         })
       }
+    },
+    cancel() {
+      this.$router.push('/mypage/userinfo')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.bg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 100%;
-  background-position-y: 80%;
-  background-repeat : no-repeat;
-  background-size : cover;
-  background-image: url('../backgroundImg/Main.png');
-}
 .inner {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 5%;
-  width: 800px;
-  height: 550px; 
-  background-color: #fff;
-  opacity: .9;
-  border-radius: 10px;
-}
-img {
-  cursor: pointer;
-  display: block;
-  width: 110px;
-  height: 110px;
-  margin: auto;
-}
-.id {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.pw {
-  margin-bottom: 10px;
-}
-.name {
-  margin-bottom: 10px;
+  flex-direction: column;
 }
 input {
   padding: 10px;
   font-size: 20px;
   border: 3px solid #f5f5f5;
   border-radius: 10px;
-  width: 600px;
+  width: 400px;
   height: 30px;
   margin-bottom: 10px;
   &:focus {
@@ -132,19 +106,28 @@ input {
     color: #cac7c7;
   }
 }
+.margin {
+  margin-right: 15px;
+}
 .check {
   margin-top: 6px;
   border: none;
   background-color: #845FA7;
   border-radius: 50px;
-  width: 620px;
-  height: 70px;
+  width: 200px;
+  height: 60px;
   cursor: pointer;
   color: #fff;
   font-size: 28px;
   &:hover {
     opacity: .9;
   }
+}
+.msg {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
 }
 
 </style>

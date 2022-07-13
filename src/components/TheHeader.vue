@@ -40,7 +40,7 @@ export default {
     ...mapState(useUserStore, ['isSignin', 'userInfo'])
   },
   methods: {
-    ...mapActions(useUserStore, ['signOut'])
+    ...mapActions(useUserStore, ['signOut']),
   }
 }
 </script>

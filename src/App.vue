@@ -10,9 +10,15 @@
       <TheFooter />
     </div>
     <transition name="modal-animation">
-      <Modal 
+      <Modal
         v-if="clientStore.isShow" 
         class="modal" />
+    </transition>
+    <transition name="modal-animation">
+      <SignModal v-if="userStore.signModal" />
+    </transition>
+    <transition name="modal-animation">
+      <UserInfoModal v-if="userStore.userModal" />
     </transition>
   </div>
 </template>
@@ -21,16 +27,25 @@
 import TheHeader from '~/components/TheHeader.vue'
 import TheFooter from '~/components/TheFooter.vue'
 import Modal from '~/components/Modal.vue'
+import SignModal from '~/components/SignModal.vue'
+import UserInfoModal from '~/components/UserInfoModal.vue'
 import { mapStores } from 'pinia'
-import {useClientStore} from '~/store/client'
+import { useClientStore } from '~/store/client'
+import { useUserStore } from '~/store/user'
+
 export default {
   components: {
     TheHeader,
     TheFooter,
-    Modal
+    Modal,
+    SignModal,
+    UserInfoModal
   },
   computed:{
-    ...mapStores([useClientStore])
+    ...mapStores([useClientStore, useUserStore])
+  },
+  created() {
+    this.userStore.changeUserName()
   }
 }
 </script>

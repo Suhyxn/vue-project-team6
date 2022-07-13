@@ -15,7 +15,7 @@
           <input
             v-model="password"
             placeholder="비밀번호 (8자 이상) *필수"
-            type="text" />
+            type="password" />
         </div>
         <div class="name">
           <input
@@ -74,7 +74,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useUserStore, ['isSignup', 'signUpMsg', 'signUpError'])
+    ...mapState(useUserStore, ['isSignup', 'signUpMsg', 'signUpError', 'modal'])
   }, 
   methods: {
     ...mapActions(useUserStore, ['signUp', 'reset']),
@@ -94,6 +94,66 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$width:450px;
+.background{
+  width: 100vw;
+  height: 100vh;
+  background-color:rgba(0,0,0,.5);
+  position:fixed;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+    margin: 0;
+  .content{
+    width:$width;
+    height:calc($width * 1/3);
+    background:#fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+  
+    .text{
+      background: skyblue;
+      width:95%;
+      height:100px;
+      border-radius: 8px 8px 0 0;
+      position: relative;
+      p{
+        color: #fff;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 25%;
+      }
+    }
+    .actions{
+      width:95%;
+      height:30px;
+      background: orange;
+      border-radius: 0 0 8px 8px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .btn{
+          margin: 0 8px;
+          padding: 0 20px;
+          outline: none;
+          border: none;
+          background: #f05650;
+          box-sizing: border-box;
+          border-radius: 5px;
+          color: #fff;
+          &:hover{
+            background:rgba(0,0,0,.5)
+          }
+      }
+    }
+  }
+}
+
 .bg {
   display: flex;
   justify-content: center;
