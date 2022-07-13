@@ -10,7 +10,7 @@
       <TheFooter />
     </div>
     <transition name="modal-animation">
-      <Modal
+      <ProductModal
         v-if="clientStore.isShow" 
         class="modal" />
     </transition>
@@ -20,33 +20,42 @@
     <transition name="modal-animation">
       <UserInfoModal v-if="userStore.userModal" />
     </transition>
+    <transition name="modal-animation">
+      <BankModal
+        v-if="accountStore.isShow"
+        class="modal" />
+    </transition>
   </div>
 </template>
 
 <script>
 import TheHeader from '~/components/TheHeader.vue'
 import TheFooter from '~/components/TheFooter.vue'
-import Modal from '~/components/Modal.vue'
 import SignModal from '~/components/SignModal.vue'
 import UserInfoModal from '~/components/UserInfoModal.vue'
 import { mapStores } from 'pinia'
 import { useClientStore } from '~/store/client'
 import { useUserStore } from '~/store/user'
+import ProductModal from '~/components/ProductModal.vue'
+import BankModal from './components/BankModal.vue'
+import { useAccountStore } from './store/account'
 
 export default {
   components: {
     TheHeader,
     TheFooter,
-    Modal,
     SignModal,
-    UserInfoModal
+    UserInfoModal,
+    ProductModal,
+    BankModal
   },
   computed:{
-    ...mapStores([useClientStore, useUserStore])
+    ...mapStores([useClientStore, useUserStore]),
+    ...mapStores([useClientStore,useAccountStore])
   },
   created() {
     this.userStore.changeUserName()
-  }
+  },
 }
 </script>
 
@@ -72,8 +81,7 @@ export default {
 }
 
 .modal{
- transition: .4s;
-
+ transition: .7s;
 }
 
 .modal-animation-enter-from{

@@ -5,9 +5,19 @@
       :key="history.id"
       class="history-item"
       :productId="history.id">
+      <div
+        class="historyImage"
+        :style="{ backgroundImage: `url(${history.product.thumbnail})`}">
+        .
+      </div>
       <div>
-        {{ history.detailId }}
-        {{ history.user }}
+        [{{ history.product.tags }}]
+      </div>
+      <div>
+        {{ history.product.title }}
+      </div>
+      <div>
+        &nbsp; 구매자:{{ history.user.displayName }}
       </div>
     </li>
   </ul>
@@ -28,3 +38,24 @@ export default {
   }
 }
 </script>
+
+<style  lang="scss" scoped>
+ul {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  li {
+    display: flex;
+    align-items: center;
+    .historyImage {
+      width: 40px;
+      height: 40px;
+      background-repeat: no-repeat;
+}
+  }
+}
+
+</style>

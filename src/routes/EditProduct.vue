@@ -1,23 +1,29 @@
 <template>
-  <ul class="product-list">
-    <li
-      v-for="product in adminStore.products"
-      :key="product.id"
-      class="product-item"
-      :productId="product.id">
-      <div
-        class="product-image"
-        :style="{ backgroundImage: `url(${product.thumbnail})` }"
-        @click="clickDetail(`${product.id}`)">
-        .
-      </div>
-      <div class="product-title">
-        {{ product.id }}
-      </div>
-    </li>
-  </ul>
+  <div class="relative">
+    <div>
+      정보를 볼 제품을 클릭하세요!
+    </div>
 
-  <div>
+    <ul class="product-list">
+      <li
+        v-for="product in adminStore.products"
+        :key="product.id"
+        class="product-item"
+        :productId="product.id">
+        <div
+          class="product-image"
+          :style="{ backgroundImage: `url(${product.thumbnail})` }"
+          @click="clickDetail(`${product.id}`)">
+          .
+        </div>
+        <div class="product-title">
+          {{ product.id }}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- <div>
     <div
       ref="title"
       contenteditable
@@ -43,6 +49,44 @@
       {{ adminStore.product.tags }}
     </div>
     <div>{{ adminStore.product.thumbnail }}</div>
+  </div> -->
+
+  <div>
+    <div>{{ adminStore.product.title }}</div>
+    <div>{{ adminStore.product.price }}</div>
+    <div>{{ adminStore.product.description }}</div>
+    <div>{{ adminStore.product.tags }}</div>
+
+    <input
+      v-model="title"
+      type="text"
+      placeholder="title" />
+    <input
+      v-model="price"
+      type="text" 
+      placeholder="price" />
+    <input
+      v-model="description"
+      type="text" 
+      placeholder="description" />
+    <input
+      v-model="tags"
+      type="text" 
+      placeholder="tags" />
+    <input
+      v-model="id"
+      type="text" 
+      placeholder="id" />
+    <input type="file" />
+    <button
+      @click="updateProduct({
+        title, price, description, tags, id
+      })">
+      test
+    </button>
+    <!-- <button @click="updateProduct({title, content, description, tags},id)">
+      수정중
+    </button> -->
   </div>
 </template>
 
@@ -54,7 +98,12 @@ export default {
   data() {
     return {
       products: [],
-      product: {}
+      product: {},
+      title: '',
+      price: '',
+      description: '',
+      tags: '',
+      id: ''
     }
   },
   computed: {
@@ -67,8 +116,11 @@ export default {
     clickDetail(productId) {
       this.adminStore.oneReadProduct(productId)
     },
-    updateProduct() {
-
+    updateProduct(item) {
+      this.adminStore.editProduct(item)
+    },
+    testId(item) {
+      console.log(item)
     }
     // updateProduct( type: 'title' || 'content' || '') {
 
@@ -79,7 +131,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.product-list {
+.relative {
+  position: relative;
+  .product-list {
   width: 40%;
   height: 350px;
   display: flex;
@@ -105,5 +159,6 @@ export default {
       font-weight: bold;
     }
   }
+}
 }
 </style>

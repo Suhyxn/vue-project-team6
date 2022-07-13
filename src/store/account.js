@@ -4,66 +4,79 @@ import axios from 'axios'
 const accountURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/account'
 const headers = {
   'content-type': 'application/json',
-  'apikey': 'FcKdtJs202204',
-  'username': 'KDT2_team6',
-  'Authorization': `Bearer ${localStorage.getItem('token')}`
+  apikey: 'FcKdtJs202204',
+  username: 'KDT2_team6',
 }
 
 export const useAccountStore = defineStore('account', {
   state() {
     return {
       list: [],
-      banks: []
+      banks: [],
+      selectedBankData: null,
+      isShow: false,
     }
   },
   getters: {},
 
   actions: {
     async selectBankList() {
-      const bankLsit = await axios({
-        url: accountURL+'/banks',
+      const bankList = await axios({
+        url: accountURL + '/banks',
         method: 'GET',
-        headers
-        })
-      this.banks = bankLsit.data
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      })
+      this.banks = bankList.data
     },
+
     async readAccountList() {
       const accountList = await axios({
         url: accountURL,
         method: 'GET',
-        headers
-        })
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      })
       this.list = accountList.data
     },
     async addAccountList(payload) {
       const { bankCode, accountNumber, phoneNumber, signature } = payload
 
-      const res = await axios({
+      await axios({
         url: accountURL,
         method: 'POST',
-        headers,
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
         data: {
           bankCode,
           accountNumber,
           phoneNumber,
-          signature
-        }
-        })
-      console.log(res.data)
+          signature,
+        },
+      })
     },
     async deleteAccount(accountIds, signature) {
       for (let i in accountIds) {
         await axios({
           url: accountURL,
           method: 'DELETE',
-          headers,
+          headers: {
+            ...headers,
+            Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+          },
           data: {
             accountId: accountIds[i],
-            signature
-          }
+            signature,
+          },
         })
       }
       this.readAccountList()
-    }
-  }
+    },
+  },
 })

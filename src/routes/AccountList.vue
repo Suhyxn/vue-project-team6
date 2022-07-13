@@ -26,9 +26,18 @@
       <br /> 
       계좌를 추가해 주세요!
     </div>
-    <div class="total_balance">
+    <div
+      v-if="accountStore.list.totalBalance"
+      class="total_balance">
       전체 보유 금액: <p class="total_balance_account">
         &nbsp;{{ Number(accountStore.list.totalBalance).toLocaleString('ko-KR') }}
+      </p>원
+    </div>
+    <div
+      v-else
+      class="total_balance">
+      전체 보유 금액: <p class="total_balance_account">
+        &nbsp; 0
       </p>원
     </div>
     <ul>
@@ -96,7 +105,6 @@ export default {
         if(this.accountStore.list.accounts[i].checked === true)
           accountIds.push(this.accountStore.list.accounts[i].id)
       }
-      console.log(accountIds)
 
       if (accountIds.length) {
         let signature = confirm('정말 선택한 계좌를 해지 하시겠습니까?')

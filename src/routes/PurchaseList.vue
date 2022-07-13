@@ -1,50 +1,49 @@
 <template>
-  <div
-    v-for="(item,index) in 20"
-    :key="index"
-    class="test">
-    <div class="img"></div>
-    <div class="title">
-    </div>
+  <div class="purchase-list">
+    <p 
+      v-if="clientStore.purchasedList === null"
+      class="null-text">
+      구매내역이 존재하지 않습니다!
+    </p>
+    <PurchasedItem   
+      v-for="item in clientStore.purchasedList"
+      :key="item.detailId" 
+      :item="item" />
   </div>
 </template>
 
 <script>
 import {useClientStore} from '~/store/client'
 import { mapStores } from 'pinia'
+import PurchasedItem from '~/components/PurchasedItem.vue'
 export default {
+  components:{
+    PurchasedItem
+  },
+
   computed:{
     ...mapStores([useClientStore])
   },
   
-  created(){
-  
+ async created(){
+    await this.clientStore.allPurchasedList()
+   
   },
-  methods:{
 
-  },
 }
 </script>
 
 <style lang="scss" scoped>
-  .test{
-    width: 100%;
-    height: 150px;
-    border: 10px solid red;
-    margin: 5px 0;
-    box-sizing: border-box;
-    display: flex;
-    .img{
-      width:25%;
-      height: 100%;
-      border-right:3px solid blue;
-      box-sizing: border-box;
-      background: black;
-    }
-    .title{
-      width: 80%;
-      height:100%;
-      background:green;
-    }
+.purchase-list{
+  position: relative;
+  .null-text{
+    position: absolute;
+    top: 200px;
+    left:25%;
+    font-weight: 700;
+    font-size: 20px;
+    color: #808080;
   }
+}
 </style>
+
