@@ -15,7 +15,7 @@
           <input
             v-model="password"
             placeholder="패스워드"
-            type="text"
+            type="password"
             @keydown.enter="signIn({
               email,
               password
