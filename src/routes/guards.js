@@ -17,7 +17,6 @@ router.beforeEach(async to => {
     if (user && user.email) {
       userStore.userInfo = user
       userStore.isSignin = true
-      console.log(userStore.userInfo)
       return true
     }
     return '/'
