@@ -5,13 +5,16 @@ export const useUserStore = defineStore('user', {
   state() {
     return {
       userInfo: {
-        displayName: 'Guest',
+        displayName: '',
       },
       signinError: false,
       isSignin: false,
       isSignup: false,
       signUpError: '',
       signUpMsg: '',
+      signModal: false,
+      userModal: false,
+      editErrorMsg: ''
     }
   },
   getters: {},
@@ -33,12 +36,12 @@ export const useUserStore = defineStore('user', {
         }
       )
       const { user, accessToken } = await res.json()
-      console.log(user)
-      window.localStorage.setItem('token', accessToken)
       if (!user) {
         this.signinError = true
         this.isSignin = false
       } else {
+        window.sessionStorage.setItem('userName', user.displayName)
+        window.sessionStorage.setItem('token', accessToken)
         this.userInfo = user
         this.isSignin = true
         this.signinError = false
@@ -46,7 +49,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async signOut() {
-      const accessToken = window.localStorage.getItem('token')
+      const accessToken = window.sessionStorage.getItem('token')
       await fetch(
         'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/logout',
         {
@@ -59,7 +62,8 @@ export const useUserStore = defineStore('user', {
           },
         }
       )
-      window.localStorage.removeItem('token', accessToken)
+      window.sessionStorage.removeItem('token', accessToken)
+      window.sessionStorage.removeItem('userName')
       this.isSignin = false
       this.userInfo.displayName = 'Guest'
     },
@@ -84,10 +88,10 @@ export const useUserStore = defineStore('user', {
         )
         const user = await res.json()
         if (!res.ok) throw new Error(user)
-        console.log(user)
         this.isSignup = true
         this.signUpMsg =
           '가입 성공! 아이디와 비밀번호를 확인하고 로그인 해주세요.'
+        this.signModal = true
       } catch {
         this.isSignup = false
         if (
@@ -111,7 +115,7 @@ export const useUserStore = defineStore('user', {
       this.signUpError = ''
     },
     async editUserInfo(userObj) {
-      const accessToken = window.localStorage.getItem('token')
+      const accessToken = window.sessionStorage.getItem('token')
       try {
         const res = await fetch(
           'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/user',
@@ -133,10 +137,30 @@ export const useUserStore = defineStore('user', {
         )
         const user = await res.json()
         if (!res.ok) throw new Error(user)
-        console.log(user)
+        this.userInfo.displayName = user.displayName
+        if (userObj.displayName.trim().length > 20) {
+          this.editErrorMsg = '수정 실패! 닉네임은 20자 이하로 입력해주세요.'
+        } else if (userObj.newPassword.trim().length < 8) {
+          this.editErrorMsg = '수정 실패! 비밀번호는 8자 이상으로 입력해주세요.'
+        } else {
+          this.userModal = true
+        }
       } catch {
+        this.editErrorMsg = '수정 실패! 비밀번호가 잘못되었습니다.'
         console.log('수정 실패')
       }
     },
+    editErrorReset() {
+      this.editErrorMsg = ''
+    },
+    changeUserName() {
+      if(window.sessionStorage.getItem('userName')) {
+        this.userInfo.displayName = window.sessionStorage.getItem('userName')
+        this.isSignin = true
+      } else {
+        this.userInfo.displayName = 'Guest'
+        this.isSignin = false
+      }
+    }
   },
 })

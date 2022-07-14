@@ -12,7 +12,7 @@
         </button>
         <button 
           class="btn"
-          @click="handler">
+          @click="modalHandler">
           취소
         </button>
       </div>
@@ -30,15 +30,30 @@ export default {
     ...mapStores([useClientStore,useAccountStore,useAdminStore])  
   },
   created(){
-    console.log(this.clientStore.singleProductId)
+      this.accountStore.readAccountList()
+      console.log(this.accountStore.selectedBankData)
   },
   methods:{
-      handler(){
-        this.clientStore.productPurchase()
+    async handler(){
+      try{
+        this.clientStore.productPurchase({
+          id:this.accountStore.selectedBankData.id,
+          price:this.accountStore.selectedBankData.balance
+        })
         this.clientStore.modalHandler()
-        //추가로직 this.$router.push(<전체 구매 제품목록 컴포넌트 경로>)
-        // 구매하기 버튼을 눌렀을때 내가 구매한 제품목록을 확인하게 하기위해서
+        await this.clientStore.allPurchasedList()
+        this.$router.push('/mypage/purchaselist')
+        this.accountStore.selectedBankData = null
+    } catch{
+        alert('로그인을 하지않았거나 등록된 계좌가 없습니다!')
+        this.clientStore.modalHandler()
+        this.$router.push('/')
+    }     
     },
+    modalHandler(){
+      this.clientStore.modalHandler()
+      this.accountStore.selectedBankData = null
+    }
   },
 }
 </script>
@@ -66,7 +81,7 @@ $width:450px;
     border-radius: 8px;
   
     .text{
-      background: skyblue;
+      background: #F9C5D5;
       width:95%;
       height:100px;
       border-radius: 8px 8px 0 0;
@@ -82,7 +97,7 @@ $width:450px;
     .actions{
       width:95%;
       height:30px;
-      background: orange;
+      background: #faebd7;
       border-radius: 0 0 8px 8px;
       display: flex;
       justify-content: flex-end;
@@ -92,7 +107,7 @@ $width:450px;
           padding: 0 20px;
           outline: none;
           border: none;
-          background: #f05650;
+          background: #FFBA46;
           box-sizing: border-box;
           border-radius: 5px;
           color: #fff;

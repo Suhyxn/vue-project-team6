@@ -15,8 +15,10 @@ import ReadHistory from './ReadHistory.vue'
 import EditUserInfo from './EditUserInfo.vue'
 import Store from './Store.vue'
 import PurchaseList from './PurchaseList.vue'
-import Detail from './Detail.vue'
+import SingleProductDetail from './SingleProductDetail.vue'
+import SinglePurchasedItemDetail from './SinglePurchasedItemDetail.vue'
 import UserInfo from './UserInfo.vue'
+import MyPageMain from './MyPageMain.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -31,12 +33,16 @@ export default createRouter({
       component: MyPage,
       children: [
         {
+          path: '',
+          component: MyPageMain,
+        },
+        {
           path: 'userinfo',
           component: UserInfo,
         },
         {
           path: 'edituserinfo',
-          component: EditUserInfo
+          component: EditUserInfo,
         },
         {
           path: 'accountlist',
@@ -50,7 +56,15 @@ export default createRouter({
           path: 'purchaselist',
           component: PurchaseList,
         },
+        {
+          path: 'purchaselist/singlepurchaseditem/:id',
+          component: SinglePurchasedItemDetail,
+        }
       ],
+    },
+    {
+      path: '/mypage/purchaselist/singlepurchaseditem/:id',
+      component: SinglePurchasedItemDetail,
     },
     {
       path: '/admin',
@@ -58,25 +72,25 @@ export default createRouter({
       children: [
         {
           path: 'allreadproduct',
-          component: AllReadProduct
+          component: AllReadProduct,
         },
         {
           path: 'allreadhistory',
-          component: AllReadHistory
+          component: AllReadHistory,
         },
         {
           path: 'editproduct',
-          component: EditProduct
+          component: EditProduct,
         },
         {
           path: 'addproduct',
-          component: Addproduct
+          component: Addproduct,
         },
         {
           path: 'readhistory',
-          component: ReadHistory
-        }
-      ]
+          component: ReadHistory,
+        },
+      ],
     },
     {
       path: '/loginHome',
@@ -90,8 +104,8 @@ export default createRouter({
       component: Store,
     },
     {
-      path: '/store/detail/:id',
-      component: Detail,
+      path: '/store/singleproductdetail/:id',
+      component: SingleProductDetail,
     },
     {
       path: '/signin',

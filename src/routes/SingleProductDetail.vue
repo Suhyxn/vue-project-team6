@@ -24,15 +24,18 @@
         <div class="actions">
           <button
             class="btn"
-            @click="handler">
+            @click="handler(
+              {id:clientStore.singlePageData.id,
+               price:clientStore.singlePageData.price
+              })">
             구매하기
           </button>
           
-          <router-link
-            to="/store"
-            class="btn--move">
+          <button
+            class="btn"    
+            @click="$router.push('/store')">
             상점으로 이동
-          </router-link>
+          </button>
         </div>
       </div> 
     </div>
@@ -41,11 +44,12 @@
 
 <script>
 import { useClientStore } from '~/store/client'
+import { useAccountStore } from '../store/account'
 import { mapStores } from 'pinia'
 export default {
   
   computed:{
-    ...mapStores([useClientStore])
+    ...mapStores([useClientStore,useAccountStore])
   },
   created(){
     this.clientStore.readSingleProduct(this.$route.params.id)
@@ -54,8 +58,14 @@ export default {
     //readSingleProduct에 전달하여 api 호출
   },
   methods:{
-    handler(){
-      this.clientStore.modalHandler()
+    handler(payload){
+        if(!sessionStorage.getItem('token')){
+          alert('제품구매는 로그인을 해야 할 수 있습니다!')
+          this.$router.push('/signin')
+          return 
+        }
+        this.accountStore.isShow = !this.accountStore.isShow
+        this.clientStore.singleProductData = payload      
     }
   }
   
@@ -118,18 +128,6 @@ export default {
           border-radius: 8px;
           color:#fff;
           &:hover{
-            background:rgba(0,0,0,.5);
-          }
-        }
-        .btn--move{
-          text-decoration: none;
-          font-size: 14px;
-          padding: 10px 22px;
-          background-color: orange;
-          border-radius: 8px;
-          box-sizing: border-box;
-          color: #fff;
-           &:hover{
             background:rgba(0,0,0,.5);
           }
         }

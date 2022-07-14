@@ -73,6 +73,7 @@
 <script>
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
+import { useAccountStore } from '../store/account'
 import EveryItem from './EveryItem.vue'
 import Equipment from './Equipment.vue'
 import Pet from './Pet.vue'
@@ -84,16 +85,13 @@ export default {
     Consumption,
     Pet,
   },
-  data(){
-    return{
-     
-    }
-  },
   computed:{
-    ...mapStores([useClientStore])
+    ...mapStores([useClientStore,useAccountStore])
   },
-   created(){
-      this.clientStore.AllReadProduct()
+  async created(){
+    await  this.clientStore.AllReadProduct()
+    await this.accountStore.readAccountList()
+   
   },
   mounted(){
       this.$refs.inputEl.focus()
@@ -103,7 +101,7 @@ export default {
       await this.clientStore.searchProduct({
         text:this.clientStore.searchValue,
       })
-    this.clientStore.searchItem.length === 0 ? alert('해당 상품을 찾을 수 없습니다!') : this.$router.push(`/store/detail/${this.clientStore.searchItem[0].id}`)
+    this.clientStore.searchItem.length === 0 ? alert('해당 상품을 찾을 수 없습니다!') : this.$router.push(`/store/singleproductdetail/${this.clientStore.searchItem[0].id}`)
     this.$refs.inputEl.value = ''
     },
   },
