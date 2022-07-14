@@ -46,6 +46,9 @@ export default {
   computed:{
     ...mapStores([useClientStore,useAccountStore])
   },
+  created(){
+    this.clientStore.getConsumption
+  },
 
   methods: {
       handler(payload){

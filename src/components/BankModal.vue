@@ -31,7 +31,7 @@
       <button @click="accountModalHandler">
         취소
       </button>
-      <button @click="createAccount">
+      <button @click="moveAccount">
         계좌등록
       </button>
     </div>
@@ -72,7 +72,7 @@ export default {
         alert('등록된 계좌가 존재하지 않습니다 계좌를 등록해 주세요!')
       }
     },
-    createAccount(){
+    moveAccount(){
       this.accountStore.isShow = !this.accountStore.isShow
       this.$router.push('/mypage/accountlist')
     }

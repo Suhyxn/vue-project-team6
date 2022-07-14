@@ -9,6 +9,8 @@
     <div class="footer">
       <TheFooter />
     </div>
+    
+    
     <transition name="modal-animation">
       <ProductModal
         v-if="clientStore.isShow" 
@@ -33,11 +35,11 @@ import TheHeader from '~/components/TheHeader.vue'
 import TheFooter from '~/components/TheFooter.vue'
 import SignModal from '~/components/SignModal.vue'
 import UserInfoModal from '~/components/UserInfoModal.vue'
+import ProductModal from '~/components/ProductModal.vue'
+import BankModal from './components/BankModal.vue'
 import { mapStores } from 'pinia'
 import { useClientStore } from '~/store/client'
 import { useUserStore } from '~/store/user'
-import ProductModal from '~/components/ProductModal.vue'
-import BankModal from './components/BankModal.vue'
 import { useAccountStore } from './store/account'
 
 export default {

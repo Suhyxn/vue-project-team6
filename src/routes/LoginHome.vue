@@ -13,7 +13,7 @@
         </RouterLink>
       </div>
       <routerLink
-        to="/store"
+        to="/store/everyitem"
         class="search">
         <span class="material-icons">
           search

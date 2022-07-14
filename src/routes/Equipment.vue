@@ -45,7 +45,9 @@ export default {
   computed:{
     ...mapStores([useClientStore,useAccountStore])
   },
-
+  created(){
+    this.clientStore.getEquiment
+  },
   methods: {
     handler(payload){
         if(!sessionStorage.getItem('token')){

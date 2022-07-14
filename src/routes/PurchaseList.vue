@@ -1,7 +1,7 @@
 <template>
   <div class="purchase-list">
     <p 
-      v-if="clientStore.purchasedList === null"
+      v-if="clientStore.purchasedList.length === 0"
       class="null-text">
       구매내역이 존재하지 않습니다!
     </p>
@@ -27,7 +27,6 @@ export default {
   
  async created(){
     await this.clientStore.allPurchasedList()
-   
   },
 
 }
