@@ -15,6 +15,12 @@
         class="modal" />
     </transition>
     <transition name="modal-animation">
+      <SignModal v-if="userStore.signModal" />
+    </transition>
+    <transition name="modal-animation">
+      <UserInfoModal v-if="userStore.userModal" />
+    </transition>
+    <transition name="modal-animation">
       <BankModal
         v-if="accountStore.isShow"
         class="modal" />
@@ -25,21 +31,31 @@
 <script>
 import TheHeader from '~/components/TheHeader.vue'
 import TheFooter from '~/components/TheFooter.vue'
+import SignModal from '~/components/SignModal.vue'
+import UserInfoModal from '~/components/UserInfoModal.vue'
+import { mapStores } from 'pinia'
+import { useClientStore } from '~/store/client'
+import { useUserStore } from '~/store/user'
 import ProductModal from '~/components/ProductModal.vue'
 import BankModal from './components/BankModal.vue'
-import { mapStores } from 'pinia'
-import {useClientStore} from '~/store/client'
 import { useAccountStore } from './store/account'
+
 export default {
   components: {
     TheHeader,
     TheFooter,
+    SignModal,
+    UserInfoModal,
     ProductModal,
     BankModal
   },
   computed:{
+    ...mapStores([useClientStore, useUserStore]),
     ...mapStores([useClientStore,useAccountStore])
-  }
+  },
+  created() {
+    this.userStore.changeUserName()
+  },
 }
 </script>
 

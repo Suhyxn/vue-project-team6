@@ -63,6 +63,10 @@ export default createRouter({
       ],
     },
     {
+      path: '/mypage/purchaselist/singlepurchaseditem/:id',
+      component: SinglePurchasedItemDetail,
+    },
+    {
       path: '/admin',
       component: Admin,
       children: [
