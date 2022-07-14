@@ -4,7 +4,8 @@
     class="purchased-item">
     <div
       class="img"
-      :style="{backgroundImage:`url(${item.product.thumbnail})`}"></div>
+      :style="{backgroundImage:`url(${item.product.thumbnail})`}">
+    </div>
     <div class="item-data">
       <div class="title">
         제품 :{{ item.product.title }}
@@ -76,27 +77,34 @@ export default {
 
 <style lang="scss" scoped>
   .purchased-item{
-    width: 100%;
-    height: 150px;
-    border: 10px solid red;
-    margin: 5px 0;
-    box-sizing: border-box;
+    width: 95%;
+    height: 100%;
+    padding-top:10px;
+    padding-bottom: 10px;
+    margin: auto;
+    margin-top: 2%;
+    background-color: #faebd7;
+    border-radius: 10px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     .img{
-      width:25%;
-      height: 100%;
-      border-right:3px solid blue;
+      width: 120px;
+      height: 110px;
+      border-radius: 5px;
+      margin-left: 7px;
+      margin-right: 7px;
       box-sizing: border-box;
-      background: black;
+      background-color: #808080;
       background-repeat: no-repeat;
       background-size: cover;
-      background-position-x: 50%;
-      background-position-y: 10%;
+      background-position-x: 30%;
+      background-position-y: 20%;
     }
     .item-data{
-      width: 80%;
+      width: 75%;
       height:100%;
-      background:green;
+      border-radius: 5px;
       display: flex;
       flex-direction: column;
       justify-content:center;
@@ -114,6 +122,7 @@ export default {
           border: none;
           background-color:orange;
           color: #fff;
+          cursor: pointer;
           &:hover{
             background-color:rgba(0,0,0,.7);
           }
