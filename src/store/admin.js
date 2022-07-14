@@ -16,11 +16,41 @@ export const useAdminStore = defineStore('admin', {
       product: {},
       histories: [],
       history: {},
-      editproduct: {}
+      editproduct: {},
+      thumbnail: ''
     }
   },
   getters: {},
   actions: {
+    async AddProduct(addP) {
+      const { data: product } = await axios({
+        url: adminURL,
+        method: 'POST',
+        headers,
+        data: JSON.stringify({
+          title: addP.title,
+          price: addP.price,
+          description: addP.description,
+          tags: addP.tags, 
+          thumbnailBase64: this.thumbnail
+        })
+      })
+      this.product = product
+      console.log(product)
+      console.log(product.tags)
+    },
+    // Base64 Image
+    SelectImage(event) {
+      console.log(event)
+      const { files } = event.target
+      for ( const file of files ) {
+        const reader =  new FileReader()
+        reader.readAsDataURL(file)
+        reader.addEventListener('load', e => {
+          this.thumbnail = e.target.result
+        })
+      }
+    },
     async allReadProduct () {
       const { data: products } = await axios ({
         url: adminURL,

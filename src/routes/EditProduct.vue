@@ -70,9 +70,13 @@
       type="text" 
       placeholder="description" />
     <input
-      v-model="tags"
+      v-model="tags[0]"
       type="text" 
-      placeholder="tags" />
+      placeholder="tags ( 장비, 소비, 펫 )" />
+    <input
+      v-model="tags[1]"
+      type="text" 
+      placeholder="tags ( anything )" />
     <input
       v-model="id"
       type="text" 
@@ -118,9 +122,6 @@ export default {
     },
     updateProduct(item) {
       this.adminStore.editProduct(item)
-    },
-    testId(item) {
-      console.log(item)
     }
     // updateProduct( type: 'title' || 'content' || '') {
 
