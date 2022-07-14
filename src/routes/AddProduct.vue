@@ -34,7 +34,7 @@ export default {
       title: '',
       price: '',
       description: '',
-      tags: '',
+      tags: [],
       thumbnail: ''
     }
   },
@@ -61,6 +61,7 @@ export default {
       })
       const product = await res.json()
       console.log(product)
+      console.log(product.tags)
     },
     SelectImage(event) {
       console.log(event)

@@ -40,6 +40,7 @@ export const useAdminStore = defineStore('admin', {
       })
       console.log(product)
       this.product = product
+      console.log(typeof product.tags)
     },
     async allReadHistory () {
       const { data: histories } = await axios ({
