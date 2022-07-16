@@ -34,13 +34,11 @@ export default {
     StoreLNB
   },
   computed:{
-    ...mapStores([useClientStore,useAccountStore,useAdminStore])
+    ...mapStores([useAdminStore,useClientStore,useAccountStore])
   },
   async created(){
-    await  this.clientStore.AllReadProduct()
-    // await this.adminStore.allReadProduct()
+    await this.adminStore.allReadProduct()
     await this.accountStore.readAccountList()
-   
   },
   mounted(){
       this.$refs.inputEl.focus()
@@ -50,7 +48,7 @@ export default {
       await this.clientStore.searchProduct({
         text:this.clientStore.searchValue,
       })
-      //  this.$router.push(`/store/singleproductdetail/${this.clientStore.searchItem[0].id}`
+    
     this.clientStore.searchItem.length === 0 ? alert('해당 상품을 찾을 수 없습니다!') : this.$router.replace('/store/searchedproduct')
     this.$refs.inputEl.value = ''
     },

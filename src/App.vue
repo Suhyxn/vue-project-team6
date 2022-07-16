@@ -50,11 +50,12 @@ export default {
     UserInfoModal,
     ProductModal,
     BankModal
-  },
+  },  
   computed:{
     ...mapStores([useClientStore, useUserStore]),
     ...mapStores([useClientStore,useAccountStore])
   },
+
   created() {
     this.userStore.changeUserName()
   },

@@ -4,7 +4,7 @@
       to="everyitem"
       :class="{active: clientStore.selected === 'everyItem'}"
       class="btn"
-      @click="selcetedCategory">
+      @click="clientStore.selected = 'everyItem'">
       전체보기
     </routerLink>
     <routerLink 
@@ -38,11 +38,7 @@ export default {
   computed:{
     ...mapStores([useClientStore])
   },
-  methods:{
-    selcetedCategory(){
-      this.clientStore.selected = 'everyItem'
-    }
-  }
+
 }
 </script>
 

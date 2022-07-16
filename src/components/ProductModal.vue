@@ -81,7 +81,7 @@ $width:450px;
     border-radius: 8px;
   
     .text{
-      background: skyblue;
+      background: #F9C5D5;
       width:95%;
       height:100px;
       border-radius: 8px 8px 0 0;
@@ -97,7 +97,7 @@ $width:450px;
     .actions{
       width:95%;
       height:30px;
-      background: orange;
+      background: #faebd7;
       border-radius: 0 0 8px 8px;
       display: flex;
       justify-content: flex-end;
@@ -107,7 +107,7 @@ $width:450px;
           padding: 0 20px;
           outline: none;
           border: none;
-          background: #f05650;
+          background: #FFBA46;
           box-sizing: border-box;
           border-radius: 5px;
           color: #fff;

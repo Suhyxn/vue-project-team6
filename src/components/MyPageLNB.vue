@@ -12,6 +12,12 @@
       @click="$router.push(`/mypage/accountlist`)">
       계좌
     </button>
+    <button 
+      class="menu purchase"
+      :class="{ active: /^\/mypage\/purchaselist.*/.test($route.fullPath) }"
+      @click="$router.push(`/mypage/purchaselist`)">
+      구매 내역
+    </button>
   </div>
 </template>
 
@@ -78,6 +84,16 @@ export default {
         border: solid 3px #2d9006;
         }
     }
+    &.purchase {
+      border: solid 2px #83c1c4;
+      background-color: #83c1c4;
+    }
+    &:hover {
+        border: solid 3px #08abb4;
+        }
+    &.active {
+        border: solid 3px #08abb4;
+        }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="item in clientStore.getPat"
+      v-for="item in adminStore.getPet"
       :key="item.id"
       class="item">
       <div 
@@ -41,12 +41,14 @@
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
 import { useAccountStore } from '../store/account'
+import { useAdminStore } from '~/store/admin'
 export default {
   computed:{
-    ...mapStores([useClientStore,useAccountStore])
+    ...mapStores([useClientStore,useAccountStore,useAdminStore])
   },
   created(){
-    this.clientStore.getPat
+     this.adminStore.getPat
+     this.clientStore.selected = 'pet'
   },
   methods: {
    handler(payload){

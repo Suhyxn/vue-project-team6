@@ -18,11 +18,13 @@ import PurchaseList from "./PurchaseList.vue";
 import SingleProductDetail from "./SingleProductDetail.vue";
 import SinglePurchasedItemDetail from "./SinglePurchasedItemDetail.vue";
 import UserInfo from "./UserInfo.vue";
+import MyPageMain from "./MyPageMain.vue";
 import EveryItem from "./EveryItem.vue";
 import Equipment from "./Equipment.vue";
 import Consumption from "./Consumption.vue";
 import Pet from "./Pet.vue";
 import SearchedProduct from "./SearchedProduct.vue";
+
 export default createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
@@ -36,7 +38,12 @@ export default createRouter({
       component: MyPage,
       children: [
         {
+          path: "",
+          component: MyPageMain,
+        },
+        {
           path: "userinfo",
+
           component: UserInfo,
         },
         {
@@ -55,6 +62,10 @@ export default createRouter({
           path: "purchaselist",
           component: PurchaseList,
         },
+        // {
+        //   path: "purchaselist/singlepurchaseditem/:id",
+        //   component: SinglePurchasedItemDetail,
+        // },
       ],
     },
     {

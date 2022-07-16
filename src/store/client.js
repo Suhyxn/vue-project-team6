@@ -41,37 +41,6 @@ export const useClientStore = defineStore("client", {
       this.isShow = !this.isShow;
     },
 
-    //전체 제품 조회 기능 수현님이 만드신거 복붙함
-    async AllReadProduct() {
-      const res = await fetch(END_POINT, {
-        method: "GET",
-        headers: {
-          ...headers,
-          //전개연산자를 이용해 headers내용 넣어주는거 가능한지 test해본것 잘됨
-          masterKey: "true",
-          //headers에 필요한 추가정보
-        },
-      });
-      const master = await res.json();
-      console.log(master);
-      this.getAllProduct = master;
-
-      const equiment = this.getAllProduct.filter((i) => {
-        return i.tags === "장비";
-      });
-      this.getEquiment = equiment;
-
-      const consumption = this.getAllProduct.filter((i) => {
-        return i.tags === "소비";
-      });
-      this.getConsumption = consumption;
-
-      const pet = this.getAllProduct.filter((i) => {
-        return i.tags === "펫";
-      });
-      this.getPat = pet;
-    },
-
     //제품 검색 기능
     async searchProduct(payload) {
       // 요청성공시 text를 payload로 만들어 구조분해하는 형태로 리펙토링 해보기(완료)
@@ -179,6 +148,7 @@ export const useClientStore = defineStore("client", {
         });
         console.log(this.purchasedList);
       } catch (err) {
+        this.purchasedList = null;
         console.log(err);
       }
     },

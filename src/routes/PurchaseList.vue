@@ -1,11 +1,11 @@
 <template>
   <div class="purchase-list">
     <p 
-      v-if="clientStore.purchasedList.length === 0"
+      v-if="clientStore.purchasedList ===null || clientStore.purchasedList.length===0"
       class="null-text">
       구매내역이 존재하지 않습니다!
     </p>
-    <PurchasedItem   
+    <PurchasedItem  
       v-for="item in clientStore.purchasedList"
       :key="item.detailId" 
       :item="item" />
@@ -17,17 +17,22 @@ import {useClientStore} from '~/store/client'
 import { mapStores } from 'pinia'
 import PurchasedItem from '~/components/PurchasedItem.vue'
 export default {
+
   components:{
     PurchasedItem
   },
-
-  computed:{
+   computed:{
     ...mapStores([useClientStore])
   },
-  
- async created(){
+  async created(){
     await this.clientStore.allPurchasedList()
   },
+
+  methods:{
+
+  },
+ 
+
 
 }
 </script>

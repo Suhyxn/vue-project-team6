@@ -1,72 +1,94 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from "pinia";
+import axios from "axios";
 
-const adminURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products'
+const adminURL =
+  "https://asia-northeast3-heropy-api.cloudfunctions.net/api/products";
 const headers = {
-  'content-type': 'application/json',
-  'apikey': 'FcKdtJs202204',
-  'username': 'KDT2_team6',
-  'masterKey': 'true'
-}
+  "content-type": "application/json",
+  apikey: "FcKdtJs202204",
+  username: "KDT2_team6",
+  masterKey: "true",
+};
 
-export const useAdminStore = defineStore('admin', {
+export const useAdminStore = defineStore("admin", {
   state: () => {
     return {
       products: [],
+      getEquiment: [],
+      getConsumption: [],
+      getPet: [],
       product: {},
       histories: [],
       history: {},
-      editproduct: {}
-    }
+      editproduct: {},
+    };
   },
   getters: {},
+
   actions: {
-    async allReadProduct () {
-      const { data: products } = await axios ({
+    async allReadProduct() {
+      const { data: products } = await axios({
         url: adminURL,
-        method: 'GET',
-        headers
-      })
-      console.log(products)
-      this.products = products
-    },
-    async oneReadProduct (id) {
-      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
-      const { data: product } = await axios ({
-        url,
-        method: 'GET',
+        method: "GET",
         headers,
-        id
-      })
-      console.log(product)
-      this.product = product
+      });
+      this.products = await products;
+      console.log(products);
+
+      const equiment = this.products.filter((i) => {
+        return i.tags[0] === "장비";
+      });
+
+      this.getEquiment = equiment;
+
+      const consumption = this.products.filter((i) => {
+        return i.tags[0] === "소비";
+      });
+      this.getConsumption = consumption;
+
+      const pet = this.products.filter((i) => {
+        return i.tags[0] === "펫";
+      });
+      console.log(pet);
+      this.getPet = pet;
     },
-    async allReadHistory () {
-      const { data: histories } = await axios ({
-        url: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all',
-        method: 'GET',
-        headers
-      })
-      console.log(histories)
-      this.histories = histories
-    },
-    async editProduct (editP) {
-      const id = editP.id
-      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
-      const { data: editproduct } = await axios ({
+    async oneReadProduct(id) {
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`;
+      const { data: product } = await axios({
         url,
-        method: 'PUT',
+        method: "GET",
+        headers,
+        id,
+      });
+      console.log(product);
+      this.product = product;
+    },
+    async allReadHistory() {
+      const { data: histories } = await axios({
+        url: "https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all",
+        method: "GET",
+        headers,
+      });
+      console.log(histories);
+      this.histories = histories;
+    },
+    async editProduct(editP) {
+      const id = editP.id;
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`;
+      const { data: editproduct } = await axios({
+        url,
+        method: "PUT",
         headers,
         data: JSON.stringify({
           title: editP.title,
           price: editP.price,
           description: editP.description,
-          tags: editP.tags
-        })
-      })
-      console.log('editing')
-      this.editproduct = editproduct
-      this.allReadProduct()
-    }
-  }
-})
+          tags: editP.tags,
+        }),
+      });
+      console.log("editing");
+      this.editproduct = editproduct;
+      this.allReadProduct();
+    },
+  },
+});

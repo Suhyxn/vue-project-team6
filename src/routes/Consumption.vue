@@ -1,7 +1,7 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="item in clientStore.getConsumption"
+      v-for="item in adminStore.getConsumption"
       :key="item.id"
       class="item">
       <div 
@@ -41,13 +41,15 @@
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
 import { useAccountStore } from '../store/account'
+import { useAdminStore } from '../store/admin'
 
 export default {
   computed:{
-    ...mapStores([useClientStore,useAccountStore])
+    ...mapStores([useClientStore,useAccountStore,useAdminStore])
   },
   created(){
-    this.clientStore.getConsumption
+    this.adminStore.getConsumption
+    this.clientStore.selected = 'consumption'
   },
 
   methods: {
