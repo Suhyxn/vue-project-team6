@@ -15,12 +15,6 @@
           모든 거래 내역 조회
         </button>
         <button 
-          class="menu myinfo"
-          :class="{ active: /^\/admin\/.*readhistory/.test($route.fullPath) }"
-          @click="$router.push(`/admin/readhistory`)">
-          거래 내역 조회
-        </button>
-        <button 
           class="menu account"
           :class="{ active: /^\/admin\/.*EditProduct/.test($route.fullPath) }"
           @click="$router.push(`/admin/editproduct`)">
@@ -64,10 +58,6 @@ export default {
         {
           name: 'AllReadHistory',
           href: '/admin/allreadhistory'
-        },
-        {
-          name: 'ReadHistory',
-          href: '/admin/readhistory'
         },
         {
           name: 'EditProduct',
