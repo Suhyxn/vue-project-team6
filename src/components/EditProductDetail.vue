@@ -86,7 +86,7 @@
       @click="updateProduct({
         title, price, description, tags, id
       })">
-      test
+      수정하기
     </button>
     <!-- <button @click="updateProduct({title, content, description, tags},id)">
       수정중

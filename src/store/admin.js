@@ -98,6 +98,16 @@ export const useAdminStore = defineStore('admin', {
       console.log('editing')
       this.editproduct = editproduct
       this.allReadProduct()
+    },
+    async deleteProduct (id) {
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
+      const { data: product } = await axios ({
+        url,
+        method: 'DELETE',
+        headers,
+        id
+      })
+      console.log (product)
     }
   }
 })

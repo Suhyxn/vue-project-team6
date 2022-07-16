@@ -15,16 +15,22 @@
           모든 거래 내역 조회
         </button>
         <button 
-          class="menu account"
+          class="menu myinfo"
           :class="{ active: /^\/admin\/.*EditProduct/.test($route.fullPath) }"
           @click="$router.push(`/admin/editproduct`)">
           제품 자세히 보기 및 수정
         </button>
         <button 
-          class="menu myinfo"
+          class="menu account"
           :class="{ active: /^\/admin\/.*AddProduct/.test($route.fullPath) }"
           @click="$router.push(`/admin/addproduct`)">
           제품 추가
+        </button>
+        <button 
+          class="menu myinfo"
+          :class="{ active: /^\/admin\/.*DeleteProduct/.test($route.fullPath) }"
+          @click="$router.push(`/admin/deleteproduct`)">
+          제품 삭제
         </button>
         <!-- <div
           v-for="nav in navigations"
