@@ -14,9 +14,6 @@ export const useAdminStore = defineStore("admin", {
   state: () => {
     return {
       products: [],
-      getEquiment: [],
-      getConsumption: [],
-      getPet: [],
       product: {},
       histories: [],
       history: {},
@@ -25,7 +22,6 @@ export const useAdminStore = defineStore("admin", {
     };
   },
   getters: {},
-
   actions: {
     async AddProduct(addP) {
       const { data: product } = await axios({
@@ -62,28 +58,9 @@ export const useAdminStore = defineStore("admin", {
         method: "GET",
         headers,
       });
-      this.products = await products;
       console.log(products);
-      console.log(typeof product.tags);
-      const equiment = this.products.filter((i) => {
-        return i.tags[0] === "장비";
-      });
-
-      this.getEquiment = equiment;
-
-      const consumption = this.products.filter((i) => {
-        return i.tags[0] === "소비";
-      });
-
-      this.getConsumption = consumption;
-
-      const pet = this.products.filter((i) => {
-        return i.tags[0] === "펫";
-      });
-
-      this.getPet = pet;
+      this.products = products;
     },
-
     async oneReadProduct(id) {
       const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`;
       const { data: product } = await axios({
@@ -94,6 +71,7 @@ export const useAdminStore = defineStore("admin", {
       });
       console.log(product);
       this.product = product;
+      console.log(typeof product.tags);
     },
     async allReadHistory() {
       const { data: histories } = await axios({
@@ -121,6 +99,16 @@ export const useAdminStore = defineStore("admin", {
       console.log("editing");
       this.editproduct = editproduct;
       this.allReadProduct();
+    },
+    async deleteProduct(id) {
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`;
+      const { data: product } = await axios({
+        url,
+        method: "DELETE",
+        headers,
+        id,
+      });
+      console.log(product);
     },
   },
 });

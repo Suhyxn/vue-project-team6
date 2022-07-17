@@ -52,8 +52,7 @@ export default {
     BankModal
   },  
   computed:{
-    ...mapStores([useClientStore, useUserStore,]),
-    ...mapStores([useClientStore,])
+    ...mapStores([useClientStore, useUserStore,useAccountStore]),
   },
 
   created() {

@@ -37,7 +37,7 @@ export default {
     ...mapStores([useAdminStore,useClientStore,useAccountStore])
   },
   async created(){
-    await this.adminStore.allReadProduct()
+    await this.clientStore.allReadProduct()
     await this.accountStore.readAccountList()
   },
   mounted(){

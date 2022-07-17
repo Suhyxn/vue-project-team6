@@ -83,11 +83,14 @@ async created(){
 
 <style lang="scss" scoped>
 .item-box{
-  padding-top:10px;
+  // padding-top:10px;
   margin: auto;
-  margin-top: 4%;
-  width: 95%;
-  height: 90%;
+  // margin-top: 4%;
+  background-image: url('../backgroundImg/Store.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
   background-color: #faebd7;
   border-radius: 10px;
   .item-image{
@@ -101,10 +104,15 @@ async created(){
     margin: auto;
   }
   .item-data{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
     div{
-      margin: 20px 10px 20px 10px;
-      font-size: 20px;
+      margin: 20px 10px;
+      font-size: 25px;
       font-weight: 700;
+      color: #a374db
     }
     .actions{
       display: flex;

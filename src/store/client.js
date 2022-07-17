@@ -16,10 +16,6 @@ const END_POINT =
 export const useClientStore = defineStore("client", {
   state() {
     return {
-      getAllProduct: [],
-      getEquiment: [],
-      getConsumption: [],
-      getPat: [],
       isShow: false,
       selected: "everyItem",
       searchValue: "",
@@ -33,12 +29,48 @@ export const useClientStore = defineStore("client", {
         data: {},
       },
       purchasedList: null,
+      products: [],
+      getEquiment: [],
+      getConsumption: [],
+      getPet: [],
     };
   },
   actions: {
     //모달창 끄고 키는 기능
     modalHandler() {
       this.isShow = !this.isShow;
+    },
+
+    //전체 제품 조회
+    async allReadProduct() {
+      const { data: products } = await axios({
+        url: `${END_POINT}`,
+        method: "GET",
+        headers: {
+          ...headers,
+          masterKey: "true",
+        },
+      });
+
+      this.products = await products;
+      console.log(products);
+      const equiment = this.products.filter((i) => {
+        return i.tags[0] === "장비";
+      });
+
+      this.getEquiment = equiment;
+
+      const consumption = this.products.filter((i) => {
+        return i.tags[0] === "소비";
+      });
+
+      this.getConsumption = consumption;
+
+      const pet = this.products.filter((i) => {
+        return i.tags[0] === "펫";
+      });
+
+      this.getPet = pet;
     },
 
     //제품 검색 기능
