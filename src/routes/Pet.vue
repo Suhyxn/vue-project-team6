@@ -1,7 +1,7 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="item in clientStore.getPat"
+      v-for="item in clientStore.getPet"
       :key="item.id"
       class="item">
       <div 
@@ -41,11 +41,15 @@
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
 import { useAccountStore } from '../store/account'
+
 export default {
   computed:{
     ...mapStores([useClientStore,useAccountStore])
   },
-
+  created(){
+     this.clientStore.getPat
+     this.clientStore.selected = 'pet'
+  },
   methods: {
    handler(payload){
        if(!sessionStorage.getItem('token')){

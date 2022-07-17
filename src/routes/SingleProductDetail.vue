@@ -4,7 +4,6 @@
       <div
         class="single-product--img"
         :style="{backgroundImage:`url(${clientStore.singlePageData.thumbnail})`}">
-        상품이미지
       </div>
      
       
@@ -33,7 +32,7 @@
           
           <button
             class="btn"    
-            @click="$router.push('/store')">
+            @click="$router.push('/store/everyitem')">
             상점으로 이동
           </button>
         </div>
