@@ -1,29 +1,25 @@
 <template>
-  <ul class="history-list">
-    <li
-      v-for="history in adminStore.histories"
-      :key="history.id"
-      class="history-item"
-      :productId="history.id">
-      <div
-        class="historyImage"
-        :style="{ backgroundImage: `url(${history.product.thumbnail})`}">
-        .
-      </div>
-      <div>
-        [{{ history.product.tags }}]
-      </div>
-      <div>
-        {{ history.product.title }}
-      </div>
-      <div>
-        &nbsp; 구매자:{{ history.user.displayName }}
-      </div>
-    </li>
-  </ul>
+  <AllReadHistoryDetail />
 </template>
 
 <script>
+import { mapStores } from 'pinia'
+import { useAdminStore } from '~/store/admin'
+import AllReadHistoryDetail from '../components/AllReadHistoryDetail.vue'
+
+export default {
+  components: {
+    AllReadHistoryDetail
+},
+  computed: {
+    ...mapStores(useAdminStore)
+  }
+}
+
+</script>
+
+
+<!-- <script>
 import { mapStores } from 'pinia'
 import { useAdminStore } from '../store/admin'
 
@@ -34,12 +30,12 @@ export default {
     ...mapStores(useAdminStore)
   },
   created() {
-    this.adminStore.allReadHistory()
+    this.adminStore.all()
   }
 }
-</script>
+</script> -->
 
-<style  lang="scss" scoped>
+<!-- <style  lang="scss" scoped>
 ul {
   width: 100%;
   height: 400px;
@@ -58,4 +54,4 @@ ul {
   }
 }
 
-</style>
+</style> -->

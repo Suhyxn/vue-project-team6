@@ -1,19 +1,22 @@
 <template>
-  <EditProductDetail />
+  <DeleteProductDetail />
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 import { useAdminStore } from '~/store/admin'
-import EditProductDetail from '../components/EditProductDetail.vue'
+import DeleteProductDetail from '../components/DeleteProductDetail.vue'
 
 export default {
   components: {
-    EditProductDetail
-},
+    DeleteProductDetail
+  },
   computed: {
     ...mapStores(useAdminStore)
+    
+  },
+  created() {
+    this.adminStore.allReadProduct()
   }
 }
-
 </script>

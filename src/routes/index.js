@@ -8,11 +8,11 @@ import AccountAdd from "./AccountAdd.vue";
 import LoginHome from "./LoginHome.vue";
 import Admin from "./Admin.vue";
 import AllReadProduct from "./AllReadProduct.vue";
-import Addproduct from "./AddProduct.vue";
+import AddProduct from "./AddProduct.vue";
 import AllReadHistory from "./AllReadHistory.vue";
 import EditProduct from "./Editproduct.vue";
-import ReadHistory from "./ReadHistory.vue";
 import EditUserInfo from "./EditUserInfo.vue";
+import DeleteProduct from "./DeleteProduct.vue";
 import Store from "./Store.vue";
 import PurchaseList from "./PurchaseList.vue";
 import SingleProductDetail from "./SingleProductDetail.vue";
@@ -63,7 +63,7 @@ export default createRouter({
           component: PurchaseList,
         },
         // {
-        //   path: "purchaselist/singlepurchaseditem/:id",
+        //   path: 'purchaselist/singlepurchaseditem/:id',
         //   component: SinglePurchasedItemDetail,
         // },
       ],
@@ -90,11 +90,11 @@ export default createRouter({
         },
         {
           path: "addproduct",
-          component: Addproduct,
+          component: AddProduct,
         },
         {
-          path: "readhistory",
-          component: ReadHistory,
+          path: "deleteproduct",
+          component: DeleteProduct,
         },
       ],
     },

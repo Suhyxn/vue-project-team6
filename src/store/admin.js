@@ -93,6 +93,7 @@ export const useAdminStore = defineStore("admin", {
           title: editP.title,
           price: editP.price,
           description: editP.description,
+
           tags: editP.tags,
         }),
       });
