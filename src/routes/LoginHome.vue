@@ -7,13 +7,13 @@
     <div class="select_container">
       <div class="user_in">
         <RouterLink
-          to="/mypage/userinfo"
+          to="/mypage"
           class="a">
           마이페이지
         </RouterLink>
       </div>
       <routerLink
-        to="/store"
+        to="/store/everyitem"
         class="search">
         <span class="material-icons">
           search

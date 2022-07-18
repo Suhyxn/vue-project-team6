@@ -9,16 +9,24 @@ import AccountAdd from './AccountAdd.vue'
 import LoginHome from './LoginHome.vue'
 import Admin from './Admin.vue'
 import AllReadProduct from './AllReadProduct.vue'
-import Addproduct from './AddProduct.vue'
+import AddProduct from './AddProduct.vue'
 import AllReadHistory from './AllReadHistory.vue'
 import EditProduct from './Editproduct.vue'
-import ReadHistory from './ReadHistory.vue'
 import EditUserInfo from './EditUserInfo.vue'
+import DeleteProduct from './DeleteProduct.vue'
 import Store from './Store.vue'
 import PurchaseList from './PurchaseList.vue'
 import SingleProductDetail from './SingleProductDetail.vue'
 import SinglePurchasedItemDetail from './SinglePurchasedItemDetail.vue'
 import UserInfo from './UserInfo.vue'
+import MyPageMain from './MyPageMain.vue'
+import EveryItem from './EveryItem.vue'
+import Equipment from './Equipment.vue'
+import Consumption from './Consumption.vue'
+import Pet from './Pet.vue'
+import SearchedProduct from './SearchedProduct.vue'
+import AdminPageMain from './AdminPageMain.vue'
+import NotFound from './NotFound.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -27,11 +35,20 @@ export default createRouter({
     {
       path: '/',
       component: Home,
+    }, 
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
+      component: NotFound
     },
     {
       path: '/mypage',
       component: MyPage,
       children: [
+        {
+          path: '',
+          component: MyPageMain,
+        },
         {
           path: 'userinfo',
           component: UserInfo,
@@ -52,6 +69,10 @@ export default createRouter({
           path: 'purchaselist',
           component: PurchaseList,
         },
+        // {
+        //   path: 'purchaselist/singlepurchaseditem/:id',
+        //   component: SinglePurchasedItemDetail,
+        // },
       ],
     },
     {
@@ -77,6 +98,10 @@ export default createRouter({
       component: Admin,
       children: [
         {
+          path: '',
+          component: AdminPageMain,
+        },
+        {
           path: 'allreadproduct',
           component: AllReadProduct,
         },
@@ -90,11 +115,11 @@ export default createRouter({
         },
         {
           path: 'addproduct',
-          component: Addproduct,
+          component: AddProduct,
         },
         {
-          path: 'readhistory',
-          component: ReadHistory,
+          path: 'deleteproduct',
+          component: DeleteProduct,
         },
       ],
     },
@@ -108,6 +133,28 @@ export default createRouter({
     {
       path: '/store',
       component: Store,
+      children: [
+        {
+          path: 'everyitem',
+          component: EveryItem,
+        },
+        {
+          path: 'equipment',
+          component: Equipment,
+        },
+        {
+          path: 'consumption',
+          component: Consumption,
+        },
+        {
+          path: 'pet',
+          component: Pet,
+        },
+        {
+          path: 'searchedproduct',
+          component: SearchedProduct,
+        },
+      ],
     },
     {
       path: '/store/singleproductdetail/:id',
@@ -116,6 +163,6 @@ export default createRouter({
     {
       path: '/editUserInfo',
       component: EditUserInfo,
-    },
+    }
   ],
 })

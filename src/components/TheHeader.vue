@@ -17,7 +17,9 @@
         class="logout"
         to="/"
         @click="signOut()">
-        <span class="material-icons">
+        <span 
+          class="material-icons"
+          @click="cleanPurchasedList">
           logout
         </span>
       </RouterLink>
@@ -41,6 +43,7 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, ['signOut']),
+
   }
 }
 </script>

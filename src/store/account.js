@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-const accountURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/account'
+const accountURL =
+  'https://asia-northeast3-heropy-api.cloudfunctions.net/api/account'
 const headers = {
   'content-type': 'application/json',
   apikey: 'FcKdtJs202204',
@@ -15,6 +16,7 @@ export const useAccountStore = defineStore('account', {
       banks: [],
       selectedBankData: null,
       isShow: false,
+      noneTitle: true,
     }
   },
   getters: {},
@@ -42,6 +44,10 @@ export const useAccountStore = defineStore('account', {
         },
       })
       this.list = accountList.data
+      this.list.accounts.length === 0
+        ? (this.noneTitle = true)
+        : (this.noneTitle = false)
+      console.log(this.list)
     },
     async addAccountList(payload) {
       const { bankCode, accountNumber, phoneNumber, signature } = payload

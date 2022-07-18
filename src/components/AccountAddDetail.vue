@@ -220,7 +220,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background-color: antiquewhite;
+  background-color: #faebd7;
     .wrong_message {
       width: 100%;
       color: red;

@@ -1,10 +1,13 @@
 <template>
   <div class="background-image">
-    <div class="square">
-      <div class="container">
-        <AdminLNB />
-        <div class="content">
-          <RouterView />
+    <div class="container">
+      <div class="admin_page">
+        <p>Admin Page</p>
+        <div class="menu">
+          <AdminLNB />
+          <div class="content">
+            <router-view />
+          </div>
         </div>
         <!-- <div class="content">
           <button @click="allReadProduct">
@@ -109,27 +112,42 @@ export default {
 .background-image {
   position: relative;
   height: 100%;
-  background-position-y: 80%;
+  background-position-y: 92%;
   background-repeat : no-repeat;
   background-size : cover;
-  background-image: url('../backgroundImg/Main.png');
-  .square {
+  background-image: url('../backgroundImg/MyPage.png');
+  .container {
+    padding-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 80px;
-    .container {
-      position:relative;
-      display: flex;
-      background-color: white;
-      width: 1300px;
-      height: 550px;
-      opacity: .8;
-      align-items: center;
-      .content {
-        width: 1000px;
+    .admin_page {
+      background: rgb(255, 255, 255, 0.8);
+      width: 60%;
+      height: 75vh;
+      border-radius: 20px;
+      p {
+        padding: 20px 0;
+        font-size: 24px;
+        font-weight: 700;
         display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .content {
+        width: 60%;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
         box-sizing: border-box;
+        background-color: #F9C5D5;
+        border-radius: 20px;
+        overflow: auto;
       }
     }
   }

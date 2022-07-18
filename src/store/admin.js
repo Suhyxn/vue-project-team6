@@ -16,11 +16,41 @@ export const useAdminStore = defineStore('admin', {
       product: {},
       histories: [],
       history: {},
-      editproduct: {}
+      editproduct: {},
+      thumbnail: '',
+      thumbnailBase64: ''
     }
   },
   getters: {},
   actions: {
+    async AddProduct(addP) {
+      console.log(addP)
+      const { title, price, description, tags, thumbnailBase64 } = addP
+      await axios({
+        url: adminURL,
+        method: 'POST',
+        headers,
+        data: {
+          title,
+          price,
+          description,
+          tags,
+          thumbnailBase64
+        }
+      })
+    },
+    // Base64 Image
+    SelectImage(event) {
+      console.log(event)
+      const { files } = event.target
+      for ( const file of files ) {
+        const reader =  new FileReader()
+        reader.readAsDataURL(file)
+        reader.addEventListener('load', e => {
+          this.thumbnail = e.target.result
+        })
+      }
+    },
     async allReadProduct () {
       const { data: products } = await axios ({
         url: adminURL,
@@ -40,6 +70,7 @@ export const useAdminStore = defineStore('admin', {
       })
       console.log(product)
       this.product = product
+      console.log(typeof product.tags)
     },
     async allReadHistory () {
       const { data: histories } = await axios ({
@@ -57,7 +88,7 @@ export const useAdminStore = defineStore('admin', {
         url,
         method: 'PUT',
         headers,
-        data: JSON.stringify({
+        data: ({
           title: editP.title,
           price: editP.price,
           description: editP.description,
@@ -67,6 +98,16 @@ export const useAdminStore = defineStore('admin', {
       console.log('editing')
       this.editproduct = editproduct
       this.allReadProduct()
+    },
+    async deleteProduct (id) {
+      const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
+      const { data: product } = await axios ({
+        url,
+        method: 'DELETE',
+        headers,
+        id
+      })
+      console.log (product)
     }
   }
 })
