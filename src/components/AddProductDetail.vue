@@ -58,11 +58,12 @@ import { useAdminStore } from '~/store/admin'
 export default {
   data() {
     return {
+      product: {},
       title: '',
       price: '',
       description: '',
-      tags: ['',''],
-      thumbnail: ''
+      tags: [],
+      thumbnailBase64: ''
     }
   },
   computed: {
@@ -70,12 +71,13 @@ export default {
   },
   methods: {
     AddProd(item) {
+      console.log(item)
       this.adminStore.AddProduct(item)
     },
     UpImage(event) {
       console.log(event)
       this.adminStore.SelectImage(event)
-    }
+    },
     // async AddProduct() {
     //   const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
     //     method: 'POST',
@@ -97,17 +99,17 @@ export default {
     //   console.log(product)
     //   console.log(product.tags)
     // },
-    // SelectImage(event) {
-    //   console.log(event)
-    //   const { files } = event.target
-    //   for ( const file of files ) {
-    //     const reader =  new FileReader()
-    //     reader.readAsDataURL(file)
-    //     reader.addEventListener('load', e => {
-    //       this.thumbnail = e.target.result
-    //     })
-    //   }
-    // }
+    SelectImage(event) {
+      console.log(event)
+      const { files } = event.target
+      for ( const file of files ) {
+        const reader =  new FileReader()
+        reader.readAsDataURL(file)
+        reader.addEventListener('load', e => {
+          this.thumbnailBase64 = e.target.result
+        })
+      }
+    }
   }
 }
 
@@ -151,6 +153,9 @@ export default {
     cursor: pointer;
     font-size: 14px;
     margin-top: 5px;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
 

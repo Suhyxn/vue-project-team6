@@ -25,6 +25,7 @@ import Consumption from './Consumption.vue'
 import Pet from './Pet.vue'
 import SearchedProduct from './SearchedProduct.vue'
 import AdminPageMain from './AdminPageMain.vue'
+import NotFound from './NotFound.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -33,6 +34,11 @@ export default createRouter({
     {
       path: '/',
       component: Home,
+    }, 
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
+      component: NotFound
     },
     {
       path: '/mypage',
@@ -44,7 +50,6 @@ export default createRouter({
         },
         {
           path: 'userinfo',
-
           component: UserInfo,
         },
         {
@@ -151,6 +156,6 @@ export default createRouter({
     {
       path: '/editUserInfo',
       component: EditUserInfo,
-    },
+    }
   ],
 })

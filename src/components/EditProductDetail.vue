@@ -83,7 +83,7 @@
           <input
             v-model="price"
             placeholder="price"
-            type="text" />
+            type="number" />
         </div>
         <div class="edit_main_tag">
           <p>태그</p>
@@ -97,6 +97,13 @@
           <input
             v-model="tags[1]"
             placeholder="tags2 ( anything )"
+            type="text" />
+        </div>
+        <div class="edit_id_tag">
+          <p>ID</p>
+          <input
+            v-model="id"
+            placeholder="id (필수 입력!)"
             type="text" />
         </div>
         <div class="file">
@@ -191,7 +198,8 @@ export default {
           width: 80px;
           height: 80px;
           background-repeat: no-repeat;
-          background-size: contain
+          background-size: contain;
+          cursor: pointer;
         }
         .product-title {
           padding-top: 10px;
@@ -224,7 +232,7 @@ export default {
       flex-direction: column;
       align-items: center;
       margin-top: 10px;
-      .edit_title, .edit_description, .edit_price, .edit_main_tag, .edit_sub_tag {
+      .edit_title, .edit_description, .edit_price, .edit_main_tag, .edit_sub_tag, .edit_id_tag {
         width: 85%;
         font-size: 16px;
         font-weight: 700;
@@ -249,6 +257,9 @@ export default {
         cursor: pointer;
         font-size: 14px;
         margin-top: 5px;
+        &:hover {
+          opacity: 0.7;
+        }
       }
     }
   }
