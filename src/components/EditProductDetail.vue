@@ -198,7 +198,8 @@ export default {
           width: 80px;
           height: 80px;
           background-repeat: no-repeat;
-          background-size: contain
+          background-size: contain;
+          cursor: pointer;
         }
         .product-title {
           padding-top: 10px;
