@@ -1,7 +1,12 @@
 <template>
+  <p 
+    v-if="clientStore.searchItem.length===0"
+    class="none-text">
+    검색된 제품이없습니다!
+  </p>
   <ul class="item-list">
     <li
-      v-for="item in clientStore.getEquiment"
+      v-for="item in clientStore.searchItem"
       :key="item.id"
       class="item">
       <div 
@@ -46,6 +51,9 @@ export default {
     ...mapStores([useClientStore,useAccountStore])
   },
 
+  created(){
+   console.log( this.clientStore.searchItem )
+  },
   methods: {
     handler(payload){
         if(!sessionStorage.getItem('token')){
@@ -57,10 +65,19 @@ export default {
       this.accountStore.isShow = !this.accountStore.isShow
     }
   },
+  
 }
 </script>
 
 <style lang="scss" scoped>
+
+  .none-text{
+    font-size: 40px;
+    font-weight: 700;
+    color: rgba($color: #808080, $alpha: .6);
+    text-align: center;
+    margin-top: 200px;
+  }
   .item-list{
     display:flex;
     flex-wrap: wrap;

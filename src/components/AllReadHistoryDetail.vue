@@ -8,16 +8,15 @@
       <div
         class="historyImage"
         :style="{ backgroundImage: `url(${history.product.thumbnail})`}">
-        .
       </div>
-      <div>
-        [{{ history.product.tags }}]
+      <div class="title">
+        {{ history.product.title }} 
       </div>
-      <div>
-        {{ history.product.title }}
+      <div class="tag">
+        &nbsp; {{ history.product.tags }}
       </div>
-      <div>
-        &nbsp; 구매자:{{ history.user.displayName }}
+      <div class="user">
+        &nbsp; 구매자: {{ history.user.displayName }}
       </div>
     </li>
   </ul>
@@ -42,7 +41,6 @@ export default {
 <style  lang="scss" scoped>
 ul {
   width: 100%;
-  height: 400px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -50,11 +48,27 @@ ul {
   li {
     display: flex;
     align-items: center;
+    background-color: #faebd7;
+    border-radius: 8px;
+    margin: 5px;
     .historyImage {
+      margin-top: 8px;
       width: 40px;
       height: 40px;
       background-repeat: no-repeat;
-}
+    }
+    .tag {
+      color: #F6921D;
+      font-weight: 700;
+    }
+    .title {
+      font-weight: 700;
+      color: #2d9006;
+    }
+    .user {
+      font-weight: 700;
+      color: #08abb4;
+    }
   }
 }
 
