@@ -10,13 +10,13 @@
       <input
         v-model="oldPassword"
         placeholder="현재 비밀번호"
-        type="text" />
+        type="password" />
     </div>
     <div class="new_pw">
       <input
         v-model="newPassword"
         placeholder="New 비밀번호 (8자 이상)"
-        type="text" />
+        type="password" />
     </div>
     <div>
       <input
@@ -115,7 +115,7 @@ input {
   background-color: #845FA7;
   border-radius: 50px;
   width: 200px;
-  height: 60px;
+  height: 50px;
   cursor: pointer;
   color: #fff;
   font-size: 28px;
