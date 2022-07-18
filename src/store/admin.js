@@ -17,27 +17,27 @@ export const useAdminStore = defineStore('admin', {
       histories: [],
       history: {},
       editproduct: {},
-      thumbnail: ''
+      thumbnail: '',
+      thumbnailBase64: ''
     }
   },
   getters: {},
   actions: {
     async AddProduct(addP) {
-      const { data: product } = await axios({
+      console.log(addP)
+      const { title, price, description, tags, thumbnailBase64 } = addP
+      await axios({
         url: adminURL,
         method: 'POST',
         headers,
-        data: JSON.stringify({
-          title: addP.title,
-          price: addP.price,
-          description: addP.description,
-          tags: addP.tags, 
-          thumbnailBase64: this.thumbnail
-        })
+        data: {
+          title,
+          price,
+          description,
+          tags,
+          thumbnailBase64
+        }
       })
-      this.product = product
-      console.log(product)
-      console.log(product.tags)
     },
     // Base64 Image
     SelectImage(event) {
@@ -88,7 +88,7 @@ export const useAdminStore = defineStore('admin', {
         url,
         method: 'PUT',
         headers,
-        data: JSON.stringify({
+        data: ({
           title: editP.title,
           price: editP.price,
           description: editP.description,

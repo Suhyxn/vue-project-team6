@@ -10,7 +10,7 @@
   <input
     v-model="price"
     placeholder="price"
-    type="text" />
+    type="number" />
   <input
     v-model="tags[0]"
     placeholder="tags ( 장비, 소비, 펫 )"
@@ -22,10 +22,10 @@
   <input
     type="file"
     placeholder="file"
-    @change="UpImage" />
+    @change="SelectImage" />
   <button
     @click="AddProd({
-      title, description, price, tags
+      title, description, price, tags, thumbnailBase64
     })">
     추가
   </button>
@@ -38,11 +38,12 @@ import { useAdminStore } from '~/store/admin'
 export default {
   data() {
     return {
+      product: {},
       title: '',
       price: '',
       description: '',
-      tags: ['',''],
-      thumbnail: ''
+      tags: [],
+      thumbnailBase64: ''
     }
   },
   computed: {
@@ -50,12 +51,13 @@ export default {
   },
   methods: {
     AddProd(item) {
+      console.log(item)
       this.adminStore.AddProduct(item)
     },
     UpImage(event) {
       console.log(event)
       this.adminStore.SelectImage(event)
-    }
+    },
     // async AddProduct() {
     //   const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
     //     method: 'POST',
@@ -77,17 +79,17 @@ export default {
     //   console.log(product)
     //   console.log(product.tags)
     // },
-    // SelectImage(event) {
-    //   console.log(event)
-    //   const { files } = event.target
-    //   for ( const file of files ) {
-    //     const reader =  new FileReader()
-    //     reader.readAsDataURL(file)
-    //     reader.addEventListener('load', e => {
-    //       this.thumbnail = e.target.result
-    //     })
-    //   }
-    // }
+    SelectImage(event) {
+      console.log(event)
+      const { files } = event.target
+      for ( const file of files ) {
+        const reader =  new FileReader()
+        reader.readAsDataURL(file)
+        reader.addEventListener('load', e => {
+          this.thumbnailBase64 = e.target.result
+        })
+      }
+    }
   }
 }
 
