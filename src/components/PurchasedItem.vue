@@ -44,10 +44,15 @@ import {useClientStore} from '~/store/client'
 import { mapStores } from 'pinia'
 export default {
   props:{
-    item:Object
+    item:{
+      type:Object,
+      required:false
+    }
+   
   },
   computed:{
     ...mapStores([useClientStore])
+    
   },
 
   methods:{
@@ -56,7 +61,7 @@ export default {
     await this.clientStore.allPurchasedList()
     console.log(this.clientStore.purchasedList)
     alert('구매확정이 완료되었습니다 구매확정 이후에는 구매 취소를 할 수 없습니다!')
-     this.$router.push('/store')
+     this.$router.push('/store/everyitem')
     },
     
     async purchaseCancel(detailId){
@@ -69,7 +74,7 @@ export default {
    async singlePurchasedData(detailId){
     await this.clientStore.singlePurchasedList({detailId})
     await this.clientStore.singlePurchasedItemPageData
-    this.$router.push(`/mypage/purchaselist/singlepurchaseditem/${detailId}`)
+    await this.$router.push(`/mypage/purchaselist/singlepurchaseditem/${detailId}`)
    }
   },
 }

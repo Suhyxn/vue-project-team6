@@ -19,6 +19,11 @@ import SingleProductDetail from './SingleProductDetail.vue'
 import SinglePurchasedItemDetail from './SinglePurchasedItemDetail.vue'
 import UserInfo from './UserInfo.vue'
 import MyPageMain from './MyPageMain.vue'
+import EveryItem from './EveryItem.vue'
+import Equipment from './Equipment.vue'
+import Consumption from './Consumption.vue'
+import Pet from './Pet.vue'
+import SearchedProduct from './SearchedProduct.vue'
 import AdminPageMain from './AdminPageMain.vue'
 
 export default createRouter({
@@ -39,6 +44,7 @@ export default createRouter({
         },
         {
           path: 'userinfo',
+
           component: UserInfo,
         },
         {
@@ -57,10 +63,10 @@ export default createRouter({
           path: 'purchaselist',
           component: PurchaseList,
         },
-        {
-          path: 'purchaselist/singlepurchaseditem/:id',
-          component: SinglePurchasedItemDetail,
-        }
+        // {
+        //   path: 'purchaselist/singlepurchaseditem/:id',
+        //   component: SinglePurchasedItemDetail,
+        // },
       ],
     },
     {
@@ -93,8 +99,8 @@ export default createRouter({
         },
         {
           path: 'deleteproduct',
-          component: DeleteProduct
-        }
+          component: DeleteProduct,
+        },
       ],
     },
     {
@@ -107,6 +113,28 @@ export default createRouter({
     {
       path: '/store',
       component: Store,
+      children: [
+        {
+          path: 'everyitem',
+          component: EveryItem,
+        },
+        {
+          path: 'equipment',
+          component: Equipment,
+        },
+        {
+          path: 'consumption',
+          component: Consumption,
+        },
+        {
+          path: 'pet',
+          component: Pet,
+        },
+        {
+          path: 'searchedproduct',
+          component: SearchedProduct,
+        },
+      ],
     },
     {
       path: '/store/singleproductdetail/:id',

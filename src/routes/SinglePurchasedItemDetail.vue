@@ -1,5 +1,7 @@
 <template>
-  <div class="item-box">
+  <div
+    v-if="!singlePurchasedItemPageData"
+    class="item-box">
     <div
       class="item-image"
       :style="{backgroundImage:`url(${clientStore.singlePurchasedItemPageData.product.thumbnail})`}">
@@ -40,7 +42,7 @@
         </button>           
         <button 
           class="btn"
-          @click="$router.push('/store')">
+          @click="$router.push('/store/everyitem')">
           상점으로 이동
         </button>        
       </div>
@@ -56,32 +58,39 @@ export default {
 computed:{
   ...mapStores([useClientStore]),
   },
+
 async created(){
-  await this.clientStore.singlePurchasedList({detailId:this.$route.params.id})
-  await console.log(this.clientStore.singlePurchasedItemPageData)
+        await this.clientStore.singlePurchasedList({detailId:this.$route.params.id})
+        // await this.clientStore.singlePurchasedItemPageData
+        await console.log(this.$route.params.id)
+        await console.log(this.clientStore.singlePurchasedItemPageData)
   },
+
   methods:{
   async purchaseDecision(detailId){
       await this.clientStore.purchaseDecision({detailId})
       alert('구매확정이 완료되었습니다 구매확정 이후에는 구매 취소를 할 수 없습니다!')
-      this.$router.push('/mypage/purchaselist')
+      this.$router.push('/store/everyitem')
     },
     async purchaseCancel(detailId){
       await this.clientStore.purchaseCancel({detailId})
       alert('구매취소가 완료되었습니다! 제품금액만큼 계좌에 환불처리됩니다!')
       this.$router.push('/mypage/accountlist')
-    }
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .item-box{
-  padding-top:10px;
+  // padding-top:10px;
   margin: auto;
-  margin-top: 4%;
-  width: 95%;
-  height: 90%;
+  // margin-top: 4%;
+  background-image: url('../backgroundImg/Store.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
   background-color: #faebd7;
   border-radius: 10px;
   .item-image{
@@ -95,10 +104,15 @@ async created(){
     margin: auto;
   }
   .item-data{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
     div{
-      margin: 20px 10px 20px 10px;
-      font-size: 20px;
+      margin: 20px 10px;
+      font-size: 25px;
       font-weight: 700;
+      color: #a374db
     }
     .actions{
       display: flex;

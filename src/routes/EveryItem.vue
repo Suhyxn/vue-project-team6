@@ -1,7 +1,7 @@
 <template>
   <ul class="item-list">
     <li
-      v-for="item in clientStore.getConsumption"
+      v-for="item in clientStore.products"
       :key="item.id"
       class="item">
       <div 
@@ -46,10 +46,12 @@ export default {
   computed:{
     ...mapStores([useClientStore,useAccountStore])
   },
-
+  created(){
+    this.clientStore.selected = 'everyItem'
+  },
   methods: {
-      handler(payload){
-       if(!sessionStorage.getItem('token')){
+    handler(payload){
+        if(!sessionStorage.getItem('token')){
           alert('제품구매는 로그인을 해야 할 수 있습니다!')
           this.$router.push('/signin')
           return 

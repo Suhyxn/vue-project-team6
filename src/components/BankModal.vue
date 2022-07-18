@@ -7,7 +7,7 @@
       </div>
       <div class="bank-select">
         <p
-          v-if="accountStore.list.accounts.length === 0"
+          v-show="accountStore.noneTitle"
           class="none-title">
           등록된 계좌가 없습니다
         </p>
@@ -31,12 +31,13 @@
       <button @click="accountModalHandler">
         취소
       </button>
-      <button @click="createAccount">
+      <button @click="moveAccount">
         계좌등록
       </button>
     </div>
   </div>
 </template>
+
 <script>
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
@@ -47,9 +48,9 @@ export default {
   computed:{
     ...mapStores([useClientStore,useAccountStore])  
   },
-  created(){
-      this.accountStore.readAccountList()
-      this.noneAction()
+ async created(){
+    await this.accountStore.readAccountList()
+    await this.noneAction()
   },
   methods:{
     selectedBankData(data){
@@ -72,7 +73,7 @@ export default {
         alert('등록된 계좌가 존재하지 않습니다 계좌를 등록해 주세요!')
       }
     },
-    createAccount(){
+    moveAccount(){
       this.accountStore.isShow = !this.accountStore.isShow
       this.$router.push('/mypage/accountlist')
     }
@@ -122,8 +123,7 @@ $width:580px;
         text-align: center;
         font-size: 25px;
         font-weight: 700;
-        color: rgba($color: #000, $alpha: 0.3);
-        overflow:hidden;
+        color: rgba($color: #000, $alpha: .3);
       }
       label{
       margin: 10px 0;

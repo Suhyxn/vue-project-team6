@@ -1,25 +1,5 @@
 <template>
   <div class="container">
-    <div class="menu">
-      <select 
-        v-model="clientStore.selected"
-        name="category"
-        class="select-section">
-        <option :value="'everyItem'">
-          전체보기 
-        </option>
-        <option :value="'equipment'">
-          장비
-        </option>
-        <option :value="'consumption'">
-          소비
-        </option>
-        <option :value="'pet'">
-          펫
-        </option>
-      </select>
-    </div>
-
     <div class="search">
       <input
         ref="inputEl"
@@ -34,38 +14,10 @@
       </span>
     </div>
 
-    <div class="category-btns">
-      <button
-        :class="{active: clientStore.selected === 'everyItem'}"
-        class="btn"
-        @click="clientStore.selected = 'everyItem'">
-        전체보기
-      </button>
-      <button
-        :class="{ active: clientStore.selected === 'equipment'}"
-        class="btn"
-        @click="clientStore.selected='equipment'">
-        장비
-      </button>
-      <button
-        :class="{ active: clientStore.selected === 'consumption' }"
-        class="btn"
-        @click="clientStore.selected = 'consumption'">
-        소비
-      </button>
-      <button
-        :class="{ active: clientStore.selected === 'pet' }"
-        class="btn"
-        @click="clientStore.selected = 'pet'">
-        펫
-      </button>
-    </div>
+    <StoreLNB class="store-btn" />
 
     <div class="item-box">
-      <EveryItem v-if="clientStore.selected === 'everyItem'" />
-      <Equipment v-else-if="clientStore.selected === 'equipment'" />
-      <Consumption v-else-if="clientStore.selected === 'consumption'" />
-      <Pet v-else-if="clientStore.selected === 'pet'" />
+      <routerView />
     </div>
   </div>
 </template>
@@ -73,25 +25,20 @@
 <script>
 import { mapStores } from 'pinia'
 import {useClientStore} from '~/store/client'
-import { useAccountStore } from '../store/account'
-import EveryItem from './EveryItem.vue'
-import Equipment from './Equipment.vue'
-import Pet from './Pet.vue'
-import Consumption from './Consumption.vue'
+import { useAccountStore } from '~/store/account'
+import { useAdminStore } from '~/store/admin'
+
+import StoreLNB from './StoreLNB.vue'
 export default {
   components:{
-    EveryItem,
-    Equipment,
-    Consumption,
-    Pet,
+    StoreLNB
   },
   computed:{
-    ...mapStores([useClientStore,useAccountStore])
+    ...mapStores([useAdminStore,useClientStore,useAccountStore])
   },
   async created(){
-    await  this.clientStore.AllReadProduct()
+    await this.clientStore.allReadProduct()
     await this.accountStore.readAccountList()
-   
   },
   mounted(){
       this.$refs.inputEl.focus()
@@ -101,7 +48,8 @@ export default {
       await this.clientStore.searchProduct({
         text:this.clientStore.searchValue,
       })
-    this.clientStore.searchItem.length === 0 ? alert('해당 상품을 찾을 수 없습니다!') : this.$router.push(`/store/singleproductdetail/${this.clientStore.searchItem[0].id}`)
+    
+    this.clientStore.searchItem.length === 0 ? alert('해당 상품을 찾을 수 없습니다!') : this.$router.replace('/store/searchedproduct')
     this.$refs.inputEl.value = ''
     },
   },
@@ -143,31 +91,13 @@ export default {
       padding: 2px 5px;
       box-sizing: border-box;
     }
-  } 
-  .category-btns{
-      height:400px ;
-      width:80px;
-      display: flex;
-      flex-direction:column;
-      justify-content: space-around;
-      position: absolute;
-      top: 60px;
-      left: 30px;
-      .btn{
-        display: inline-block;
-        outline: none;
-        background: royalblue;
-        border-radius: 8px;
-        border: none;
-        color: #fff;
-        &:hover{
-          background:rgba(0,0,0,.8);
-        }
-        &.active {
-          background: red;
-        }
-      }
-    }
+  }
+  
+  .store-btn{
+    position: absolute;
+     top: 80px;
+      left: 50px;
+  }
     .item-box{
     width:60vw;
     height:60vh;
