@@ -1,21 +1,26 @@
 <template>
-  <ul class="product-list">
-    <li
-      v-for="product in adminStore.products"
-      :key="product.id"
-      class="product-item"
-      :productId="product.id">
-      <div
-        class="product-image"
-        :style="{ backgroundImage: `url(${product.thumbnail})` }"
-        @click="clickDelete(`${product.id}`)">
-        .
-      </div>
-      <div class="product-title">
-        {{ product.title }}
-      </div>
-    </li>
-  </ul>
+  <div>
+    <p class="delete_title">
+      누르는 즉시 제품이 삭제됩니다!
+    </p>
+    <ul class="product-list">
+      <li
+        v-for="product in adminStore.products"
+        :key="product.id"
+        class="product-item"
+        :productId="product.id">
+        <div
+          class="product-image"
+          :style="{ backgroundImage: `url(${product.thumbnail})` }"
+          @click="clickDelete(`${product.id}`)">
+          .
+        </div>
+        <div class="product-title">
+          {{ product.title }}
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -43,6 +48,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.delete_title {
+  font-size: 22px;
+  font-weight: 700;
+  color: red;
+  margin-left: 45px;
+  margin-top: 25px;
+}
 .product-list {
   width: 100%;
   height: auto;

@@ -256,6 +256,9 @@ export default {
         cursor: pointer;
         font-size: 14px;
         margin-top: 5px;
+        &:hover {
+          opacity: 0.7;
+        }
       }
     }
   }
