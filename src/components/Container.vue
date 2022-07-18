@@ -58,58 +58,44 @@ export default {
 
 <style lang="scss" scoped> 
 .container{
-  width: 80vw;
-  height: 80vh;
-  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 90%;
+  background: rgb(255, 255, 255, 0.8);
   position: relative;
-  border-radius: 8px;
-
-
-  .menu{
-    position: absolute;
-    right:220px;
-    top: 30px;
-    .select-section{
-      width: 80px;
-      height: 30px;
-      text-align: center;
-      background: #808080;
-      font-weight: 700;
-      border-radius: 8px;
-      border: none;
-      outline: none; 
-    }
-  }
+  border-radius: 20px;
   .search{
     position: absolute;
-    right:0px;
-    top: 25px;
+    right: 5%;
+    top: 15px;
     .search-bar{
+      width: 200px;
+      height: 30px;
       outline: none;
       border-radius: 8px;
       border: 1px solid ;
       padding: 2px 5px;
       box-sizing: border-box;
     }
+    .material-icons {
+      position: absolute; 
+      cursor: pointer;
+      right: 5px;
+      top: 3px;
+    }
   }
-  
   .store-btn{
-    position: absolute;
-     top: 80px;
-      left: 50px;
+    width: 12%;
+    height: 60vh;
+    margin-right: 20px;
   }
-    .item-box{
-    width:60vw;
-    height:60vh;
-    background-image: url('../backgroundImg/itembox.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-y:65%;
+  .item-box{
+    width: 80%;
+    height: 60vh;
     overflow-y:scroll;
-    position: absolute;
-    top: 80px;
-    left:200px;
-    border-radius: 8px;
+    border-radius: 20px;
   }
 }
 </style>

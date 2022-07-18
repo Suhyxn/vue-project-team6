@@ -87,12 +87,13 @@ $width:450px;
           padding: 0 20px;
           outline: none;
           border: none;
-          background: #FFBA46;
+          background: #845FA7;
           box-sizing: border-box;
           border-radius: 5px;
           color: #fff;
+          cursor: pointer;
           &:hover{
-            background:rgba(0,0,0,.5)
+            opacity: 0.7;
           }
           .a {
             color: #fff;

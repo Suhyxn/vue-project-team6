@@ -10,15 +10,15 @@
       </div>
       <div class="info">
         <p class="title">
-          제품: {{ item.title }}
+          {{ item.title }}
         </p> 
         <p class="price">
-          가격: {{ item.price }}
+          {{ item.price.toLocaleString('ko-KR') }}원
         </p>
       </div>
       <div class="btns">
         <button 
-          class="btn"
+          class="btn purchase"
           @click="handler({
             id:item.id,
             price:item.price
@@ -27,7 +27,7 @@
         </button>
       
         <button
-          class="btn"
+          class="btn detail"
           @click="$router.push(`/store/singleproductdetail/${item.id}`)">
           상세페이지
         </button>
@@ -72,15 +72,14 @@ export default {
     .item{
       width:200px;
       height:250px;
-      background:red;
-      border: ridge 15px #fff;
+      background:#FEE3EC;
       border-radius: 8px;
       box-sizing: border-box;
       margin: 10px 0;
       display: flex;
+      justify-content: center;
+      align-items: center;
       flex-direction: column;
-      
-    
      .sumnail{
       width: 60px;
       height: 60px;
@@ -90,23 +89,27 @@ export default {
       background-size: cover;
       margin: 10px;
       box-sizing: border-box;
+      border-radius: 5px;
      }
      .info{
       margin: 10px;
       font-weight: 700;
       .title{
+        text-align: center;
         margin-bottom: 10px;
         height: 32px;
+        color: #2d9006;
       }
       .price{
+        text-align: center;
         margin-bottom: 10px;
+        color: #08abb4;
       }
      }
      .btns{
       display: flex;
       justify-content:space-around;
       align-items: center;
-      
       .btn{
         display: inline-block;
         padding:5px 10px;
@@ -117,10 +120,21 @@ export default {
         background: #000;
         color: #fff;
         font-size:12px;
-        &:hover{
-          background:green;
+        cursor: pointer;
+        margin-left: 5px;
+        margin-right: 5px;
+        &.purchase {
+          background-color: #F999B7;
+          &:hover {
+            opacity: 0.7;
+          }
         }
-        
+        &.detail {
+          background-color: #845FA7;
+          &:hover {
+            opacity: 0.7;
+          }
+        }
       }
      }
     }

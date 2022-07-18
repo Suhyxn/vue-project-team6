@@ -8,10 +8,10 @@
     </div>
     <div class="item-data">
       <div class="title">
-        제품 :{{ item.product.title }}
+        제품: {{ item.product.title }}
       </div>
       <div class="price">
-        가격: {{ item.product.price }}
+        가격: {{ item.product.price.toLocaleString('ko-KR') }}원
       </div>
       <div class="description">
         제품 설명: {{ item.product.description }}
@@ -19,18 +19,18 @@
       <div class="actions">
         <button
           v-if="!item.done"
-          class="btn"
+          class="btn confirm"
           @click="purchaseDecision(item.detailId)">
           구매확정
         </button>
         <button
           v-if="!item.done"
-          class="btn"
+          class="btn cancel"
           @click="purchaseCancel(item.detailId)">
           구매취소
         </button>
         <button
-          class="btn"
+          class="btn buy_list"
           @click="singlePurchasedData(item.detailId)">
           제품 구매 내역
         </button>
@@ -114,10 +114,20 @@ export default {
       flex-direction: column;
       justify-content:center;
       align-items:flex-start;
-      div{
+      div, .title, .price, .description{
         margin: 5px ;
         font-size: 14px;
         font-weight: 700;
+      }
+      .title {
+        color: #2d9006;
+      } 
+      .price {
+        color: #08abb4;
+      } 
+      .description {
+        color: #845FA7;
+        line-height: 20px;
       }
       .actions{
         .btn{
@@ -125,11 +135,27 @@ export default {
           outline: none;
           border-radius: 8px;
           border: none;
-          background-color:orange;
           color: #fff;
+          padding: 3px 10px;
+          font-weight: 700;
           cursor: pointer;
-          &:hover{
-            background-color:rgba(0,0,0,.7);
+          &.confirm {
+            background-color: #845FA7;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.cancel {
+            background-color: #f83d3d;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.buy_list {
+            background-color: #F6921D;
+            &:hover {
+              opacity: 0.7;
+            }
           }
         }
       }

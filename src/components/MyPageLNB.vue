@@ -87,13 +87,13 @@ export default {
     &.purchase {
       border: solid 3px #83c1c4;
       background-color: #83c1c4;
-    }
     &:hover {
-        border: solid 3px #08abb4;
+      border: solid 3px #08abb4;
         }
     &.active {
-        border: solid 3px #08abb4;
+      border: solid 3px #08abb4;
         }
+    }
   }
 }
 </style>

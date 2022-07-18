@@ -6,7 +6,7 @@
       </div>
       <div class="actions">
         <button
-          class="btn"
+          class="btn confirm"
           @click="modalOff">
           <RouterLink
             to="/signin"
@@ -15,7 +15,7 @@
           </RouterLink>
         </button>
         <button 
-          class="btn"
+          class="btn cancel"
           @click="modalOff">
           취소
         </button>
@@ -92,12 +92,21 @@ $width:450px;
           padding: 0 20px;
           outline: none;
           border: none;
-          background: #FFBA46;
           box-sizing: border-box;
           border-radius: 5px;
           color: #fff;
-          &:hover{
-            background:rgba(0,0,0,.5)
+          cursor: pointer;
+          &.confirm {
+            background-color: #845FA7;
+            &:hover{
+              opacity: 0.7;
+            }
+          }
+          &.cancel {
+            background-color: #F6921D;
+            &:hover{
+              opacity: 0.7;
+            }
           }
           .a {
             color: #fff;

@@ -25,6 +25,7 @@ import Consumption from './Consumption.vue'
 import Pet from './Pet.vue'
 import SearchedProduct from './SearchedProduct.vue'
 import AdminPageMain from './AdminPageMain.vue'
+import StoreMainPage from './StoreMainPage.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -114,6 +115,10 @@ export default createRouter({
       path: '/store',
       component: Store,
       children: [
+        {
+          path: '',
+          component: StoreMainPage,
+        },
         {
           path: 'everyitem',
           component: EveryItem,

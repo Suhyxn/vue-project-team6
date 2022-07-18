@@ -20,18 +20,24 @@
             @click="selectedBankData(item)" />
           <span class="bank-name">은행명: {{ item.bankName }} / </span>
           <span class="account-number">계좌번호: {{ item.accountNumber }} / </span>
-          <span class="balance">잔액: {{ item.balance }}</span>
+          <span class="balance">잔액: {{ item.balance.toLocaleString('ko-KR') }}원</span>
         </label>
       </div>
     </div>
     <div class="actions">
-      <button @click="openProductModal">
+      <button
+        class="confirm"
+        @click="openProductModal">
         확인
       </button>
-      <button @click="accountModalHandler">
+      <button
+        class="cancel"
+        @click="accountModalHandler">
         취소
       </button>
-      <button @click="moveAccount">
+      <button
+        class="add_account"
+        @click="moveAccount">
         계좌등록
       </button>
     </div>
@@ -155,12 +161,26 @@ $width:580px;
     padding: 0 30px;
     outline: none;
     color: #fff;
-    background-color:#FFBA46;
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    &:hover{
-      background-color: rgba(0,0,0,.5);
+    &.confirm {
+      background-color: #845FA7;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    &.cancel {
+      background-color: #F6921D;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    &.add_account {
+      background-color: #8EC976;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 }

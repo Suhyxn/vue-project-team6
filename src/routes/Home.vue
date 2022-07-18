@@ -16,7 +16,7 @@
           search
         </span>
         <router-link
-          to="/store/everyitem"
+          to="/store"
           class="move-btn">
           제품 검색
         </router-link>

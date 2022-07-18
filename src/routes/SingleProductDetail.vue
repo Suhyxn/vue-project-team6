@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="item-box">
+  <div class="item-box">
+    <div class="container">
       <div
         class="single-product--img"
         :style="{backgroundImage:`url(${clientStore.singlePageData.thumbnail})`}">
@@ -13,7 +13,7 @@
         </div>
         
         <div class="single-product-data__price">
-          가격: {{ clientStore.singlePageData.price }}
+          가격: {{ clientStore.singlePageData.price.toLocaleString('ko-KR') }}원
         </div>
       
         <div class="single-product-data__description">
@@ -22,7 +22,7 @@
         
         <div class="actions">
           <button
-            class="btn"
+            class="btn purchase"
             @click="handler(
               {id:clientStore.singlePageData.id,
                price:clientStore.singlePageData.price
@@ -31,7 +31,7 @@
           </button>
           
           <button
-            class="btn"    
+            class="btn detail"    
             @click="$router.push('/store/everyitem')">
             상점으로 이동
           </button>
@@ -72,49 +72,51 @@ export default {
 </script> 
 
 <style lang="scss" scoped>
-@mixin inner{
-  margin: 0 auto;
-  width: 1320px;
-}
-  .container{
+  .item-box{
     display: flex;
+    height: 100%;
     justify-content: center;
     align-items: center;
-    height: 100%;
     background-position-y: 80%;
     background-repeat : no-repeat;
     background-size : cover;
     background-image: url('../backgroundImg/Store.png');
-    
-    .item-box{
+    .container{
       width: 80vw;
       height: 80vh;
-      background: #fff;
+      background: #FEE3EC;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 20px;
       .single-product--img{
-      width:200px;
-      height:200px;
-      margin-right: 50px;
-      margin-bottom: 125px;
-      background: #808080;
-      background-repeat: no-repeat;
-      background-size: cover;
-      border-radius: 5px;
-      border: 12px ridge royalblue;
-      box-sizing: border-box;
+        width:200px;
+        height:200px;
+        margin-right: 50px;
+        margin-bottom: 125px;
+        background: #808080;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 5px;
+        box-sizing: border-box;
       }
-    
     .single-product--data{
       width:50%;
       height: 80%;
-      
-     
       div{
         font-size: 25px;
-        margin: 70px 30px;
-       
+        margin: 50px 30px;
+        font-weight: 700;
+      }
+      .single-product--data__title {
+        color: #2d9006;
+      }
+      .single-product-data__price {
+        color: #08abb4;
+      }
+      .single-product-data__description {
+        color: #845FA7;
+        line-height: 30px;
       }
       .actions{
         .btn{
@@ -123,11 +125,21 @@ export default {
           border: none;
           padding: 10px 40px;
           box-sizing: border-box;
-          background: orange;
           border-radius: 8px;
           color:#fff;
-          &:hover{
-            background:rgba(0,0,0,.5);
+          font-weight: 700;
+          cursor: pointer;
+          &.purchase {
+          background-color: #F999B7;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.detail {
+            background-color: #845FA7;
+            &:hover {
+              opacity: 0.7;
+            }
           }
         }
       }

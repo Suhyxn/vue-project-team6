@@ -2,49 +2,51 @@
   <div
     v-if="!singlePurchasedItemPageData"
     class="item-box">
-    <div
-      class="item-image"
-      :style="{backgroundImage:`url(${clientStore.singlePurchasedItemPageData.product.thumbnail})`}">
-    </div>
-    <div class="item-data">
-      <div class="bank-name">
-        은행명: {{ clientStore.singlePurchasedItemPageData.account.bankName }}
+    <div class="container">
+      <div
+        class="item-image"
+        :style="{backgroundImage:`url(${clientStore.singlePurchasedItemPageData.product.thumbnail})`}">
       </div>
-      <div class="bank-number">
-        계좌번호: {{ clientStore.singlePurchasedItemPageData.account.accountNumber }}
-      </div>
-      <div class="item-title">
-        제품명: {{ clientStore.singlePurchasedItemPageData.product.title }}
-      </div>
-      <div class="item-price">
-        제품가격: {{ clientStore.singlePurchasedItemPageData.product.price }}
-      </div>
-      <div class="item-description">
-        제품설명: {{ clientStore.singlePurchasedItemPageData.product.description }}
-      </div>
-      <div class="actions">
-        <button 
-          v-if="!clientStore.singlePurchasedItemPageData.done"
-          class="btn"
-          @click="purchaseDecision($route.params.id)">
-          구매확정
-        </button>        
-        <button 
-          v-if="!clientStore.singlePurchasedItemPageData.done"
-          class="btn"
-          @click="purchaseCancel($route.params.id)">
-          구매취소
-        </button>
-        <button 
-          class="btn"
-          @click="$router.push('/mypage/purchaselist')">
-          전체구매 내역
-        </button>           
-        <button 
-          class="btn"
-          @click="$router.push('/store/everyitem')">
-          상점으로 이동
-        </button>        
+      <div class="item-data">
+        <div class="bank-name">
+          은행명: {{ clientStore.singlePurchasedItemPageData.account.bankName }}
+        </div>
+        <div class="bank-number">
+          계좌번호: {{ clientStore.singlePurchasedItemPageData.account.accountNumber }}
+        </div>
+        <div class="item-title">
+          제품명: {{ clientStore.singlePurchasedItemPageData.product.title }}
+        </div>
+        <div class="item-price">
+          제품가격: {{ clientStore.singlePurchasedItemPageData.product.price.toLocaleString('ko-KR') }}원
+        </div>
+        <div class="item-description">
+          제품설명: {{ clientStore.singlePurchasedItemPageData.product.description }}
+        </div>
+        <div class="actions">
+          <button 
+            v-if="!clientStore.singlePurchasedItemPageData.done"
+            class="btn confirm"
+            @click="purchaseDecision($route.params.id)">
+            구매확정
+          </button>        
+          <button 
+            v-if="!clientStore.singlePurchasedItemPageData.done"
+            class="btn cancel"
+            @click="purchaseCancel($route.params.id)">
+            구매취소
+          </button>
+          <button 
+            class="btn buy_list"
+            @click="$router.push('/mypage/purchaselist')">
+            전체구매 내역
+          </button>           
+          <button 
+            class="btn move_store"
+            @click="$router.push('/store/everyitem')">
+            상점으로 이동
+          </button>        
+        </div>
       </div>
     </div>
   </div>
@@ -83,52 +85,102 @@ async created(){
 
 <style lang="scss" scoped>
 .item-box{
-  // padding-top:10px;
-  margin: auto;
-  // margin-top: 4%;
-  background-image: url('../backgroundImg/Store.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  background-color: #faebd7;
-  border-radius: 10px;
-  .item-image{
-    width: 110px;
-    height: 100px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: #808080;
-    background-position-y:20%;  
-    border-radius: 5px;
-    margin: auto;
-  }
-  .item-data{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items: center;
-    div{
-      margin: 20px 10px;
-      font-size: 25px;
-      font-weight: 700;
-      color: #a374db
-    }
-    .actions{
+    position: relative;
+    height: 100%;
+    background-position-y: 92%;
+    background-repeat : no-repeat;
+    background-size : cover;
+    background-image: url('../backgroundImg/MyPage.png');
+    .container {
+      position: absolute;
       display: flex;
       justify-content: center;
       align-items: center;
-      .btn{
-        margin: 0 8px;
-        outline: none;
-        border: none;
-        border-radius: 8px;
-        background-color: orange;
-        color: #fff;
-        cursor: pointer;
-        padding: 5px 20px;
-        &:hover{
-          background-color: rgba(0,0,0,.7);
+      padding-top: 20px;
+      padding-bottom: 20px;
+      background-color: #FEE3EC;
+      top: 0;
+      bottom: 0;
+      right: 10%;
+      margin: auto;
+      width: 80%;
+      height: 80%;
+      border-radius: 20px;
+      .item-image{
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #808080;
+        background-position-y:20%;  
+        border-radius: 5px;
+        margin: auto;
+      }
+      .item-data{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        .bank-name, .bank-number, .item-title, .item-price, .item-description {
+          margin: 20px 10px;
+          font-size: 20px;
+          font-weight: 700;
+        }
+        .bank-name {
+          color: #F6921D;
+        }
+        .bank-number {
+          color: #8EC976;
+        }
+        .item-title{
+          color: #2d9006;
+        }
+        .item-price {
+          color: #08abb4;
+        }
+        .item-description {
+          color: #845FA7;
+          line-height: 25px;
+        }
+      .actions{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .btn{
+          margin: 0 8px;
+          outline: none;
+          border: none;
+          border-radius: 8px;
+          color: #fff;
+          cursor: pointer;
+          padding: 5px 20px;
+          font-weight: 700;
+          &.confirm {
+            background-color: #845FA7;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.cancel {
+            background-color: #f83d3d;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.buy_list {
+            background-color: #F6921D;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.move_store {
+            background-color: #08abb4;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
         }
       }
     }

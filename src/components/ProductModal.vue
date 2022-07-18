@@ -6,12 +6,12 @@
       </div>
       <div class="actions">
         <button
-          class="btn"
+          class="btn buy"
           @click="handler">
           구매
         </button>
         <button 
-          class="btn"
+          class="btn cancel"
           @click="modalHandler">
           취소
         </button>
@@ -107,12 +107,21 @@ $width:450px;
           padding: 0 20px;
           outline: none;
           border: none;
-          background: #FFBA46;
           box-sizing: border-box;
           border-radius: 5px;
           color: #fff;
-          &:hover{
-            background:rgba(0,0,0,.5)
+          cursor: pointer;
+          &.buy {
+            background-color: #845FA7;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          &.cancel {
+            background-color: #F6921D;
+            &:hover {
+              opacity: 0.7;
+            }
           }
       }
     }
