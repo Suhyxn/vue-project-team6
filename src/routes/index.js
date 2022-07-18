@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Home.vue'
+import Sign from './Sign.vue'
 import SignIn from './SignIn.vue'
 import SignUp from './SignUp.vue'
 import MyPage from './MyPage.vue'
@@ -26,6 +27,7 @@ import Pet from './Pet.vue'
 import SearchedProduct from './SearchedProduct.vue'
 import AdminPageMain from './AdminPageMain.vue'
 import StoreMainPage from './StoreMainPage.vue'
+import NotFound from './NotFound.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -34,6 +36,11 @@ export default createRouter({
     {
       path: '/',
       component: Home,
+    }, 
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/404',
+      component: NotFound
     },
     {
       path: '/mypage',
@@ -45,7 +52,6 @@ export default createRouter({
         },
         {
           path: 'userinfo',
-
           component: UserInfo,
         },
         {
@@ -69,6 +75,20 @@ export default createRouter({
         //   component: SinglePurchasedItemDetail,
         // },
       ],
+    },
+    {
+      path: '/sign',
+      component: Sign,
+      children: [
+        {
+          path: 'signin',
+          component: SignIn,
+        },
+        {
+          path: 'signup',
+          component: SignUp,
+        },
+      ]
     },
     {
       path: '/mypage/purchaselist/singlepurchaseditem/:id',
@@ -146,16 +166,8 @@ export default createRouter({
       component: SingleProductDetail,
     },
     {
-      path: '/signin',
-      component: SignIn,
-    },
-    {
-      path: '/signup',
-      component: SignUp,
-    },
-    {
       path: '/editUserInfo',
       component: EditUserInfo,
-    },
+    }
   ],
 })

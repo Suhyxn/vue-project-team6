@@ -5,15 +5,15 @@
         <p>수정이 완료되었습니다.</p>
       </div>
       <div class="actions">
-        <button
-          class="btn"
-          @click="modalOff">
-          <RouterLink
-            to="/mypage/userinfo"
-            class="a">
+        <RouterLink
+          to="/mypage/userinfo"
+          class="a">
+          <button
+            class="btn"
+            @click="modalOff">
             확인
-          </RouterLink>
-        </button>
+          </button>
+        </RouterLink>
       </div>
     </div>
   </div>

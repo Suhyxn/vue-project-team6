@@ -1,5 +1,13 @@
 import { defineStore } from 'pinia'
+import axios from 'axios'
 import router from '../routes'
+
+const authURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/'
+const headers = {
+  'content-type': 'application/json',
+  apikey: 'FcKdtJs202204',
+  username: 'KDT2_team6',
+}
 
 export const useUserStore = defineStore('user', {
   state() {
@@ -20,48 +28,38 @@ export const useUserStore = defineStore('user', {
   getters: {},
   actions: {
     async signIn(signObj) {
-      const res = await fetch(
-        'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login',
-        {
+      try {
+        const res = await axios({
+          url: authURL + 'login',
           method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-            apikey: 'FcKdtJs202204',
-            username: 'KDT2_team6',
-          },
-          body: JSON.stringify({
+          headers,
+          data: {
             email: signObj.email.trim(),
             password: signObj.password.trim(),
-          }),
-        }
-      )
-      const { user, accessToken } = await res.json()
-      if (!user) {
-        this.signinError = true
-        this.isSignin = false
-      } else {
+          }
+        })
+        const { user, accessToken } = await res.data
         window.sessionStorage.setItem('userName', user.displayName)
         window.sessionStorage.setItem('token', accessToken)
         this.userInfo = user
         this.isSignin = true
         this.signinError = false
         router.push('/loginHome')
+      } catch {
+        this.signinError = true
+        this.isSignin = false
       }
     },
     async signOut() {
       const accessToken = window.sessionStorage.getItem('token')
-      await fetch(
-        'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/logout',
-        {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-            apikey: 'FcKdtJs202204',
-            username: 'KDT2_team6',
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      await axios({
+        url: authURL + 'logout',
+        method: 'POST',
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       window.sessionStorage.removeItem('token', accessToken)
       window.sessionStorage.removeItem('userName')
       this.isSignin = false
@@ -69,25 +67,17 @@ export const useUserStore = defineStore('user', {
     },
     async signUp(signObj) {
       try {
-        const res = await fetch(
-          'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/signup',
-          {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-              apikey: 'FcKdtJs202204',
-              username: 'KDT2_team6',
-            },
-            body: JSON.stringify({
-              email: signObj.email.trim(),
-              password: signObj.password.trim(),
-              displayName: signObj.displayName.trim(),
-              profileImgBase64: signObj.profileImgBase64,
-            }),
+        await axios({
+          url: authURL + 'signup',
+          method: 'POST',
+          headers,
+          data: {
+            email: signObj.email.trim(),
+            password: signObj.password.trim(),
+            displayName: signObj.displayName.trim(),
+            profileImgBase64: signObj.profileImgBase64,
           }
-        )
-        const user = await res.json()
-        if (!res.ok) throw new Error(user)
+        })
         this.isSignup = true
         this.signUpMsg =
           '가입 성공! 아이디와 비밀번호를 확인하고 로그인 해주세요.'
@@ -117,37 +107,29 @@ export const useUserStore = defineStore('user', {
     async editUserInfo(userObj) {
       const accessToken = window.sessionStorage.getItem('token')
       try {
-        const res = await fetch(
-          'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/user',
-          {
-            method: 'PUT',
-            headers: {
-              'content-type': 'application/json',
-              apikey: 'FcKdtJs202204',
-              username: 'KDT2_team6',
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify({
-              oldPassword: userObj.oldPassword.trim(),
-              newPassword: userObj.newPassword.trim(),
-              displayName: userObj.displayName.trim(),
-              profileImgBase64: userObj.profileImgBase64,
-            }),
+        const res = await axios({
+          url: authURL + 'user',
+          method: 'PUT',
+          headers: {
+            ...headers,
+            Authorization: `Bearer ${accessToken}`,
+          },
+          data: {
+            oldPassword: userObj.oldPassword.trim(),
+            newPassword: userObj.newPassword.trim(),
+            displayName: userObj.displayName.trim(),
+            profileImgBase64: userObj.profileImgBase64,
           }
-        )
-        const user = await res.json()
-        if (!res.ok) throw new Error(user)
+        })
+        const user = await res.data
         this.userInfo.displayName = user.displayName
+        this.userModal = true
+      } catch {
         if (userObj.displayName.trim().length > 20) {
           this.editErrorMsg = '수정 실패! 닉네임은 20자 이하로 입력해주세요.'
-        } else if (userObj.newPassword.trim().length < 8) {
-          this.editErrorMsg = '수정 실패! 비밀번호는 8자 이상으로 입력해주세요.'
         } else {
-          this.userModal = true
+          this.editErrorMsg = '수정 실패! 비밀번호가 잘못되었습니다.'
         }
-      } catch {
-        this.editErrorMsg = '수정 실패! 비밀번호가 잘못되었습니다.'
-        console.log('수정 실패')
       }
     },
     editErrorReset() {

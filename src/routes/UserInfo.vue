@@ -67,8 +67,8 @@ export default {
   margin-bottom: 15px;
 }
 p {
-  width: 400px;
-  padding: 20px 0;
+  width: 80%;
+  padding: 20px 0 20px 40px;
   font-size: 24px;
   font-weight: 700;
   .icon {
@@ -85,7 +85,7 @@ button {
   background-color: #845FA7;
   border-radius: 50px;
   width: 400px;
-  height: 60px;
+  height: 50px;
   cursor: pointer;
   color: #fff;
   font-size: 24px;
