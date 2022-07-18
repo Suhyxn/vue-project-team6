@@ -28,7 +28,7 @@
           </span>
           <RouterLink
             class="join"
-            to="/signup"
+            to="/sign/signup"
             @click="errorReset()">
             회원가입
           </RouterLink>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Home.vue'
+import Sign from './Sign.vue'
 import SignIn from './SignIn.vue'
 import SignUp from './SignUp.vue'
 import MyPage from './MyPage.vue'
@@ -54,6 +55,20 @@ export default createRouter({
       ],
     },
     {
+      path: '/sign',
+      component: Sign,
+      children: [
+        {
+          path: 'signin',
+          component: SignIn,
+        },
+        {
+          path: 'signup',
+          component: SignUp,
+        },
+      ]
+    },
+    {
       path: '/mypage/purchaselist/singlepurchaseditem/:id',
       component: SinglePurchasedItemDetail,
     },
@@ -97,14 +112,6 @@ export default createRouter({
     {
       path: '/store/singleproductdetail/:id',
       component: SingleProductDetail,
-    },
-    {
-      path: '/signin',
-      component: SignIn,
-    },
-    {
-      path: '/signup',
-      component: SignUp,
     },
     {
       path: '/editUserInfo',

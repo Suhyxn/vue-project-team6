@@ -31,7 +31,7 @@
         </div>
         <div class="checkID">
           <RouterLink
-            to="/signin"
+            to="/sign/signin"
             class="login">
             로그인
           </RouterLink>

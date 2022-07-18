@@ -5,15 +5,15 @@
         <p>가입 성공! 로그인 하시겠습니까?</p>
       </div>
       <div class="actions">
-        <button
-          class="btn"
-          @click="modalOff">
-          <RouterLink
-            to="/signin"
-            class="a">
+        <RouterLink
+          to="/sign/signin"
+          class="a">
+          <button
+            class="btn"
+            @click="modalOff">
             확인
-          </RouterLink>
-        </button>
+          </button>
+        </RouterLink>
         <button 
           class="btn"
           @click="modalOff">
