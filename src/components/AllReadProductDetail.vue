@@ -8,7 +8,6 @@
       <div
         class="product-image"
         :style="{ backgroundImage: `url(${product.thumbnail})` }">
-        .
       </div>
       <div class="product-title">
         {{ product.title }}
@@ -40,7 +39,7 @@ export default {
 <style scoped lang="scss">
 .product-list {
   width: 100%;
-  height: 350px;
+  height: auto;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -51,7 +50,9 @@ export default {
     flex-direction: column;
     align-items: center;
     margin: 15px;
-    width: 16%;
+    width: 18%;
+    background-color: #faebd7;
+    border-radius: 5px;
     .product-image {
       width: 80px;
       height: 80px;
@@ -59,9 +60,16 @@ export default {
       background-size: contain
     }
     .product-title {
-      padding-top: 10px;
+      width: 100%;
       height: 20px;
+      padding-top: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background-color: #edc899;
       font-weight: bold;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
   }
 }

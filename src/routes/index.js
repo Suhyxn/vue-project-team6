@@ -19,6 +19,7 @@ import SingleProductDetail from './SingleProductDetail.vue'
 import SinglePurchasedItemDetail from './SinglePurchasedItemDetail.vue'
 import UserInfo from './UserInfo.vue'
 import MyPageMain from './MyPageMain.vue'
+import AdminPageMain from './AdminPageMain.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -70,6 +71,10 @@ export default createRouter({
       path: '/admin',
       component: Admin,
       children: [
+        {
+          path: '',
+          component: AdminPageMain,
+        },
         {
           path: 'allreadproduct',
           component: AllReadProduct,

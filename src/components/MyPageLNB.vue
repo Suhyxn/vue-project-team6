@@ -66,7 +66,7 @@ export default {
     color: #fff;
     &.myinfo {
       background-color: #F6921D;
-      border: solid 2px #F6921D;
+      border: solid 3px #F6921D;
       &:hover {
         border: solid 3px #FFE341;
       }
@@ -75,7 +75,7 @@ export default {
       }
     }
     &.account {
-      border: solid 2px #8EC976;
+      border: solid 3px #8EC976;
       background-color: #8EC976;
       &:hover {
         border: solid 3px #2d9006;
@@ -85,7 +85,7 @@ export default {
         }
     }
     &.purchase {
-      border: solid 2px #83c1c4;
+      border: solid 3px #83c1c4;
       background-color: #83c1c4;
     }
     &:hover {
