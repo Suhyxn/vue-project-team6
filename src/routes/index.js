@@ -39,7 +39,6 @@ export default createRouter({
     }, 
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/404',
       component: NotFound
     },
     {
