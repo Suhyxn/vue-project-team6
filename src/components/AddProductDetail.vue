@@ -19,7 +19,7 @@
       <input
         v-model="price"
         placeholder="price"
-        type="text" />
+        type="number" />
     </div>
     <div class="main_tag">
       <p>제품 태그</p>
@@ -60,7 +60,7 @@ export default {
     return {
       product: {},
       title: '',
-      price: '',
+      price: 0,
       description: '',
       tags: [],
       thumbnailBase64: ''
