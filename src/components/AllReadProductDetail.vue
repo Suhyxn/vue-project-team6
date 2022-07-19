@@ -1,7 +1,7 @@
 <template>
   <ul class="product-list">
     <li
-      v-for="product in products"
+      v-for="product in adminStore.products"
       :key="product.id"
       class="product-item"
       :productId="product.id">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
+import { mapStores } from 'pinia'
 import { useAdminStore } from '../store/admin'
 
 export default {
@@ -27,13 +27,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(useAdminStore, ['products'])
+    ...mapStores(useAdminStore)
   },
   created() {
-    this.allReadProduct()
-  },
-  methods: {
-    ...mapActions(useAdminStore, ['allReadProduct']),
+    this.adminStore.allReadProduct()
   }
 }
 
