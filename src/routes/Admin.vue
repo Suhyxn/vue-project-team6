@@ -57,52 +57,6 @@ export default {
   },
   computed: {
     ...mapStores(useAdminStore)
-  },
-  methods: {
-    async allReadProduct () {
-      const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202204',
-          'username': 'KDT2_team6' ,
-          'masterKey': 'true'
-        }
-      })
-      const master = await res.json()
-      console.log(master)
-    },
-    async AddProduct() {
-      const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products ', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'apikey': 'FcKdtJs202204',
-          'username': 'KDT2_team6' ,
-          'masterKey': 'true'
-        },
-        body: JSON.stringify({
-          title: this.title,
-          price: this.price,
-          description: this.description,
-          tags: this.tags,
-          thumbnailBase64: this.thumbnail
-        })
-      })
-      const product = await res.json()
-      console.log(product)
-    },
-    SelectImage(event) {
-      console.log(event)
-      const { files } = event.target
-      for ( const file of files ) {
-        const reader =  new FileReader()
-        reader.readAsDataURL(file)
-        reader.addEventListener('load', e => {
-          this.thumbnail = e.target.result
-        })
-      }
-    }
   }
 }
 </script>
