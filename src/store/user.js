@@ -13,15 +13,15 @@ export const useUserStore = defineStore('user', {
   state() {
     return {
       userInfo: {
-        displayName: 'Guest',
+        displayName: '',
       },
       signinError: false,
       isSignin: false,
       isSignup: false,
       signUpError: '',
       signUpMsg: '',
-      signModal: '',
-      userModal: '',
+      signModal: false,
+      userModal: false,
       editErrorMsg: ''
     }
   },
