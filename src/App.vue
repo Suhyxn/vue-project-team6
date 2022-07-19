@@ -16,10 +16,10 @@
         class="modal" />
     </transition>
     <transition name="modal-animation">
-      <SignModal v-if="signModal" />
+      <SignModal v-if="userStore.signModal" />
     </transition>
     <transition name="modal-animation">
-      <UserInfoModal v-if="userModal" />
+      <UserInfoModal v-if="userStore.userModal" />
     </transition>
     <transition name="modal-animation">
       <BankModal
@@ -37,11 +37,9 @@ import UserInfoModal from '~/components/UserInfoModal.vue'
 import ProductModal from '~/components/ProductModal.vue'
 import BankModal from './components/BankModal.vue'
 import { mapStores } from 'pinia'
-import { mapState, mapActions } from 'pinia'
 import { useClientStore } from '~/store/client'
 import { useUserStore } from '~/store/user'
 import { useAccountStore } from './store/account'
-
 export default {
   components: {
     TheHeader,
@@ -50,22 +48,16 @@ export default {
     UserInfoModal,
     ProductModal,
     BankModal
-  },
-  computed: {
-    ...mapState(useUserStore, ['signModal', 'userModal']),
-    ...mapState(useAccountStore, ['isShow']),
-    ...mapState(useClientStore, ['isShow']),
-    ...mapStores([useClientStore, useAccountStore]),
-
+  },  
+  computed:{
+    ...mapStores(useClientStore, useUserStore, useAccountStore),
   },
   created() {
-    this.changeUserName()
+    this.userStore.changeUserName()
   },
-  methods: {
-    ...mapActions(useUserStore, ['changeUserName'])
-  }
 }
 </script>
+
 
 <style lang="scss" scoped>
 
