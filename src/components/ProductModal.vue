@@ -27,7 +27,7 @@ import {useAccountStore} from '~/store/account'
 import {useAdminStore} from '~/store/admin'
 export default {
   computed:{
-    ...mapStores([useClientStore,useAccountStore,useAdminStore])  
+    ...mapStores(useClientStore, useAccountStore, useAdminStore)  
   },
   created(){
       this.accountStore.readAccountList()

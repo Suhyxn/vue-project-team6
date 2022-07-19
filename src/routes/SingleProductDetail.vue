@@ -45,10 +45,9 @@
 import { useClientStore } from '~/store/client'
 import { useAccountStore } from '../store/account'
 import { mapStores } from 'pinia'
-export default {
-  
+export default { 
   computed:{
-    ...mapStores([useClientStore,useAccountStore])
+    ...mapStores(useClientStore, useAccountStore)
   },
   created(){
     this.clientStore.readSingleProduct(this.$route.params.id)
@@ -67,7 +66,6 @@ export default {
         this.clientStore.singleProductData = payload      
     }
   }
-  
 }
 </script> 
 

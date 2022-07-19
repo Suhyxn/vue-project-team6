@@ -57,17 +57,15 @@ import {useClientStore} from '~/store/client'
 import {mapStores} from 'pinia'
 
 export default {
-computed:{
-  ...mapStores([useClientStore]),
+  computed:{
+    ...mapStores(useClientStore),
   },
-
-async created(){
-        await this.clientStore.singlePurchasedList({detailId:this.$route.params.id})
-        // await this.clientStore.singlePurchasedItemPageData
-        await console.log(this.$route.params.id)
-        await console.log(this.clientStore.singlePurchasedItemPageData)
+  async created(){
+          await this.clientStore.singlePurchasedList({detailId:this.$route.params.id})
+          // await this.clientStore.singlePurchasedItemPageData
+          await console.log(this.$route.params.id)
+          await console.log(this.clientStore.singlePurchasedItemPageData)
   },
-
   methods:{
   async purchaseDecision(detailId){
       await this.clientStore.purchaseDecision({detailId})
