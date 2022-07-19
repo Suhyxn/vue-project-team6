@@ -12,7 +12,7 @@
     
     <transition name="modal-animation">
       <ProductModal
-        v-if="isShow" 
+        v-if="clientStore.isShow" 
         class="modal" />
     </transition>
     <transition name="modal-animation">
@@ -23,7 +23,7 @@
     </transition>
     <transition name="modal-animation">
       <BankModal
-        v-if="isShow"
+        v-if="accountStore.isShow"
         class="modal" />
     </transition>
   </div>
@@ -36,6 +36,7 @@ import SignModal from '~/components/SignModal.vue'
 import UserInfoModal from '~/components/UserInfoModal.vue'
 import ProductModal from '~/components/ProductModal.vue'
 import BankModal from './components/BankModal.vue'
+import { mapStores } from 'pinia'
 import { mapState, mapActions } from 'pinia'
 import { useClientStore } from '~/store/client'
 import { useUserStore } from '~/store/user'
@@ -53,7 +54,9 @@ export default {
   computed: {
     ...mapState(useUserStore, ['signModal', 'userModal']),
     ...mapState(useAccountStore, ['isShow']),
-    ...mapState(useClientStore, ['isShow'])
+    ...mapState(useClientStore, ['isShow']),
+    ...mapStores([useClientStore, useAccountStore]),
+
   },
   created() {
     this.changeUserName()
