@@ -20,19 +20,16 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
+import { mapState } from 'pinia'
 import { useUserStore } from '~/store/user'
 
 export default {
   computed:{
-    ...mapStores([useUserStore])  
-  },
-  created(){
-
+    ...mapState(useUserStore, ['userModal'])
   },
   methods:{
      modalOff() {
-      this.userStore.userModal = false
+      this.userModal = false
      }
   },
 }
