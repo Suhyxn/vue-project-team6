@@ -54,7 +54,7 @@ export default {
     handler(payload){
         if(!sessionStorage.getItem('token')){
           alert('제품구매는 로그인을 해야 할 수 있습니다!')
-          this.$router.push('/signin')
+          this.$router.push('/sign/signin')
           return 
         }
       this.clientStore.singleProductData = payload
