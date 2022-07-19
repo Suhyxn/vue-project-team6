@@ -43,7 +43,7 @@
         }
         p {
           color: #460f79;
-          font-size: 30px;
+          font-size: 55px;
           font-weight: 700;
         }
     }
