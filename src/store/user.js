@@ -16,12 +16,12 @@ export const useUserStore = defineStore('user', {
         displayName: '',
       },
       signinError: false,
-      isSignin: false,
+      isSignin: null,
       isSignup: false,
       signUpError: '',
       signUpMsg: '',
-      signModal: false,
-      userModal: false,
+      signModal: null,
+      userModal: null,
       editErrorMsg: ''
     }
   },

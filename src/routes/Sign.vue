@@ -2,7 +2,7 @@
   <div class="background-img">
     <div v-if="routerView">
       <div class="welcome">
-        <h2>{{ userInfo?.displayName }}님</h2>
+        <h2>{{ userInfo.displayName }}님</h2>
         MapleStory Market에 오신 것을 환영합니다!
       </div>
       <div class="select_container">
