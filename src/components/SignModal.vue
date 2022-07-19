@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useUserStore } from '~/store/user'
 
 export default {
@@ -33,9 +33,7 @@ export default {
     ...mapState(useUserStore, ['signModal'])
   },
   methods:{
-     modalOff() {
-      this.signModal = false
-     }
+     ...mapActions(useUserStore, ['modalOff']),
   },
 }
 </script>
