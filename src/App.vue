@@ -10,23 +10,22 @@
       <TheFooter />
     </div>
     
-    
-    <!-- <transition name="modal-animation">
+    <transition name="modal-animation">
       <ProductModal
-        v-if="clientStore.isShow" 
+        v-if="isShow" 
         class="modal" />
-    </transition> -->
+    </transition>
     <transition name="modal-animation">
       <SignModal v-if="signModal" />
     </transition>
     <transition name="modal-animation">
       <UserInfoModal v-if="userModal" />
     </transition>
-    <!-- <transition name="modal-animation">
+    <transition name="modal-animation">
       <BankModal
-        v-if="accountStore.isShow"
+        v-if="isShow"
         class="modal" />
-    </transition> -->
+    </transition>
   </div>
 </template>
 
@@ -35,13 +34,12 @@ import TheHeader from '~/components/TheHeader.vue'
 import TheFooter from '~/components/TheFooter.vue'
 import SignModal from '~/components/SignModal.vue'
 import UserInfoModal from '~/components/UserInfoModal.vue'
-// import ProductModal from '~/components/ProductModal.vue'
-// import BankModal from './components/BankModal.vue'
+import ProductModal from '~/components/ProductModal.vue'
+import BankModal from './components/BankModal.vue'
 import { mapState, mapActions } from 'pinia'
-// import { mapStores } from 'pinia'
-// import { useClientStore } from '~/store/client'
+import { useClientStore } from '~/store/client'
 import { useUserStore } from '~/store/user'
-// import { useAccountStore } from './store/account'
+import { useAccountStore } from './store/account'
 
 export default {
   components: {
@@ -49,15 +47,14 @@ export default {
     TheFooter,
     SignModal,
     UserInfoModal,
-    // ProductModal,
-    // BankModal
+    ProductModal,
+    BankModal
   },
   computed: {
-    ...mapState(useUserStore, ['signModal', 'userModal'])
+    ...mapState(useUserStore, ['signModal', 'userModal']),
+    ...mapState(useAccountStore, ['isShow']),
+    ...mapState(useClientStore, ['isShow'])
   },
-  // computed:{
-  //   ...mapStores([useClientStore, useUserStore, useAccountStore]),
-  // },
   created() {
     this.changeUserName()
   },
