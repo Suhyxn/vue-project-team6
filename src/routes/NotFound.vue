@@ -3,7 +3,7 @@
     <div class="container">
       <div class="admin_page">
         <img
-          src="../backgroundImg/unknown.webp"
+          src="../assets/unknown.webp"
           alt="404 ERROR" />
         <p>
           404 ERROR
@@ -21,7 +21,7 @@
   background-position-y: 92%;
   background-repeat : no-repeat;
   background-size : cover;
-  background-image: url('../backgroundImg/MyPage.png');
+  background-image: url('../assets/MyPage.png');
   .container {
     padding-top: 40px;
     display: flex;
