@@ -27,7 +27,7 @@
         account_circle
       </span>
       <div class="user_name">
-        {{ userInfo.displayName }}
+        {{ userInfo?.displayName }}
       </div>
     </div>
   </div>
