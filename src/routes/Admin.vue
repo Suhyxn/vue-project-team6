@@ -69,7 +69,7 @@ export default {
   background-position-y: 92%;
   background-repeat : no-repeat;
   background-size : cover;
-  background-image: url('../backgroundImg/MyPage.png');
+  background-image: url('../assets/MyPage.png');
   .container {
     padding-top: 40px;
     display: flex;

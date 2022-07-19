@@ -80,7 +80,7 @@ export default {
     background-position-y: 80%;
     background-repeat : no-repeat;
     background-size : cover;
-    background-image: url('../backgroundImg/Store.png');
+    background-image: url('../assets/Store.png');
     .container{
       width: 80vw;
       height: 80vh;
