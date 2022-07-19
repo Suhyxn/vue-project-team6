@@ -143,6 +143,10 @@ export const useUserStore = defineStore('user', {
         this.userInfo.displayName = 'Guest'
         this.isSignin = false
       }
-    }
+    },
+    modalOff() {
+      this.signModal = false
+      this.userModal = false
+     }
   },
 })

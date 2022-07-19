@@ -10,21 +10,20 @@
       <TheFooter />
     </div>
     
-    
     <transition name="modal-animation">
       <ProductModal
-        v-if="clientStore.isShow" 
+        v-if="isShow" 
         class="modal" />
     </transition>
     <transition name="modal-animation">
-      <SignModal v-if="userStore.signModal" />
+      <SignModal v-if="signModal" />
     </transition>
     <transition name="modal-animation">
-      <UserInfoModal v-if="userStore.userModal" />
+      <UserInfoModal v-if="userModal" />
     </transition>
     <transition name="modal-animation">
       <BankModal
-        v-if="accountStore.isShow"
+        v-if="isShow"
         class="modal" />
     </transition>
   </div>
@@ -37,7 +36,7 @@ import SignModal from '~/components/SignModal.vue'
 import UserInfoModal from '~/components/UserInfoModal.vue'
 import ProductModal from '~/components/ProductModal.vue'
 import BankModal from './components/BankModal.vue'
-import { mapStores } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useClientStore } from '~/store/client'
 import { useUserStore } from '~/store/user'
 import { useAccountStore } from './store/account'
@@ -50,14 +49,18 @@ export default {
     UserInfoModal,
     ProductModal,
     BankModal
-  },  
-  computed:{
-    ...mapStores([useClientStore, useUserStore,useAccountStore]),
   },
-
+  computed: {
+    ...mapState(useUserStore, ['signModal', 'userModal']),
+    ...mapState(useAccountStore, ['isShow']),
+    ...mapState(useClientStore, ['isShow'])
+  },
   created() {
-    this.userStore.changeUserName()
+    this.changeUserName()
   },
+  methods: {
+    ...mapActions(useUserStore, ['changeUserName'])
+  }
 }
 </script>
 
