@@ -50,9 +50,6 @@ export default {
   computed:{
     ...mapStores(useClientStore, useAccountStore)
   },
-  created(){
-   console.log( this.clientStore.searchItem )
-  },
   methods: {
     handler(payload){
         if(!sessionStorage.getItem('token')){

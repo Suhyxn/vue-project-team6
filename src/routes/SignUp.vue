@@ -81,7 +81,6 @@ export default {
     selectFile(event) {
       const reader = new FileReader()
       for(const file of event.target.files) {
-        console.log(file)
         reader.readAsDataURL(file)
         reader.addEventListener('load', e => {
           this.profileImgBase64 = e.target.result

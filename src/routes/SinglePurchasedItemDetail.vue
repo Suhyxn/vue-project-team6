@@ -61,10 +61,8 @@ export default {
     ...mapStores(useClientStore),
   },
   async created(){
-          await this.clientStore.singlePurchasedList({detailId:this.$route.params.id})
-          // await this.clientStore.singlePurchasedItemPageData
-          await console.log(this.$route.params.id)
-          await console.log(this.clientStore.singlePurchasedItemPageData)
+    await this.clientStore.singlePurchasedList({detailId:this.$route.params.id})
+    // await this.clientStore.singlePurchasedItemPageData
   },
   methods:{
   async purchaseDecision(detailId){

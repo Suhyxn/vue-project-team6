@@ -31,7 +31,6 @@ export default {
   },
   created(){
       this.accountStore.readAccountList()
-      console.log(this.accountStore.selectedBankData)
   },
   methods:{
     async handler(){

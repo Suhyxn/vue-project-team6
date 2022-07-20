@@ -71,11 +71,9 @@ export default {
   },
   methods: {
     AddProd(item) {
-      console.log(item)
       this.adminStore.AddProduct(item)
     },
     UpImage(event) {
-      console.log(event)
       this.adminStore.SelectImage(event)
     },
     // async AddProduct() {
@@ -100,7 +98,6 @@ export default {
     //   console.log(product.tags)
     // },
     SelectImage(event) {
-      console.log(event)
       const { files } = event.target
       for ( const file of files ) {
         const reader =  new FileReader()

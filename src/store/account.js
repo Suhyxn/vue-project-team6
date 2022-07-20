@@ -47,7 +47,6 @@ export const useAccountStore = defineStore('account', {
       this.list.accounts.length === 0
         ? (this.noneTitle = true)
         : (this.noneTitle = false)
-      console.log(this.list)
     },
     async addAccountList(payload) {
       const { bankCode, accountNumber, phoneNumber, signature } = payload

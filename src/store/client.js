@@ -53,7 +53,6 @@ export const useClientStore = defineStore('client', {
       })
 
       this.products = await products
-      console.log(products)
       const equiment = this.products.filter((i) => {
         return i.tags[0] === '장비'
       })
@@ -86,7 +85,6 @@ export const useClientStore = defineStore('client', {
             searchText: text,
           },
         })
-        console.log(data)
         this.searchItem = data
         //추가로직 = this.$router.push를 이용해 res의 id로 상세 페이지로 이동시키기
         //this.searchItem은 빈배열이다
@@ -104,7 +102,7 @@ export const useClientStore = defineStore('client', {
       }
 
       try {
-        const res = await axios({
+        await axios({
           url: `${END_POINT}/buy`,
           method: 'POST',
           headers: {
@@ -116,7 +114,6 @@ export const useClientStore = defineStore('client', {
             accountId: id,
           },
         })
-        console.log(res)
         this.allPurchasedList()
       } catch (err) {
         alert('로그인을 하지않았거나 등록된 계좌가 없습니다')
@@ -178,7 +175,6 @@ export const useClientStore = defineStore('client', {
         this.purchasedList = data.filter((i) => {
           return i.isCanceled === false
         })
-        console.log(this.purchasedList)
       } catch (err) {
         this.purchasedList = null
         console.log(err)

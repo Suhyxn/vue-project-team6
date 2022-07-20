@@ -57,14 +57,12 @@ export default {
    async purchaseDecision(detailId){
     await this.clientStore.purchaseDecision({detailId})
     await this.clientStore.allPurchasedList()
-    console.log(this.clientStore.purchasedList)
     alert('구매확정이 완료되었습니다 구매확정 이후에는 구매 취소를 할 수 없습니다!')
      this.$router.push('/store/everyitem')
     },
     async purchaseCancel(detailId){
       await this.clientStore.purchaseCancel({detailId})
       await this.clientStore.allPurchasedList()
-      console.log(this.clientStore.purchasedList)
       alert('구매취소가 완료되었습니다! 제품금액만큼 계좌에 환불처리됩니다!')
       this.$router.push('/mypage/accountlist')
     },

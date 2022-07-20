@@ -24,7 +24,6 @@ export const useAdminStore = defineStore('admin', {
   getters: {},
   actions: {
     async AddProduct(addP) {
-      console.log(addP)
       const { title, price, description, tags, thumbnailBase64 } = addP
       await axios({
         url: adminURL,
@@ -41,7 +40,6 @@ export const useAdminStore = defineStore('admin', {
     },
     // Base64 Image
     SelectImage(event) {
-      console.log(event)
       const { files } = event.target
       for ( const file of files ) {
         const reader =  new FileReader()
@@ -57,7 +55,6 @@ export const useAdminStore = defineStore('admin', {
         method: 'GET',
         headers
       })
-      console.log(products)
       this.products = products
     },
     async oneReadProduct (id) {
@@ -68,9 +65,7 @@ export const useAdminStore = defineStore('admin', {
         headers,
         id
       })
-      console.log(product)
       this.product = product
-      console.log(typeof product.tags)
     },
     async allReadHistory () {
       const { data: histories } = await axios ({
@@ -78,7 +73,6 @@ export const useAdminStore = defineStore('admin', {
         method: 'GET',
         headers
       })
-      console.log(histories)
       this.histories = histories
     },
     async editProduct (editP) {
@@ -95,19 +89,17 @@ export const useAdminStore = defineStore('admin', {
           tags: editP.tags
         })
       })
-      console.log('editing')
       this.editproduct = editproduct
       this.allReadProduct()
     },
     async deleteProduct (id) {
       const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
-      const { data: product } = await axios ({
+      await axios ({
         url,
         method: 'DELETE',
         headers,
         id
       })
-      console.log (product)
     }
   }
 })
