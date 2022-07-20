@@ -32,7 +32,7 @@ export const useAdminStore = defineStore('admin', {
         headers,
         data: {
           title,
-          price,
+          price: Number(price),
           description,
           tags,
           thumbnailBase64
@@ -84,15 +84,17 @@ export const useAdminStore = defineStore('admin', {
     async editProduct (editP) {
       const id = editP.id
       const url = `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`
+      const { title, price, description, tags, thumbnailBase64 } = editP
       const { data: editproduct } = await axios ({
         url,
         method: 'PUT',
         headers,
         data: ({
-          title: editP.title,
-          price: editP.price,
-          description: editP.description,
-          tags: editP.tags
+          title,
+          price: Number(price),
+          description,
+          tags,
+          thumbnailBase64
         })
       })
       console.log('editing')
