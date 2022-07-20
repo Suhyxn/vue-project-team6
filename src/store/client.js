@@ -1,12 +1,14 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
 
+const { VITE_APIKEY, VITE_USERNAME } = import.meta.env
+
 //export 안쪽에서 const사용이 안되서 위쪽에 API URL과 공통 header정보 명시해놓음
 // headers에 추가적인 내용 필요시 ...(전개연산자) 사용하기
 const headers = {
   'content-type': 'application/json',
-  apikey: 'FcKdtJs202204',
-  username: 'KDT2_team6',
+  apikey: VITE_APIKEY,
+  username: VITE_USERNAME,
   //username은 test용으로 지어짐 향후 완성되면 구현되면 KDT2_team6으로 변경예정
 }
 

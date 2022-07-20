@@ -2,11 +2,13 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import router from '../routes'
 
+const { VITE_APIKEY, VITE_USERNAME } = import.meta.env
+
 const authURL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/'
 const headers = {
   'content-type': 'application/json',
-  apikey: 'FcKdtJs202204',
-  username: 'KDT2_team6',
+  apikey: VITE_APIKEY,
+  username: VITE_USERNAME,
 }
 
 export const useUserStore = defineStore('user', {

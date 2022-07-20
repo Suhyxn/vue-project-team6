@@ -25,15 +25,6 @@
   </div>
 </template>
 
-<script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
-
-export default {
-  ...mapStores(useMainStore)
-}
-</script>
-
 <style lang="scss" scoped>
   .background-img {
     position: relative;
