@@ -94,7 +94,6 @@ import router from './index'
 import { useUserStore } from '~/store/user'
 import { validateTokenUser } from '~/core'
 
-
 router.beforeEach(async to => {
   const userStore = useUserStore()
 
@@ -206,8 +205,6 @@ router.beforeEach(async to => {
 - 해지한 계좌는 다시 연결해도 잔액이 반영되지 않습니다.(기본 금액으로 추가됩니다)
 
 ![image](https://user-images.githubusercontent.com/65530775/179929128-aff64578-fc9b-41e1-9c7b-1fe2599f5a1d.png)
-
-
 
 
 ### 기타 작업 내용들
@@ -342,4 +339,3 @@ router.beforeEach(async to => {
 - 404 ERROR 페이지 작성 및 설정
 
 <img width="1680" alt="스크린샷 2022-07-20 오후 7 32 48" src="https://user-images.githubusercontent.com/89029699/179961423-1b02627f-a857-4476-9bbb-929fad59d623.png">
-

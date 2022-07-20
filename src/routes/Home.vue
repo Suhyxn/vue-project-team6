@@ -7,7 +7,8 @@
       <div class="user_in">
         <RouterLink
           to="/sign"
-          class="a">
+          class="a"
+          @click="errorReset">
           로그인 / 회원가입
         </routerlink>
       </div>
@@ -26,11 +27,13 @@
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useMainStore } from '~/store/main'
+import { mapActions } from 'pinia'
+import { useUserStore } from '~/store/user'
 
 export default {
-  ...mapStores(useMainStore)
+  methods: {
+    ...mapActions(useUserStore, ['errorReset']),
+  }
 }
 </script>
 
