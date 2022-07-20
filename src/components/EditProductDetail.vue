@@ -125,7 +125,6 @@ export default {
       this.adminStore.oneReadProduct(productId)
     },
     updateProduct(item) {
-      console.log(item)
       this.adminStore.editProduct(item)
     },
     SelectImage(event) {

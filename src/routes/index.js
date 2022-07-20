@@ -28,6 +28,7 @@ import SearchedProduct from './SearchedProduct.vue'
 import AdminPageMain from './AdminPageMain.vue'
 import StoreMainPage from './StoreMainPage.vue'
 import NotFound from './NotFound.vue'
+import SignMain from './SignMain.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -68,17 +69,17 @@ export default createRouter({
         {
           path: 'purchaselist',
           component: PurchaseList,
-        },
-        // {
-        //   path: 'purchaselist/singlepurchaseditem/:id',
-        //   component: SinglePurchasedItemDetail,
-        // },
+        }
       ],
     },
     {
       path: '/sign',
       component: Sign,
       children: [
+        {
+          path: '',
+          component: SignMain,
+        },
         {
           path: 'signin',
           component: SignIn,

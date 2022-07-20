@@ -33,10 +33,7 @@ export default {
     }
   }, 
   computed: {
-    ...mapStores([
-      useMainStore,
-      useAccountStore
-    ])
+    ...mapStores(useMainStore, useAccountStore)
   },
   methods: {
   }
