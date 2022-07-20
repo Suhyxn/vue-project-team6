@@ -1,3 +1,14 @@
+# 🤝 팀 프로젝트
+
+- 과제 기한: 
+  - 과제 수행 기간: 06월 09일(목) ~ 07월 22일(금)
+  - 코드 리뷰 기간: 07월 22일(금) ~ 07월 29일(금)
+- 내용: 
+  - API 분석 후 어떤 프로젝트로 진행/완성할 것인지 팀 단위로 결정하세요.
+- 결과 : 
+  - 배포 사이트: https://maplestorymarket.netlify.app
+
+<hr />
 
 ## 인증 (백송이)
 
@@ -132,3 +143,124 @@ router.beforeEach(async to => {
 #### 사용자 정보 수정 성공 모달
 ![수정 성공 모달](https://user-images.githubusercontent.com/102528180/179929874-0cf6ad11-23ad-4825-9ef3-ad2d85923dfb.PNG)
 
+
+
+
+## 계좌 (변승훈)
+
+사용자가 아이템을 구매 했을 때 사용 할 계좌 부분입니다.
+
+
+### 계좌 목록 및 잔액 조회
+
+1. 계좌가 없는 경우
+  - '전체 보유 금액' 위에 빨간 경고문으로 '추가된 계좌가 없습니다. 계좌를 추가해 주세요!'을 출력하게 구현하였습니다.
+  - 계좌가 하나도 등록되어 있지 않은 경우 '계좌 해지' 버튼을 disabled를 통해 비활성화 시켰습니다.  
+  ![image](https://user-images.githubusercontent.com/65530775/179925202-d1c1f318-2599-4d0a-a883-6fee10eddaf7.png)
+  
+2. 계좌가 있는 경우
+- 계좌번호는 일부만 노출됩니다. E.g. `"356-XXXX-XXXX-XX"`
+- 잔액의 단위는 '원화(￦)'입니다.<br />
+원화의 콤마( , )를 맞추기 위해 `.toLocaleString('ko-KR')`를 사용했습니다.
+![image](https://user-images.githubusercontent.com/65530775/179928659-8e249635-fc54-4be3-bdce-de7ba834dcb1.png)
+
+
+- 등록 가능한 계좌가 전부 다 찼을 경우(7개) '계좌 추가' 버튼을 disabled를 통해 비활성화 시켰습니다.
+- 추가적으로 '전체 보유 금액' 위에 빨간 경고문으로 '추가 가능한 계좌가 없습니다!'을 출력하게 구현하였습니다.
+![image](https://user-images.githubusercontent.com/65530775/179928433-eb1c6e97-7d19-4c24-b30d-566fb5ed6c21.png)
+
+### 계좌 연결
+- 계좌 등록 버튼을 누른 뒤 계좌 연결을 진행합니다.
+- 빨간 글씨로 써져있는 경고문들의 조건과 `placeholder`의 조건들을 맞게 입력을 하면 계좌를 연결할 수 있습니다.
+-  계좌번호 자리와 전화번호는 `placeholder`에 적혀 있는 조건에 맞게 작성해야 합니다. <br />
+이 둘은 조건식을 설정했습니다.
+- 해당 조건을 하나라도 지키지 못한 경우 계좌가 연결되지 않습니다.
+- 해당 조건을 지켰는지에 대한 확인은 경고문이 전부 초록색으로 바뀌었는지 확인하면 됩니다.
+![image](https://user-images.githubusercontent.com/65530775/179929952-14467d5f-a054-4ea9-9601-9cd075f86f7f.png)
+
+
+- 연결된 계좌 잔액에는 자동으로 기본 '3백만원'이 추가됩니다.
+![image](https://user-images.githubusercontent.com/65530775/179929819-8968fa43-3def-40e8-b0a3-6be2fb7a70dd.png)
+
+
+### 선택 가능한 은행 목록 조회
+- 위의 계좌 연결과 이어지는 부분입니다.
+- 은행 당 하나의 계좌만 허용됩니다.
+- 사용자가 계좌를 추가하면, 해당 은행 정보 `disabled` 속성이 `true`로 변경됩니다.<br />
+ 이를 이용하여 은행 선택 시 '사용 중', '사용 가능'을 표시하였습니다.
+- 이미 연결한 은행이면 경고문과 함께 입력된 계좌번호가 초기화 되며 계좌번호를 입력할 수 없는 상태가 됩니다.
+ ![image](https://user-images.githubusercontent.com/65530775/179934228-87e8bbb7-27ad-469c-a81d-502d2a3eae3d.png)
+
+- 은행 정보 `digits` 속성의 숫자를 모두 더하면 각 은행의 유효한 계좌번호 길이가 됩니다. <br />
+이를 이용하여 계좌 번호 입력 시 선택한 은행에 따라 해당 `input`의 `maxlength`를 조정했습니다. <br />
+추가적으로 `placeholder`에도 해당 내용을 확인할 수 있게 표기해두었습니다.
+![image](https://user-images.githubusercontent.com/65530775/179934576-33ae8f99-26a0-412b-85fc-0ae0df29ffeb.png)
+
+![image](https://user-images.githubusercontent.com/65530775/179932979-138f71d3-0691-45ac-b5d0-5c3f63aecb99.png)
+
+
+
+### 계좌 해지
+- checkbox를 클릭하여 해당 계좌를 해지할 수 있습니다.
+- 처음 계좌 해지 버튼 클릭 시 '정말 선택한 계좌를 해지 하시겠습니까?'의 문구와 함께 해지 유무를 한 번더 선택할 수 있습니다.
+- 해지한 계좌는 다시 연결해도 잔액이 반영되지 않습니다.(기본 금액으로 추가됩니다)
+
+![image](https://user-images.githubusercontent.com/65530775/179929128-aff64578-fc9b-41e1-9c7b-1fe2599f5a1d.png)
+
+
+
+
+### 기타 작업 내용들
+
+- Figma를 통한 전체 페이지 관련 스타일 초안 작성
+![image](https://user-images.githubusercontent.com/65530775/179937712-e8f33541-25f3-4a83-ae27-d614fa5cc9da.png)
+
+- 메인 페이지 
+![image](https://user-images.githubusercontent.com/65530775/179937813-588c6720-d7e2-4e4d-ad21-5539b471bc34.png)
+
+- 마이 페이지
+![image](https://user-images.githubusercontent.com/65530775/179925108-dbbc97fe-4b18-4b1b-adc1-66edabd4a86c.png)
+
+- 관리자 페이지
+![image](https://user-images.githubusercontent.com/65530775/179937907-b9aa96f9-31f6-4eeb-8920-472591ef6b35.png)
+
+- 제품 구매 페이지
+![image](https://user-images.githubusercontent.com/65530775/179938285-bd0066c0-a151-4dd1-8009-7b965512b0aa.png)
+
+- 위 페이지 들의 세부 내용들 (각 페이지 별 왼쪽의 메뉴(LeftNavBar) 클릭 시 나타나는 화면들)에 대한 스타일 및 색상 통일 작업
+
+- 완성된 메인, 마이, 관리자, 제품 구매 페이지들을 router-view를 이용하여 처리, 아래는 마이 페이지를 router-view를 이용하여 처리 한 예시 코드
+
+```
+{
+      path: '/mypage',
+      component: MyPage,
+      children: [
+        {
+          path: '',
+          component: MyPageMain,
+        },
+        {
+          path: 'userinfo',
+          component: UserInfo,
+        },
+        {
+          path: 'edituserinfo',
+          component: EditUserInfo,
+        },
+        {
+          path: 'accountlist',
+          component: AccountList,
+        },
+        {
+          path: 'accountadd',
+          component: AccountAdd,
+        },
+        {
+          path: 'purchaselist',
+          component: PurchaseList,
+        }
+      ],
+    },
+```
+- 코드 리팩토링 조언, 구조적인 부분에 대한 조언 등
