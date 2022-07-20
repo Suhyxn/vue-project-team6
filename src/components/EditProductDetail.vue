@@ -128,7 +128,6 @@ export default {
       this.adminStore.editProduct(item)
     },
     SelectImage(event) {
-      console.log(event)
       const { files } = event.target
       for ( const file of files ) {
         const reader =  new FileReader()
