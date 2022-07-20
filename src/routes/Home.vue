@@ -7,7 +7,8 @@
       <div class="user_in">
         <RouterLink
           to="/sign"
-          class="a">
+          class="a"
+          @click="errorReset">
           로그인 / 회원가입
         </routerlink>
       </div>
@@ -24,6 +25,17 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'pinia'
+import { useUserStore } from '~/store/user'
+
+export default {
+  methods: {
+    ...mapActions(useUserStore, ['errorReset']),
+  }
+}
+</script>
 
 <style lang="scss" scoped>
   .background-img {
