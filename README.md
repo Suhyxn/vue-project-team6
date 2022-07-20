@@ -270,9 +270,9 @@ router.beforeEach(async to => {
 ## 제품 (김수현)
 
 <img width="1680" alt="스크린샷 2022-07-20 오후 6 17 03 복사본" src="https://user-images.githubusercontent.com/89029699/179960420-59c9c81c-eea1-494c-a76c-2f2dfbc37441.png">
-<li> /admin 페이지 변승훈님 작성 </li>
-<li> 회원가입시 사용자 닉네임을 'admin' 으로 로그인시 <code> /admin </code> 으로 이동하여
-관리자 전용 기능들을 사용하여 제품들을 관리할 수 있습니다. </li> 
+- /admin 페이지 변승훈님 작성 
+- 회원가입시 사용자 닉네임을 'admin' 으로 로그인시 <code> /admin </code> 으로 이동하여
+관리자 전용 기능들을 사용하여 제품들을 관리할 수 있습니다. 
 
 <br/>
 
@@ -281,8 +281,8 @@ router.beforeEach(async to => {
 ```/admin/allreadproduct``` 화면 
 <img width="1680" alt="스크린샷 2022-07-20 오후 7 24 42" src="https://user-images.githubusercontent.com/89029699/179960743-6572bf15-cca9-4d47-b7ab-7ad248d1eacc.png">
 
-<li>스크롤을 통해 모든 제품들을 확인할 수 있습니다.</li>
-<li>제품 이미지와 이름을 확인할 수 있습니다.</li>
+- 스크롤을 통해 모든 제품들을 확인할 수 있습니다.
+- 제품 이미지와 이름을 확인할 수 있습니다.
 
 <br/>
 
@@ -291,9 +291,9 @@ router.beforeEach(async to => {
 ```/admin/allreadhistory``` 화면
 <img width="1680" alt="스크린샷 2022-07-20 오후 7 24 55" src="https://user-images.githubusercontent.com/89029699/179960771-b0d4941b-58c1-4c29-9bb1-5bad6dd58d98.png">
 
-<li>데이터를 읽는 시간이 조금 걸리는 편입니다.</li>
-<li>제품명, 제품 태그, 구매자를 확인할 수 있습니다.</li>
-<li>스크롤을 통해 추가적인 판매내역들을 확인할 수 있습니다.</li>
+- 데이터를 읽는 시간이 조금 걸리는 편입니다.
+- 제품명, 제품 태그, 구매자를 확인할 수 있습니다.
+- 스크롤을 통해 추가적인 판매내역들을 확인할 수 있습니다.
 
 <br/>
 
@@ -302,8 +302,8 @@ router.beforeEach(async to => {
 ```/admin/editproduct``` 화면
 <img width="1680" alt="스크린샷 2022-07-20 오후 7 25 07" src="https://user-images.githubusercontent.com/89029699/179960790-c6e6b5fb-77dd-458b-8f2f-f2775324b2b0.png">
 
-<li>제품이미지를 클릭시 해당 제품 정보를 조회할 수 있습니다.</li>
-<li>제품명, 제품 가격, 제품 설명, 제품 태그를 확인할 수 있습니다.</li>
+- 제품이미지를 클릭시 해당 제품 정보를 조회할 수 있습니다.
+- 제품명, 제품 가격, 제품 설명, 제품 태그를 확인할 수 있습니다.
 
 <br/>
 
@@ -312,10 +312,10 @@ router.beforeEach(async to => {
 ```/admin/editproduct``` 화면
 <img width="1680" alt="스크린샷 2022-07-20 오후 7 25 07" src="https://user-images.githubusercontent.com/89029699/179960790-c6e6b5fb-77dd-458b-8f2f-f2775324b2b0.png">
 
-<li>수정시 제품이미지 하단에 뜨는 제품 id 필수 작성이 필요합니다.</li>
-<li>수정할 정보를 입력한 후 수정하기 버튼을 눌러야지만 수정 기능이 작동됩니다.</li>
-<li>파일(사진)은 Base64로 변환하여 요청합니다.</li>
-<li>사진은 1MB 이하여야 합니다.</li>
+- 수정시 제품이미지 하단에 뜨는 제품 id 필수 작성이 필요합니다.
+- 수정할 정보를 입력한 후 수정하기 버튼을 눌러야지만 수정 기능이 작동됩니다.
+- 파일(사진)은 Base64로 변환하여 요청합니다.
+- 사진은 1MB 이하여야 합니다.
 
 <br/>
 
@@ -324,8 +324,8 @@ router.beforeEach(async to => {
 ```/admin/addproduct``` 화면
 <img width="1680" alt="스크린샷 2022-07-20 오후 7 25 19" src="https://user-images.githubusercontent.com/89029699/179960801-e148893f-d499-434a-b787-dc81adbb7db9.png">
 
-<li>파일(사진)은 Base64로 변환하여 요청합니다.</li>
-<li>사진은 1MB 이하여야 합니다.</li>
+- 파일(사진)은 Base64로 변환하여 요청합니다.
+- 사진은 1MB 이하여야 합니다.
 
 <br/>
 
@@ -334,8 +334,8 @@ router.beforeEach(async to => {
 ```/admin/deleteproduct``` 화면
 <img width="1679" alt="스크린샷 2022-07-20 오후 7 25 29" src="https://user-images.githubusercontent.com/89029699/179960810-45e3b61f-196c-44e3-aaa9-9e9c04288618.png">
 
-<li>삭제할 제품을 클릭시 제품이 삭제됩니다.</li>
-<li>다른 경고 없이 바로 삭제가 진행됩니다.</li>
+- 삭제할 제품을 클릭시 제품이 삭제됩니다.
+- 다른 경고 없이 바로 삭제가 진행됩니다.
 
 ### 기타 작업 내용
 
