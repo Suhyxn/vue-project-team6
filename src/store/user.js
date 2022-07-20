@@ -101,6 +101,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     errorReset() {
+      this.signinError = false
       this.signUpMsg = ''
       this.signUpError = ''
     },
